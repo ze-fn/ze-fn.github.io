@@ -1,0 +1,50 @@
+<div class="list-groups">
+  <tbody>
+    <tr>
+      <div class="skill-filters">
+        <button class="filter-btn active" data-skill="all">All</button>
+        {% for category in site.data.resume.skills %}
+          <button class="filter-btn" data-skill="{{ category.name | downcase }}">
+            {{ category.name }}
+          </button>
+        {% endfor %}
+      </div>
+      <div class="skills-grid">
+        {% for category in site.data.resume.skills %}
+          {% for skill in category.keywords %}
+            <span class="skill-item {{ category.name | downcase }}">
+              {% if skill.icon %}
+                <i class="{{ skill.icon }}"></i>
+              {% endif %}
+              {{ skill.name }}
+            </span>
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </tr>
+  </tbody>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const buttons = document.querySelectorAll('.filter-btn');
+    const skills = document.querySelectorAll('.skill-item');
+
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelector('.filter-btn.active').classList.remove('active');
+        btn.classList.add('active');
+
+        const category = btn.getAttribute('data-skill');
+
+        skills.forEach((skill) => {
+          if (category === 'all' || skill.classList.contains(category)) {
+            skill.style.display = 'inline-flex';
+          } else {
+            skill.style.display = 'none';
+          }
+        });
+      });
+    });
+  });
+</script>

@@ -1,0 +1,43 @@
+<div class="row">
+  {% assign half = data[1].size | divided_by: 2 %}
+  {% assign left_column = data[1] | slice: 0, half %}
+  {% assign right_column = data[1] | slice: half, data[1].size %}
+
+  <!-- Left Column -->
+  <div class="col-md-6">
+    <ul class="list-group list-group-flush">
+      {% for content in left_column %}
+        <li class="list-group-item">
+          <h6 class="font-weight-bold" style="color: var(--global-theme-color)">
+            {{ content.title }}
+          </h6>
+          <h6 class="" style="font-size: 0.95rem; color: var(--global-text-color-light)">
+            {{ content.conference }}
+          </h6>
+          {% if content.summary %}
+            <h6 class="" style="font-size: 0.95rem">{{ content.summary }}</h6>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Right Column -->
+  <div class="col-md-6">
+    <ul class="list-group list-group-flush">
+      {% for content in right_column %}
+        <li class="list-group-item">
+          <h6 class="font-weight-bold" style="color: var(--global-theme-color)">
+            {{ content.title }}
+          </h6>
+          <h6 class="" style="font-size: 0.95rem; color: var(--global-text-color-light)">
+            {{ content.conference }}
+          </h6>
+          {% if content.summary %}
+            <h6 class="" style="font-size: 0.95rem">{{ content.summary }}</h6>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>

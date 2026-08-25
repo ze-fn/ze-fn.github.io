@@ -1,0 +1,177 @@
+---
+title: "Intro to Data Visualization with ggplot2"
+author: "Zelvy Fauzan"
+date: "2026-07-24"
+output: html_document
+---
+
+## Introduction
+
+One of the main task of a data analyst or scientist is to deliver the data in a meaningful way. The delivery of the data must be easy to understand. Raw data or tabular data is less preferred because they are hard to read for general audience. So, that's why we need an effective and efficient way to deliver insights from the data.
+
+Meet the Data Visualization!
+
+Data visualization is ... data, visualized. :D
+
+Simple as that.
+
+Let's take an example: Monthly expenditure.
+
+Every month, we pay our electricity bills, water bills, and so on. Month by month, you realized that your monthly expenditure is getting more expensive than before. But your monthly income stays the same.
+
+For some, it's just something that can't be helped. I mean, inflation, right? But even so, I think we can agree that even if there IS inflation, we rarely understand how bad is the inflation. Or let's just say how bad is the bills getting expensive.
+
+Again, for some people, looking at tabular data may be less impactful. But if we use data visualization, we can give more impact. We will be able to understand the magnitude of the problem we are facing.
+
+Enough talk, let's dive in.
+
+------------------------------------------------------------------------
+
+## 1. Explore or Explain?
+
+Have you seen a teacher? Or maybe your parents? Did you notice how teacher can teach and parents can nurture you? *Where did they get those experiences?*
+
+The answer is ... **exploration**.
+
+They get those experience from exploration. Whether it's exploring life choices, the wilds, opportunities, or whatever. And when they get that experience from their exploration, they teach or nurture other people.
+
+If you think about it, exploration often times are a mess. They are typically chaos. They are not in a pretty format. The same goes with exploratory plot in data analysis.
+
+Exploratory plots are not pretty. They often used to be shown to specialists. They are rough first drafts. They are data-heavy. They are full of data, scattered all over the place.
+
+Explanatory plot, on the other hand, is the *ready-to-eat* plots. They are meant for general audiences. They are the pretty plots. They only show the data that is most interesting/impactful for the reader.
+
+Did I say *enough talk* already? Well, this time it's real. Let's enough talk, and get started. We are using the infamous `mtcars` dataset. Available built-in inside R.
+
+```{r explr-expln1}
+# install.packages(ggplot2)
+library(ggplot2)
+
+head(mtcars) # See the dataset, just small portion
+
+ggplot(mtcars, aes(cyl, mpg)) +
+  geom_point()
+```
+
+Congratulations! You just created your first exploratory plot (if you follow along, that is)!
+
+The `ggplot()` function is built based on **The Grammar of Graphics** book.
+
+The book is highly technical and academic, so if you are scared of that, rest assured for I will explain it like you are a 5th graders.
+
+Remember how a function works in R or any programming language? They need an input from us to be working. This `ggplot()` function is no exception. But This ggplot is quite special. It can hold as many arguments as you wish.
+
+Let's start from the very basic level, or the very fundamental level.
+
+When we want to visualize a data, we need to tell R which data source to show. In this case, the name of the table/data frame: `mtcars`. I'm using it for demonstration only. If you have your own data, feel free to use them.
+
+```{r explr-expln2}
+ggplot(mtcars)
+#      ^^^^^^
+# This part of the argument is the dataset.
+# You can be verbose
+
+ggplot(data = mtcars)
+#      ^^^^^^^^^^^^^
+# Same same, but still same  
+```
+
+We often omit the `data = [blablabla]` parameter. Gotta be fast, no? So, `ggplot()` will always assume the first argument that you pass to them is the dataset.
+
+There is also cases when you are wrangling your data and then make a visualization out of it right away.
+
+For example:
+
+```{r explr-explr3}
+mtcars %>% 
+  filter(cyl == 4) %>% 
+  ggplot(aes(disp, wt)) +
+    geom_point()
+```
+
+Notice that I didn't specify the dataset inside the `ggplot()` function? That's because the dataset is already declared from the previous pipe!
+
+Then you see that there is a `+` symbol right after the `ggplot()` ends. That is the "mapping" of the chart. We can decide how to plot the data that we told R.
+
+## 2. Aesthetics
+
+### 2.1. aes() in the main ggplot
+
+In the latest example, I used `geom_point()` mapping. This is when we want to tell R to create a scatter plot. It's called "point" because R will plot each data point from the x and map it to the x-axis. The same goes with the y data points. R will map the values of y variable onto the y-axis in a dot shape.
+
+If you can't scroll up to see the chart for yourself, I will show it again below.
+
+```{r m1}
+mtcars %>% 
+  filter(cyl == 4) %>% 
+  ggplot(aes(disp, wt)) +
+    geom_point()
+```
+
+By the way, have you ever tried to combine different data into one chart? If not, I have something for you.
+
+Imagine you wanted to know how is the relationship between disp and hp for each cyl, along with the average of disp for each cyl. The first task is to display disp and hp grouped by cyl (cyl is grouped by color), then the second task is the average of disp. Again, we can complete the first task with raw data. We don't need to change anything. Simply plot the whole data and we are good to go. The problem is when we try to add an aggregated statistics into a dataset that is raw.
+
+Let me show you real quick with plots. Seeing graphics is far more helpful in this case.
+
+```{r m2}
+# Note: I used `as.factor()` to temporarily change the cyl column into factors. Otherwise, R will see it as continuous data type and we don't want that. If you are curious, try remove the as.factor() function and see what happens
+task1 <- ggplot(mtcars, aes(hp, disp, color = as.factor(cyl))) +
+  geom_point() +
+  expand_limits(x = 0, y = 0) +
+  labs(title = "This is from the raw dataset",
+       subtitle = "We don't need to change anything from the data")
+
+task2 <- mtcars %>% 
+  group_by(cyl) %>% 
+  mutate(mean_disp = mean(disp),
+         mean_hp = mean(hp)) %>% 
+  ungroup() %>% 
+  ggplot(aes(mean_disp, mean_hp)) +
+    geom_point(size = 4, aes(color = as.factor(cyl))) + 
+    geom_line() +
+    expand_limits(x = 0, y = 0) +
+    labs(title = "This is the second task",
+        subtitle = "Show aggregated data in a chart view")
+
+task1
+task2
+```
+
+How to combine them???
+
+Well, I have a good news for you. We can combine the raw and the aggregated values together using only one additional aesthetics.
+
+See me do it.
+
+```{r m3}
+(agg_avg_disp <- mtcars %>% 
+  group_by(cyl) %>% 
+  summarize(avg_disp = mean(disp),
+            avg_hp = mean(disp)) %>% 
+   mutate(fcyl = factor(cyl)))
+
+mtcars %>% 
+  mutate(fcyl = factor(cyl)) %>% 
+  ggplot(aes(hp, disp)) +
+    geom_point(aes(color = fcyl)) +
+    geom_point(data = agg_avg_disp, aes(avg_hp, avg_disp, fill = fcyl),  size = 4, shape = 21, alpha = .5)
+```
+
+`cyl` to `fcyl` beforehand so I don't need to tell R again and again.
+
+See that I put a `data` argument inside the second geom_point()? That's how you combine two different dataset into a single chart!
+
+Be careful, though, when you combine different dataset and the aesthetics that you want to map is on different scale. Like, when the first x ranges from 0-100 and the second x ranges from 20-200.
+
+That is possible but it will give you more work to do, like syincing the scale, for example.
+
+
+
+### 2.2. Attributes
+
+
+
+
+
+

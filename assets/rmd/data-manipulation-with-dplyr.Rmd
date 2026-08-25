@@ -1,0 +1,325 @@
+---
+title: "Data Manipulation with dplyr"
+author: "Zelvy Fauzan"
+date: "2026-07-23"
+output: html_document
+---
+
+## Introduction
+
+When I revisit introductory courses on R for Data Analyst role, I thought of trying the CPE exam on DataCamp. I tried the Introduction to R exam and passed. Then I saw the Data Manipulation with dplyr CPE exam. I doubted myself.
+
+So, I re-learn data manipulation in R using dplyr!
+
+This is my note from the whole course. I made it as if I'm the teacher. Vinh Giang (an expert in communication and public speaking) once said about learning:
+
+> #### *"... if you take that skill set ... and teach somebody else, ... you retain about 90%"*
+
+And I find it true.
+
+I hope you gain something from this article just like I gain something writing it.
+
+------------------------------------------------------------------------
+
+## 1. Transforming Data with dplyr
+
+Transforming data will be your daily activity (if you are going to be a data analyst, that is). Often times, you will get data in its raw format. Often, you will also need to transform the data. Either by renaming, filtering, changing, or you name it.
+
+Most basic operations are:
+
+- Selecting,
+- Filtering,
+- Arranging, and/or
+- Mutating
+
+the data.
+
+Let's start from the most likely to happen. The `select`
+
+### 1.1. select() function
+
+The `select()` function is just the way it sounds. It selects the columns that we want to see or that interest us.
+
+I will use the gapminder dataset. If you haven't it installed on your system, uncomment the first line of the below code block.
+
+```{r td1}
+# install.packages("gapminder")
+library(gapminder)
+
+gapminder %>% 
+  select(continent, country, year)
+```
+
+Pretty easy, right?
+
+Did you notice something strange from the code? Take a guess and if you guessed right treat yourself! :D
+
+Notice that I specified continent first instead of country first, and R showed it no problem. In the original dataset, the column `country` is on the first column index and `continent` is the second index.
+
+What I mean by this is that you can also rearrange how the column appear in your code just by specifying it in the order that you wanted.
+
+Very convenient!
+
+And that's pretty much the basic of `select()` function.
+
+There are some additional paramters in this function but we will get into it in the later section.
+
+For now, let's move on to the next common function.
+
+### 1.2. filter() function
+
+Once you selected your column of interest, you probably wanted to see a specific group or values. Let's say we want to see the gapminder dataset but only the Asia continent.
+
+That's easy, we can use the `filter()` function, which (yes, you guessed it) filters the dataset to whatever you are telling R to show.
+
+```{r td2}
+gapminder %>% 
+  filter(continent == "Asia")
+```
+
+We can also filter by year!
+
+```{r td3}
+gapminder %>% 
+  filter(year == 1982)
+```
+
+And guess what? You can even filter with other conditions too!
+
+```{r td4}
+gapminder %>% 
+  filter(continent == "Asia",
+         year >= 1980)
+```
+
+The `filter()` function will filter the dataset based on the conditions that you give to R. You can give as many conditions as you needed. The order of evaluation R perform is based on the line. If you tell continent "Europe" and then year 2007, then R will evaluate the continent first then the year.
+
+Easy, right?
+
+### 1.3. arrange() function
+
+The `arrange()` function is identical to the "Sort" function in Excel or Spreadsheet. They have the same meaning, after all.
+
+Suppose we are interested in all countries, its life expectancy, and population **over the years**.
+
+```{r td5}
+gapminder %>% 
+  select(country, year, lifeExp, pop) %>% 
+  arrange(year)
+```
+
+We use the `arrange()` when we wanted to see changes over time. It's usually like that.
+
+On to the next function!
+
+### 1.4. mutate() function
+
+This is the part where we can experiment a lot with our data. The `mutate()` function allows us to create a new column, rename a column, and even selecting columns. It's basically almost everyting you need for data transformation.
+
+Let's try it!
+
+Suppose we want to change the lifeExp column from being in year unit into month unit. We simply multiply the lifeExp by 12 (because there are 12 months in a year).
+
+```{r td6}
+gapminder %>% 
+  mutate(lifeExp = lifeExp * 12)
+```
+
+Or ... instead of storing our new column into an existing one, we can tell R to create a new column out of it.
+
+```{r td7}
+gapminder %>% 
+  mutate(lifeExp_month = lifeExp * 12)
+```
+
+If your screen is not wide enough, the new column is located at the right-most of the data frame.
+
+Easy peasy!
+
+Let me show you how the `mutate()` can be a `select()` function too.
+
+```{r td8}
+gapminder %>% 
+  mutate(continent, lifeExp, population = pop, .keep = "none")
+```
+
+We use an additional argument called `.keep` which I set it to "none". This way, we are telling R to keep "none" but the ones being specified. So, R gives us continent, lifeExp, and pop that is renamed to population. The `country`, `year`, and `gdpPercap` columns were left behind because we told R to `.keep` "none".
+
+When you want to rename the the column inside the `mutate()` function, remember to tell the new name first then the old name (not the other way around!).
+
+The `mutate()` function seemed to carried all the basic data transformation functions all by itself! But not all, of course.
+
+### 1.5. Combining Them Together
+
+Let's have a recap by combining all of them together.
+
+Suppose we want to see Japan's life expectancy and gdpPercap over the years starting from 1975.
+
+```{r td9}
+gapminder %>% 
+  select(country, year, lifeExp, gdpPercap) %>% 
+  filter(country == "Japan",
+         year >= 1985) %>% 
+  arrange(year)
+```
+
+Huh, that's easy, *innit*?
+
+------------------------------------------------------------------------
+
+## 2. Aggregation
+
+Looking at the data in its raw format is not ideal to be communicated especially when you are trying to tell something or a story with the data. People won't get your idea right away.
+
+For example, your supervisor asked you to show how many countries are there in each continent in the gapminder dataset. You start by counting the occurrences of each different continent in the `continent` column. But that would take too long if you do it manually. That's why we use aggregation.
+
+It's a way to summarize data.
+
+There are some functions that can do aggregation. Let's take a tour into it one by one.
+
+### 2.1. count() function
+
+First, the `count()` function. It gives you the number of ocurrences.
+
+Remember the previous problem? How many countries are in each continent in the gapminder dataset?
+
+See this:
+
+```{r ag1}
+gapminder %>% 
+  count(continent)
+```
+
+You might be wondering, _"why do we pass on the continent column instead of the country column? Aren't we trying to find out how many **countries** are there in each continent?"_
+
+I understand your confusion and I shall explain it to you.
+
+See the how the Earth is organized from the biggest to the smallest. One planet, 5 continents, hundreds of countries.
+
+They are like in a tree structure.
+
+Planet is the root, continents are the branches, and countries are the leaves. And each of that hierarchy is tied to the upper level. Leaves are part of the branches, branches are part of the root, and root is the one root (or if you want to make it broader, the solar system).
+
+Let's take another detour. Same problem to solve but you count by countries.
+
+You read the countries one by one. Carefully seeing which country is inside which continent. Japan is in Asia, so one point for Asia. China is in Asia, so another point for Asia. Malaysia is in Asia, that's another point for Asia.
+
+Things will get tough when you read the country and don't know beforehand which continent it belongs to. Is Uni Emirate Arab in Asia or Africa? 
+
+See? It's hard.
+
+That's why we count the ocurrences of the continent instead of using the continent. 
+
+Therefore, you always want to pass on the column that is one level/group/hierarchy higher than what you are trying to solve.
+
+```{r ag2}
+# This is a bad example, don't take this.
+# I just want to show you how could it go wrong.
+
+gapminder %>% 
+  count(country)
+```
+
+See? Each country has 12 ocurrences. Does this answer the problem? Does this address _"how many countries are there in each continent?"_ 
+
+I don't think so.
+
+But still, that bad example is actually good for answering other questions. Something like,
+
+* How many period does this gapminder dataset has?
+* What is the interval between period?
+* Is there any countries that has missing year observation?
+
+We can also crank up our game by using the `wt` and `sort` argument inside the `count()` function.
+
+Suppose you want to find out the total gdpPercap of each continent. We already have that for each country but we still don't have it for continent level. Guess what, we can use `count()` to do the job!
+
+```{r ag3}
+gapminder %>% 
+  count(continent, wt = gdpPercap, sort = TRUE)
+```
+
+As you can see, we just summed the gdpPercap column for each continent. Additionally, we sorted it from highest to lowest by specifying the `sort` argument to `TRUE`.
+
+Alright, let's move on to the next function.
+
+### 2.2. Mutate then Count
+
+Suppose we want to count the sum population of each continent over the years. Meaning, we group by continent, then count the continent with weight set to pop. And of course, sort it descendingly. 
+
+Let's take it into action.
+
+```{r ag3}
+gapminder %>% 
+  mutate(continent, year, pop) %>% 
+  group_by(year) %>% 
+  count(continent, wt = pop, sort = TRUE)
+```
+
+Voila! It appears that Asia is the continent with the most population.
+
+> #### Challenge:
+>
+> If you know the `lag()` function, try to find the growth of population for each continent over the years. Show it in percent unit.
+
+### 2.3. Group and Ungroup-ing
+
+If someone or something can be grouped, then they can also be ungrouped.
+
+You can do `ungroup()` to your data. But I think it's not quire intuitive for some people. No worries, I will explain why would we need to ungroup.
+
+The ungroup is commonly used when we deal with summary statistics. Stat functions including the `mean`, `median`, `max`, `min`, and the likes. Have you ever 
+
+### 2.4. summarize() function
+
+### 2.5. slice_min() and slice_max() functions
+
+### 2.6. Everything, Together!
+
+------------------------------------------------------------------------
+
+## 3. Select and Transform
+
+### 3.1. Select Helpers
+
+### 3.2. rename() function
+
+### 3.3. relocate() function
+
+Say you want to move a column from the right-most to the second index of the data frame. We will find this when we are dealing with big data.
+
+Such data
+
+![](https://imgflip.com/s/meme/Doge.jpg)
+
+Much columns
+
+We can use the `relocate()` function to move the column(s) to a specified new location.
+
+```{r td9}
+gapminder %>% 
+  relocate(gdpPercap, .after = continent)
+```
+
+Above, I tried to relocate the `gdpPercap` column right after the `continent` column.
+
+Now, you might ask, _"how do we tell R to which location the column should relocate to?"_
+
+Good question!
+
+We have two options when relocating a column.
+
+* `.after`: which will relocate **right** next to the specified column.
+* `.before`: is to the **left** of the specirfied column.
+
+And the argument for the `.after` and `.before` is usually the column name. But, you can also tell R `last_col()`, which will send the column that we want to relocate to the very right-most column. 
+
+### 3.4. Combine Everything, Together!
+
+------------------------------------------------------------------------
+
+## 4. Window Functions
+
+### 4.1. lag() function
+
+### 4.2. 

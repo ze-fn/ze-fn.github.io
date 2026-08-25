@@ -1,0 +1,466 @@
+---
+title: "Introduction to R"
+author: "Zelvy Fauzan"
+date: "2026-07-22"
+output: html_document
+---
+
+
+## Introduction
+
+I was enrolled in [DataCamp's Data Analyst Certification](https://www.datacamp.com/certification) but I failed too many times. The cause was my memory. I forgot most of what I learned in the course. 
+
+Also, I shifted too many times across fields. Electrical Engineering, Website Development, Data Science, etc. The distractions were real and I got the consequences of my action.
+
+So, I decided to learn from the scratch. With ultimate focus on one, single field--data.
+
+This is the first course of the "Data Analyst in R" career track.
+
+> Add expandable details section below
+> Show course roadmap from career track
+> content: [Introduction to R, Introduction to Tidyverse, Data Manipulation with dplyr, Project: Analyze the Popularity of Programming Languages, Joining Data with dplyr, Introduction to Statistics in R, Introduction to Data Visualization with ggplot2, Exploratory Data Analysis in R, Sampling in R, Hypothesis Testing in R, Project: Hypothesis Testing with Men's and Women's Soccer Matches]
+
+
+## 1. Intro to Basics
+
+### 1.1. Arithmetics
+
+In R, arithmetic operation can be carried out by simply using operation symbols.
+
+```{r arithmetics}
+# Addition
+1 + 2 # Result: 3
+
+# Substraction
+3 - 1 # Result: 2
+
+# Multiplication
+4 * 5 # Result: 20
+
+# Division
+10 / 2 # Result: 5
+
+10 / 3 # Result: 3.333333
+
+# Modulo Division
+10 %% 3 # Result: 1
+
+# Exponentiation
+10 ^ 2 # Result: 100
+
+10 ** 5 # Result: 1+e05
+```
+
+### 1.2. Variables
+
+Like in mathematics (and other programming languages), we can declare variables. The variable assignment notation is the same with other languages. 
+
+Though, we R users tend to use different notation for variable declaration. Let's take a look.
+
+```{r variables}
+height <- 175 # Assigns 175
+weight <- 75 # Assigns 50
+
+bmi = 30.0 # Assigns 30
+eye_color = "brown" # Assigns "brown"
+```
+
+Both ways are acceptable in R. We R users use the `<-` notation to avoid confusion. The reason is that we want to make it clear whether we are declaring a variable or equation. 
+
+We will see discuss it in other articles.
+
+We can also perform arithmetic to variables.
+
+```{r variables2}
+(calc_bmi <- weight / (height/100) ^ 2) # Result 24.4898
+```
+
+The order of operation can also be specified using parentheses, just like in mathematics. 
+
+Also, notice that I put the whole variable assignment inside a parenthesis?
+
+Those parentheses that wrapped the variable assignment will tell R to run and show the result. So it's like:
+
+*"Declare this variable and then show me the output right away."*
+
+### 1.3. Data Types
+
+We have five basic data types in R.
+
+```{r data-types}
+whole <- 1L
+float <- 3.14
+char <- "some text"
+logi <- TRUE # or FALSE
+complex_num <- 3i
+
+# Use class() to see data type
+class(whole)
+class(float)
+class(char)
+class(logi)
+class(complex_num)
+```
+
+> *Note: I declared 1L to the `whole` so that R knows I'm assigning integer. If we only assign `1`, R will render it as "numeric"
+
+---
+
+## 2. Vectors
+
+If you are learning R, chances are you are learning Data Analysis or Data Science. This means that you will always deal with lists of values. Vector is like a list of values.
+
+We use `c()` to assign a vector into a variable.
+
+Suppose we are measuring our family member's height. We can store it in a vector/list.
+
+```{r vectors1}
+(fam_height <- c(156, 169, 163, 149))
+```
+
+Say we are also interested to measure our family member's weight.
+
+```{r vectors2}
+fam_weight <- c(50, 69, 60, 40)
+```
+
+### 2.1. Arithmetics with Vectors
+
+In R, when we do arithmetic operation to vectors, it automatically perform element-wise operation. Let's do some calculation to see the Body Mass Index of our family members.
+
+```{r vectors3}
+fam_h_meters <- (fam_height / 100)
+# fam_weight is already in kg
+
+(fam_bmi <- fam_weight / fam_h_meters^2)
+```
+
+### 2.2. Naming a Vector
+
+We found the BMI score of our family members, but it's hard to see which value belongs to who. Is 20.54569 for father? Or maybe mother? Or big sis? We don't know!
+
+To make the vector easier to read, we can assign a name for each value.
+
+```{r vector4}
+fam_member_name <- c("Mother", "Father", "Older Sister", "Me")
+
+names(fam_bmi) <- fam_member_name
+fam_bmi
+```
+
+We declare a variable with names respectively. In this case, say we measured the mother first, then the father, older sister, and then us. Then we use the `names()` function to declare apply the names to our BMI vector.
+
+It's like a column name in a sense.
+
+Also, remember that the `names()` applies name to the column by default. If you want to apply names to the rows, you can use `rownames()` instead.
+
+If you need to see only the specific person (or value), say we want to see the Father only, we can do so like this:
+
+```{r vector5}
+fam_bmi[2]
+fam_bmi[0]
+```
+
+In R, we start indexing of the value from 1, not 0. If we call a vector at the index 0, we will get an output of the data type. Also, if we call a vector at the index outside of the range, we will get an output of `NA`.
+
+```{r vector6}
+num_index <- c(1,2,3,4,5,6)
+num_index[1]
+num_index[0]
+
+str_index <- c("A", "B", "C", "D")
+str_index[2]
+str_index[0]
+
+logi_index <- c(TRUE, FALSE, FALSE)
+logi_index[4]
+logi_index[0]
+```
+
+### 2.3. Slicing and Vectors
+
+Say we want to see the Mother and the Father, we don't want to see the Older Sister and us. We can do so by _slicing_ the vector.
+
+```{r vector7}
+fam_bmi[1:2]
+```
+
+**Notice:** In R, slicing is all inclusive (unlike some languages). So, if we want to get the 4th until 10th value of a vector with 1 to 20, we do it like this:
+
+```{r vector8}
+example2 <- c(1:20)
+
+example2[4:10]
+# in Python, example2[4:10] will result: 4 5 6 7 8 9
+```
+
+That's basically Vectors. Let's move on to Matrices.
+
+---
+
+## 3. Matrices
+
+Remember the Matrix?
+
+No, not the movie. It's the matrix in mathematics.
+
+If you have ever seen a table, that's what a matrix looks like.
+
+To make a matrix of our own, use the `matrix()` function. Be advised, the function has arguments to be filled.
+
+```{r matrix1}
+matrix(1:12, nrow = 4, byrow = TRUE)
+```
+
+Above, we see there are `nrow` and `byrow` arguments. They are the specifics for our matrix.
+
+If we didn't specify one of them or more, things won't go as intended. Let's see what I mean by that.
+
+```{r matrix2}
+matrix(1:12) # 12 rows; 1 column
+matrix(1:12, nrow=3) # 3 rows; 4 columns
+matrix(1:12, byrow=TRUE) # 12 rows; 1 column
+matrix(1:12, byrow=FALSE) # 12 rows; 1 column
+matrix(1:12, nrow=3, byrow=TRUE) # values are assigned horizontally (top to bottom)
+matrix(1:12, nrow=3, byrow=FALSE) # values are assigned vertically (left to right)
+
+matrix(1:12, ncol=3) # 4 rows; 3 columns
+matrix(1:12, ncol=3, byrow=TRUE) # 4 rows; 3 columns; vertical assignment
+matrix(1:12, ncol=3, byrow=FALSE) # 4 rows; 3 columns; horizontal assignment
+```
+
+Say, we are measuring students' academic potential. We measured reading, writing, and mathematics. We have three vectors (students) and we want to make a matrix out of it.
+
+```{r matrix3}
+student1 <- c(90, 89, 87)
+student2 <- c(88, 87, 90)
+student3 <- c(82, 82, 96)
+
+students <- c(student1, student2, student3)
+
+(gradebook <- matrix(students, nrow = 3, byrow = TRUE))
+```
+
+If we blindly use the matrix without any arguments, this will happen:
+
+```{r matrix4}
+matrix(students) # all in one column, not good
+matrix(students, nrow=3) # wrong order of assignment
+matrix(students, nrow=3, byrow=FALSE) # wrong order of assignment
+```
+
+### 3.1. Naming the Matrix
+
+As you might have seen, the matrix is there but we can't easily read that. Just like the Vectors, we don't know which row belongs to which student. And we don't either know which column is which subject.
+
+So, to make life easier, we give names to the rows and the columns.
+
+We use `rownames()` and `colnames()`. The name of the function is self-explanatory, I guess.
+
+```{r matrix5}
+student_id <- c("student1","student2","student3")
+subject_name <- c("reading", "writing", "mathematics")
+
+rownames(gradebook) <- student_id
+colnames(gradebook) <- subject_name
+gradebook
+```
+
+There is a short-hand of doing this naming stuff when dealing with matrix. See below.
+
+
+```{r matrix6}
+gradebook2 <- matrix(students, 
+                     nrow=3,
+                     byrow=TRUE,
+                     dimnames=list(student_id, subject_name))
+gradebook2
+
+```
+
+The `dimname` argument with the value of `list(row, col)` saves us some time!
+
+When we specify the dimname argument, R will assume the first argument of the `list()` as the row names; then the second argument of it as the column names.
+
+### 3.2. Aggregation in Matrix
+
+Now you want to see the average score of each student. Then you want to see if each student passed the passing grade or not.
+
+If you ever worked in Excel or Spreadsheet, you would use the `=SUM()` formula for the first row, then autofill vertically.
+
+R has the same function as well but with different function name. And the result is in a named vector, not in table.
+
+(We will see tables in future section)
+
+```{r matrix7}
+(total_score <- rowSums(gradebook)) # sums by row
+(total_each_subject <- colSums(gradebook)) # sums by col
+```
+
+### 3.3. Combining Matrix with Vectors
+
+We got the sum of subject score for each student, and we also got the sum of students' score for each subject. Now we want to combine them. To do so, we can use `cbind()` and `rbind()` functions.
+
+The `cbind()` will combine all the supplied data column-wise.
+
+```{r matrix8}
+(gradebook_w_student_total <- cbind(gradebook, total_score))
+```
+
+The `rbind()` will combine all the supplied data row-wise.
+
+```{r matrix9}
+(gradebook_final <- rbind(gradebook_w_student_total, total_each_subject))
+```
+
+Pretty neat!
+
+---
+
+## 4. Factors
+
+You probably ever heard about data types in statistics. There are two groups: numerical and categorical data. In each of the groups are sub-groups. They have their own sub-groups.
+
+In numerical data, we have: **continuous** and **discrete**.
+
+In categorical data, we have: **ordinal** and **nominal**.
+
+In R, factor is either ordinal, nominal, or discrete. Factor cannot and must **NOT** be continuous. 
+
+To declare a factor, simply use the `factor()` function along with the data. This will make the data a factor.
+
+We can also set the factor to have a particular order. Just like in ordinal data type.
+
+For example, let's take a look at the planets in our solar system. Mercury is the closest to the sun, while Neptune is tha farthest. With this, we can rank Mercury as the 1st order (lowest) and Neptune as the 8th order (highest).
+
+```{r factor1}
+planets <- c("Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune")
+
+class(planets)
+
+(f_planets <- factor(planets, order = TRUE, levels = planets))
+
+class(f_planets)
+```
+
+Suppose you want to change the name of the levels of a column that has predefined factors. Say, from M (as male) and F (as female). We can use `levels()` function to the already factor-ed data.
+
+```{r factor2}
+gender <- c("M", "F", "F", "M", "M")
+f_gender <- factor(gender)
+gender
+
+
+levels(f_gender) <- c("Female", "Male")
+f_gender
+```
+A quick way to update your data!
+
+### 4.1. Factor with Summary
+
+When you apply a `summary()` function to a variable, R will show the stats for the variable.
+
+```{r factor3}
+summary(gender)
+```
+
+But, if you apply `summary()` function to a factor variable, R will simply sum it up.
+
+```{r factor4}
+summary(f_gender)
+```
+
+---
+
+## 5. Data Frames
+
+Data frames are table. They have columns, rows, and (of course) values. They are like matrix, but data frames are more beautiful and easier to read in terms of appearance.
+
+Let's take a look at a pre-installed data frame from R: the `mtcars`.
+
+```{r df}
+mtcars
+```
+
+### 5.1. Data Exploration
+
+If you have ever worked with Excel or Spreadsheet, you probably got used to looking at your data.
+
+In R, however, you only see a small portion of the table that you called. Just look at the call result from the `mtcars`. It has 32 rows but only 10 rows are showed. Though, you can also tell R to show all of the rows and columns if you insisted, but it will take a toll in your machine so be careful.
+
+* `head(n)`: See number of rows as many as `n`.
+* `str(data)`: See the structure of the data frame.
+* `data.frame(x, y, ...)`: Create a dataframe from the given input.
+* `subset(data, conditions)`: See all rows that meet the given conditions
+
+```{r df2}
+# prints the 2nd col of mtcars but will returns in vector format
+mtcars[2]
+mtcars[,2]
+class(mtcars[,2])
+str(mtcars[,2])
+
+# prints the 5th row of mtcars but returns in data.frame format
+mtcars[5]
+mtcars[5,]
+class(mtcars[5,])
+str(mtcars[5,])
+```
+
+## 6. Lists
+
+I did said somewhere that vector is like a list of values. Well, it turned out the function `list()` exists in R.
+
+In other kinds of "list" (vector, matrix, and data frame), if you input value(s) that have different data type from the rest of the data, R will uniform the data type.
+
+For example...
+
+```{r list1}
+vector1 <- c(1,2,3,4,"5")
+vector1
+class(vector1)
+
+vector2 <- c(1,2,3,4,5.5)
+vector2
+class(vector2)
+
+vector3 <- c(1L, 2L, 3L, 4L, 5)
+vector3
+class(vector3)
+```
+
+But the `list()` function preserves everything along with the data and the data types.
+
+```{r list2}
+a_bag <- list(vector1, vector2, vector3, mtcars, gradebook)
+a_bag
+```
+
+See that the `a_bag` list has only numbers? Guess what, we can change it with names! This way, we can understand the list better, and other people who look into our codes can easily understand the context as well.
+
+```{r list3}
+b_bag <- list(vec1 = vector1, vec2 = vector2, vec3 = vector3, mtcars_df = mtcars, gradebook_mat = gradebook)
+b_bag
+```
+
+Now we have our list.
+
+In a sense, list is like when we put books inside our bag. Each book (of course) has chapters.
+
+You went out and equip your bag on your shoulders. When you arrived at the library, you want to read the 3rd chapter of the book "vec3".
+
+```{r list4}
+# From b_bag, take the book called "vec3", then open me the [3] rd chapter 
+b_bag$vec3[3]
+
+
+# From b_bag, take the book called "vec3", then open me the [3]-rd, [4]-th, and [5]-th chapter 
+b_bag$vec3[3:5]
+```
+
+---
+
+## Closing
+
+Thank you for taking your time to read this article. I hope you gain something from this.
+

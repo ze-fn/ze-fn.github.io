@@ -1,8 +1,8 @@
 ---
 layout: post
-date: 2016-01-15 07:59:00-0400
+date: 2026-04-18 18:52:00+0700
 inline: true
 related_posts: false
 ---
 
-A simple inline announcement with Markdown emoji! :sparkles: :smile:
+Diving into "Fundamentals of Physics 12th ed." (Halliday, Resnick, & Walker, 2022)
