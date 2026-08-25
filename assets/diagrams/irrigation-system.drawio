@@ -1,0 +1,134 @@
+<mxfile host="Electron">
+  <diagram name="Page-1" id="nFXacFMdyNnf50jJnPsR">
+    <mxGraphModel dx="1916" dy="906" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="64e4B9fklX-wBpgAlxyj-37" parent="1" style="whiteSpace=wrap;html=1;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;fillColor=none;" value="" vertex="1">
+          <mxGeometry height="100" width="340" x="10" y="390" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-3" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="64e4B9fklX-wBpgAlxyj-2" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-52" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="64e4B9fklX-wBpgAlxyj-8">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-29.97" y="200" />
+              <mxPoint x="-29.97" y="590" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-1" parent="1" style="whiteSpace=wrap;html=1;" value="Solar Panel" vertex="1">
+          <mxGeometry height="60" width="120" x="210" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-5" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="64e4B9fklX-wBpgAlxyj-4" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-24" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="64e4B9fklX-wBpgAlxyj-23" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-26" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="64e4B9fklX-wBpgAlxyj-25" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-2" parent="1" style="whiteSpace=wrap;html=1;" value="Automated Irrigation System" vertex="1">
+          <mxGeometry height="60" width="120" x="210" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-4" parent="1" style="whiteSpace=wrap;html=1;" value="IoT Integration" vertex="1">
+          <mxGeometry height="60" width="120" x="390" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-47" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="64e4B9fklX-wBpgAlxyj-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-6" parent="1" style="whiteSpace=wrap;html=1;" value="Smart Irrigation System" vertex="1">
+          <mxGeometry height="60" width="120" x="210" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-48" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="64e4B9fklX-wBpgAlxyj-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-8" parent="1" style="whiteSpace=wrap;html=1;" value="Power Supply" vertex="1">
+          <mxGeometry height="60" width="120" x="30" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-10" parent="1" style="whiteSpace=wrap;html=1;" value="Self-sustaining Irrigation System" vertex="1">
+          <mxGeometry height="60" width="120" x="210" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-62" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="64e4B9fklX-wBpgAlxyj-57">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-66" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="64e4B9fklX-wBpgAlxyj-58" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-12" parent="1" style="whiteSpace=wrap;html=1;" value="Solar Cells" vertex="1">
+          <mxGeometry height="60" width="120" x="740" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-63" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="64e4B9fklX-wBpgAlxyj-57">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="950" y="380" />
+              <mxPoint x="710" y="380" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-67" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="64e4B9fklX-wBpgAlxyj-58" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-15" parent="1" style="whiteSpace=wrap;html=1;" value="Material Residue" vertex="1">
+          <mxGeometry height="60" width="120" x="890" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-23" parent="1" style="whiteSpace=wrap;html=1;" value="&lt;div&gt;NPK&lt;/div&gt;" vertex="1">
+          <mxGeometry height="60" width="120" x="210" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-25" parent="1" style="whiteSpace=wrap;html=1;" value="Moisture" vertex="1">
+          <mxGeometry height="60" width="120" x="30" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-38" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Soil Sensor" vertex="1">
+          <mxGeometry height="30" width="70" x="10" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-43" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-23" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="64e4B9fklX-wBpgAlxyj-6" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="330" y="510" as="sourcePoint" />
+            <mxPoint x="380" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-45" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-4" style="endArrow=classic;html=1;rounded=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="64e4B9fklX-wBpgAlxyj-6" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="330" y="510" as="sourcePoint" />
+            <mxPoint x="380" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-46" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-25" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="64e4B9fklX-wBpgAlxyj-6" value="">
+          <mxGeometry height="50" relative="1" width="50" as="geometry">
+            <mxPoint x="330" y="510" as="sourcePoint" />
+            <mxPoint x="380" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-55" parent="1" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;" value="RnD" vertex="1">
+          <mxGeometry height="380" width="490" x="550" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-61" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="64e4B9fklX-wBpgAlxyj-57">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-68" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="64e4B9fklX-wBpgAlxyj-57" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-56" parent="1" style="whiteSpace=wrap;html=1;" value="Solar Energy Materials" vertex="1">
+          <mxGeometry height="60" width="120" x="590" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-74" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-57" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="64e4B9fklX-wBpgAlxyj-72">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-57" parent="1" style="whiteSpace=wrap;html=1;" value="Systematic Review" vertex="1">
+          <mxGeometry height="60" width="120" x="650" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-73" edge="1" parent="1" source="64e4B9fklX-wBpgAlxyj-58" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="64e4B9fklX-wBpgAlxyj-72">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-58" parent="1" style="whiteSpace=wrap;html=1;" value="Meta-Analysis" vertex="1">
+          <mxGeometry height="60" width="120" x="827" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="64e4B9fklX-wBpgAlxyj-72" parent="1" style="whiteSpace=wrap;html=1;" value="Independent Power Producer" vertex="1">
+          <mxGeometry height="60" width="120" x="740" y="520" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

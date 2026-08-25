@@ -1,669 +1,279 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ze-fn.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://ze-fn.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-08-24T13:13:35+00:00</updated><id>https://ze-fn.github.io/feed.xml</id><subtitle>A simple, whitespace theme for academics. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">a post with marimo snippets</title><link href="https://ze-fn.github.io/blog/2025/marimo/" rel="alternate" type="text/html" title="a post with marimo snippets"/><published>2025-04-28T12:00:00+00:00</published><updated>2025-04-28T12:00:00+00:00</updated><id>https://ze-fn.github.io/blog/2025/marimo</id><content type="html" xml:base="https://ze-fn.github.io/blog/2025/marimo/"><![CDATA[<p><a href="https://marimo.io">marimo</a> notebooks can run Python directly in the reader’s browser. Opt a page in from its front matter:</p> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
-<span class="na">layout</span><span class="pi">:</span> <span class="s">post</span>
-<span class="na">title</span><span class="pi">:</span> <span class="s">a post with marimo snippets</span>
-<span class="na">marimo</span><span class="pi">:</span> <span class="kc">true</span>
-<span class="nn">---</span>
-</code></pre></div></div> <p>Nothing is loaded on pages without that flag, so bundling the plugin costs nothing site-wide.</p> <h2 id="runnable-snippets">Runnable snippets</h2> <p>Wrap fenced Python blocks in a container and the runtime turns them into an interactive notebook after the page loads:</p> <div class="al-marimo-inline"> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="n">marimo</span> <span class="k">as</span> <span class="n">mo</span>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ze-fn.github.io/feed.xml" rel="self" type="application/atom+xml"/><link href="https://ze-fn.github.io/" rel="alternate" type="text/html" hreflang="en"/><updated>2026-08-25T07:33:07+00:00</updated><id>https://ze-fn.github.io/feed.xml</id><title type="html">blank</title><subtitle>Zelvy&apos;s Personal Website. Based on [*folio](https://github.com/bogoli/-folio) design. </subtitle><entry><title type="html">Python: Basic Conditional Statements</title><link href="https://ze-fn.github.io/blog/2026/py-basics-conditionals/" rel="alternate" type="text/html" title="Python: Basic Conditional Statements"/><published>2026-07-17T00:00:00+00:00</published><updated>2026-07-17T00:00:00+00:00</updated><id>https://ze-fn.github.io/blog/2026/py-basics-conditionals</id><content type="html" xml:base="https://ze-fn.github.io/blog/2026/py-basics-conditionals/"><![CDATA[<h2 id="introduction">Introduction</h2> <p>Friday is the time for me to learn Data Science. Actually, I should be learning more about data science specifically.</p> <p>I have some experiences with R for Data Science, but I faced some troubles when learning the machine learning part. My main source of learning was hard to follow so I decided to learn Python for Data Science instead, hoping to get a better explanation.</p> <p>Python and R are different. I had to learn from scratch again. But even then, my main source of learning was also hard to follow despite the fact that I was just started.</p> <p>I changed my learning source to <a href="https://freecodecamp.org/">freeCodeCamp</a>. The learning format was different but the materials were easy to follow.</p> <p>Then, I reached the “Lab” part. It is a part where I apply what I have learned and make a simple program.</p> <p>There were many projects but this one is about conditional statements.</p> <h2 id="project-travel-weather-planner">Project: Travel Weather Planner</h2> <h3 id="overview">Overview</h3> <p>The task was simple:</p> <p>Write a simple program to decide whether commuting is possible based on the weather, distance to travel, and vehicle availability.</p> <h3 id="planning">Planning</h3> <p>At first, I jumped right into the terminal and wrote my program. But I found it difficult to wrote the program. There were too many to consider. My head got overheated.</p> <p>Not long, I remembered that I had seen someone made a flowchart diagram for this kind of task.</p> <p>So, I decided to draw a flowchart diagram di organize the conditions.</p> <p>Once the diagram was done, I started writing the code.</p> <p>Writing the program while looking at the flowchart was shockingly easier than jumping right to the text editor!</p> <p>I spent excessive amount of time drawing the diagram, though, but it was worth it. See the diagram below.</p> <p>(Insert dagram in svg)</p> <p>As for the code, you can review it below.</p> <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">distance_mi</span> <span class="o">=</span> <span class="mi">54</span>
+<span class="n">is_raining</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">has_bike</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">has_car</span> <span class="o">=</span> <span class="bp">False</span>
+<span class="n">has_ride_share_app</span> <span class="o">=</span> <span class="bp">True</span>
 
-<span class="n">slider</span> <span class="o">=</span> <span class="n">mo</span><span class="p">.</span><span class="n">ui</span><span class="p">.</span><span class="nf">slider</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sh">"</span><span class="s">n</span><span class="sh">"</span><span class="p">)</span>
-<span class="n">slider</span>
-</code></pre></div> </div> <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mo</span><span class="p">.</span><span class="nf">md</span><span class="p">(</span><span class="sa">f</span><span class="sh">"</span><span class="s">The first </span><span class="si">{</span><span class="n">slider</span><span class="p">.</span><span class="n">value</span><span class="si">}</span><span class="s"> squares: </span><span class="si">{</span><span class="p">[</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nf">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">slider</span><span class="p">.</span><span class="n">value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span><span class="si">}</span><span class="sh">"</span><span class="p">)</span>
-</code></pre></div> </div> </div> <p>Until the runtime has moved those blocks into place the container stays hidden, so readers never see the raw source flash before it becomes a notebook.</p> <h2 id="embedding-a-hosted-notebook">Embedding a hosted notebook</h2> <p>If you already publish a notebook — on <code class="language-plaintext highlighter-rouge">marimo.app</code> or your own WASM host — embed it instead:</p> <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">al_marimo_embed</span><span class="w"> </span><span class="na">src</span><span class="o">=</span><span class="s2">"https://marimo.app/l/your-notebook"</span><span class="w"> </span><span class="na">height</span><span class="o">=</span><span class="s2">"700px"</span><span class="w"> </span><span class="na">caption</span><span class="o">=</span><span class="s2">"Sampling demo"</span><span class="w"> </span><span class="cp">%}</span>
-</code></pre></div></div> <p>The frame is sandboxed <strong>without</strong> <code class="language-plaintext highlighter-rouge">allow-same-origin</code>, so the embedded notebook cannot reach this page’s storage or cookies.</p> <h2 id="a-note-on-what-this-loads">A note on what this loads</h2> <p>The <code class="language-plaintext highlighter-rouge">marimo-snippets</code> runtime is vendored into the plugin at a pinned version and served from your own site, rather than pulled from a CDN — so no third-party origin executes script in your readers’ pages. Running a notebook does contact marimo’s host, which is worth knowing before you opt a page in.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="code"/><category term="formatting"/><summary type="html"><![CDATA[running Python in the browser with marimo]]></summary></entry><entry><title type="html">a post with plotly.js</title><link href="https://ze-fn.github.io/blog/2025/plotly/" rel="alternate" type="text/html" title="a post with plotly.js"/><published>2025-03-26T14:24:00+00:00</published><updated>2025-03-26T14:24:00+00:00</updated><id>https://ze-fn.github.io/blog/2025/plotly</id><content type="html" xml:base="https://ze-fn.github.io/blog/2025/plotly/"><![CDATA[<p>This is an example post with some <a href="https://plotly.com/javascript/">plotly</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">plotly
-</span><span class="sb">{
-  "data": [
-    {
-      "x": [1, 2, 3, 4],
-      "y": [10, 15, 13, 17],
-      "type": "scatter"
-    },
-    {
-      "x": [1, 2, 3, 4],
-      "y": [16, 5, 11, 9],
-      "type": "scatter"
-    }
-  ]
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-plotly">{
-  "data": [
-    {
-      "x": [1, 2, 3, 4],
-      "y": [10, 15, 13, 17],
-      "type": "scatter"
-    },
-    {
-      "x": [1, 2, 3, 4],
-      "y": [16, 5, 11, 9],
-      "type": "scatter"
-    }
-  ]
-}
-</code></pre> <p>Also another example chart.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">plotly
-</span><span class="sb">{
-  "data": [
-    {
-      "x": [1, 2, 3, 4],
-      "y": [10, 15, 13, 17],
-      "mode": "markers"
-    },
-    {
-      "x": [2, 3, 4, 5],
-      "y": [16, 5, 11, 9],
-      "mode": "lines"
-    },
-    {
-      "x": [1, 2, 3, 4],
-      "y": [12, 9, 15, 12],
-      "mode": "lines+markers"
-    }
-  ],
-  "layout": {
-    "title": {
-      "text": "Line and Scatter Plot"
-    }
-  }
-}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>This is how it looks like:</p> <pre><code class="language-plotly">{
-  "data": [
-    {
-      "x": [1, 2, 3, 4],
-      "y": [10, 15, 13, 17],
-      "mode": "markers"
-    },
-    {
-      "x": [2, 3, 4, 5],
-      "y": [16, 5, 11, 9],
-      "mode": "lines"
-    },
-    {
-      "x": [1, 2, 3, 4],
-      "y": [12, 9, 15, 12],
-      "mode": "lines+markers"
-    }
-  ],
-  "layout": {
-    "title": {
-      "text": "Line and Scatter Plot"
-    }
-  }
-}
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="charts"/><summary type="html"><![CDATA[this is what included plotly.js code could look like]]></summary></entry><entry><title type="html">a post with image galleries</title><link href="https://ze-fn.github.io/blog/2024/photo-gallery/" rel="alternate" type="text/html" title="a post with image galleries"/><published>2024-12-04T01:59:00+00:00</published><updated>2024-12-04T01:59:00+00:00</updated><id>https://ze-fn.github.io/blog/2024/photo-gallery</id><content type="html" xml:base="https://ze-fn.github.io/blog/2024/photo-gallery/"><![CDATA[<p>The images in this post are all zoomable, arranged into different mini-galleries using different libraries.</p> <h2 id="lightbox2">Lightbox2</h2> <p><a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/></a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/></a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg" data-lightbox="roadtrip"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/></a></p> <hr/> <h2 id="photoswipe"><a href="https://photoswipe.com/">PhotoSwipe</a></h2> <div class="pswp-gallery pswp-gallery--single-column" id="gallery--getting-started"> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg" data-pswp-width="1669" data-pswp-height="2500" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg" alt=""/> </a> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-2500.jpg" data-pswp-width="1875" data-pswp-height="2500" data-cropped="true" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/7/img-200.jpg" alt=""/> </a> <a href="https://unsplash.com" data-pswp-src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg" data-pswp-width="2500" data-pswp-height="1666" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg" alt=""/> </a> <div> <a href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-2500.jpg" data-pswp-width="2500" data-pswp-height="1667" target="_blank"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-200.jpg" alt=""/> </a> </div> </div> <hr/> <h2 id="spotlight-js"><a href="https://nextapps-de.github.io/spotlight/">Spotlight JS</a></h2> <div class="spotlight-group"> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/> </a> </div> <div class="spotlight-group"> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/4/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/5/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/5/img-200.jpg"/> </a> <a class="spotlight" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-2500.jpg"> <img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/6/img-200.jpg"/> </a> </div> <hr/> <h2 id="venobox"><a href="https://veno.es/venobox/">Venobox</a></h2> <p><a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/1/img-200.jpg"/></a> <a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/2/img-200.jpg"/></a> <a class="venobox" data-gall="myGallery" href="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-2500.jpg"><img src="https://cdn.photoswipe.com/photoswipe-demo-images/photos/3/img-200.jpg"/></a></p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="images"/><summary type="html"><![CDATA[this is what included image galleries could look like]]></summary></entry><entry><title type="html">Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra</title><link href="https://ze-fn.github.io/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra/" rel="alternate" type="text/html" title="Google Gemini updates: Flash 1.5, Gemma 2 and Project Astra"/><published>2024-05-14T00:00:00+00:00</published><updated>2024-05-14T00:00:00+00:00</updated><id>https://ze-fn.github.io/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra</id><content type="html" xml:base="https://ze-fn.github.io/blog/2024/google-gemini-updates-flash-15-gemma-2-and-project-astra/"><![CDATA[<p>Gemini breaks new ground with a faster model, longer context, AI agents and moreLearn more:Learn more:Learn more:Models &amp; ResearchProductsInfrastructure &amp; cloudTechnology Learn more: ProductsPlatformsDevices Learn more: Outreach &amp; initiativesLeadershipInside Google Learn more: May 14, 2024 We’re introducing a series of updates across the Gemini family of models, including the new 1.5 Flash, our lightweight model for speed and efficiency, and Project Astra, our vision for the future of AI assistants. Demis HassabisCEO of Google DeepMind, on behalf of the Gemini teamIn December, we launched our first natively multimodal model Gemini 1.0 in three sizes: Ultra, Pro and Nano. Just a few months later we released 1.5 Pro, with enhanced performance and a breakthrough long context window of 1 million tokens.Developers and enterprise customers have been putting 1.5 Pro to use in incredible ways and finding its long context window, multimodal reasoning capabilities and impressive overall performance incredibly useful.We know from user feedback that some applications need lower latency and a lower cost to serve. This inspired us to keep innovating, so today, we’re introducing Gemini 1.5 Flash: a model that’s lighter-weight than 1.5 Pro, and designed to be fast and efficient to serve at scale.Both 1.5 Pro and 1.5 Flash are available in public preview with a 1 million token context window in Google AI Studio and Vertex AI. And now, 1.5 Pro is also available with a 2 million token context window via waitlist to developers using the API and to Google Cloud customers.We’re also introducing updates across the Gemini family of models, announcing our next generation of open models, Gemma 2, and sharing progress on the future of AI assistants, with Project Astra.Context lengths of leading foundation models compared with Gemini 1.5’s 2 million token capability1.5 Flash is the newest addition to the Gemini model family and the fastest Gemini model served in the API. It’s optimized for high-volume, high-frequency tasks at scale, is more cost-efficient to serve and features our breakthrough long context window.While it’s a lighter weight model than 1.5 Pro, it’s highly capable of multimodal reasoning across vast amounts of information and delivers impressive quality for its size.The new Gemini 1.5 Flash model is optimized for speed and efficiency, is highly capable of multimodal reasoning and features our breakthrough long context window.1.5 Flash excels at summarization, chat applications, image and video captioning, data extraction from long documents and tables, and more. This is because it’s been trained by 1.5 Pro through a process called “distillation,” where the most essential knowledge and skills from a larger model are transferred to a smaller, more efficient model.Read more about 1.5 Flash in our updated Gemini 1.5 technical report, on the Gemini technology page, and learn about 1.5 Flash’s availability and pricing.Over the last few months, we’ve significantly improved 1.5 Pro, our best model for general performance across a wide range of tasks.Beyond extending its context window to 2 million tokens, we’ve enhanced its code generation, logical reasoning and planning, multi-turn conversation, and audio and image understanding through data and algorithmic advances. We see strong improvements on public and internal benchmarks for each of these tasks.1.5 Pro can now follow increasingly complex and nuanced instructions, including ones that specify product-level behavior involving role, format and style. We’ve improved control over the model’s responses for specific use cases, like crafting the persona and response style of a chat agent or automating workflows through multiple function calls. And we’ve enabled users to steer model behavior by setting system instructions.We added audio understanding in the Gemini API and Google AI Studio, so 1.5 Pro can now reason across image and audio for videos uploaded in Google AI Studio. And we’re now integrating 1.5 Pro into Google products, including Gemini Advanced and in Workspace apps.Read more about 1.5 Pro in our updated Gemini 1.5 technical report and on the Gemini technology page.Gemini Nano is expanding beyond text-only inputs to include images as well. Starting with Pixel, applications using Gemini Nano with Multimodality will be able to understand the world the way people do — not just through text, but also through sight, sound and spoken language.Read more about Gemini 1.0 Nano on Android.Today, we’re also sharing a series of updates to Gemma, our family of open models built from the same research and technology used to create the Gemini models.We’re announcing Gemma 2, our next generation of open models for responsible AI innovation. Gemma 2 has a new architecture designed for breakthrough performance and efficiency, and will be available in new sizes.The Gemma family is also expanding with PaliGemma, our first vision-language model inspired by PaLI-3. And we’ve upgraded our Responsible Generative AI Toolkit with LLM Comparator for evaluating the quality of model responses.Read more on the Developer blog.As part of Google DeepMind’s mission to build AI responsibly to benefit humanity, we’ve always wanted to develop universal AI agents that can be helpful in everyday life. That’s why today, we’re sharing our progress in building the future of AI assistants with Project Astra (advanced seeing and talking responsive agent).To be truly useful, an agent needs to understand and respond to the complex and dynamic world just like people do — and take in and remember what it sees and hears to understand context and take action. It also needs to be proactive, teachable and personal, so users can talk to it naturally and without lag or delay.While we’ve made incredible progress developing AI systems that can understand multimodal information, getting response time down to something conversational is a difficult engineering challenge. Over the past few years, we’ve been working to improve how our models perceive, reason and converse to make the pace and quality of interaction feel more natural.Building on Gemini, we’ve developed prototype agents that can process information faster by continuously encoding video frames, combining the video and speech input into a timeline of events, and caching this information for efficient recall.By leveraging our leading speech models, we also enhanced how they sound, giving the agents a wider range of intonations. These agents can better understand the context they’re being used in, and respond quickly, in conversation.With technology like this, it’s easy to envision a future where people could have an expert AI assistant by their side, through a phone or glasses. And some of these capabilities are coming to Google products, like the Gemini app and web experience, later this year.We’ve made incredible progress so far with our family of Gemini models, and we’re always striving to advance the state-of-the-art even further. By investing in a relentless production line of innovation, we’re able to explore new ideas at the frontier, while also unlocking the possibility of new and exciting Gemini use cases.Learn more about Gemini and its capabilities.Collection Sign up for our newsletters with product updates, event information, special offers, and more. Done. Just one step more. Check your inbox to confirm your subscription.</p> <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>You can also subscribe with a different email address.
+<span class="k">if</span> <span class="n">distance_mi</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+    <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">False</span><span class="sh">'</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">distance_mi</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">distance_mi</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">is_raining</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">False</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">True</span><span class="sh">'</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">distance_mi</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">distance_mi</span> <span class="o">&lt;=</span> <span class="mi">6</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">is_raining</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">False</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">has_bike</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">True</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">False</span><span class="sh">'</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">distance_mi</span> <span class="o">&gt;</span> <span class="mi">6</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">has_ride_share_app</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">True</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">has_car</span> <span class="o">==</span> <span class="bp">True</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">True</span><span class="sh">'</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nf">print</span><span class="p">(</span><span class="sh">'</span><span class="s">False</span><span class="sh">'</span><span class="p">)</span>
+</code></pre></div></div> <h2 id="reflections">Reflections</h2> <p>I found my workflow for writing a simple program:</p> <blockquote> <p>Diagram -&gt; Code</p> </blockquote> <p>And <strong>not</strong> straight to code.</p> <p>This is subjective, I admit. But everyone has their own way of doing things, no?</p> <p>Leave a comment if you find my experience entertaining! XD</p>]]></content><author><name>Zelvy Fauzan</name></author><category term="Learning"/><category term="Software Engineering"/><category term="Project"/><category term="Python"/><summary type="html"><![CDATA[A Simple Travel Weather Planner but with Diagrams]]></summary></entry><entry><title type="html">Microcontroller 1: Speed Reaction Game</title><link href="https://ze-fn.github.io/blog/2026/mc-1-speed-reaction-game/" rel="alternate" type="text/html" title="Microcontroller 1: Speed Reaction Game"/><published>2026-07-16T00:00:00+00:00</published><updated>2026-07-16T00:00:00+00:00</updated><id>https://ze-fn.github.io/blog/2026/mc-1-speed-reaction-game</id><content type="html" xml:base="https://ze-fn.github.io/blog/2026/mc-1-speed-reaction-game/"><![CDATA[<h2 id="introduction">Introduction</h2> <p>This is actually my second attempt to create a speed reaction game. The first attempt was purely imitating what Hugh did.</p> <p>In the second attempt, I tried to create my own functions for <code class="language-plaintext highlighter-rouge">LED countdown</code> and <code class="language-plaintext highlighter-rouge">Winner Ringtone</code>.</p> <h2 id="custom-functions">Custom Functions</h2> <p>When I was working on the game mechanics, I was wondering on adding a winner ringtone into the game mechanics.</p> <p>When either of the player pressed the button first, the buzzer will ring for three times with a short interval. But writing it for the two conditions would be tedious.</p> <p>So, I was thinking of making a function instead of hard-coding it inside each of the conditions.</p> <p>I created the function for the winner ringtone:</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">buzzer</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">winnerRingtone</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">digitalWrite</span><span class="p">(</span><span class="n">buzzer</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+        <span class="n">delay</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+        <span class="n">digitalWrite</span><span class="p">(</span><span class="n">buzzer</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>Additionally, I thought of making another custom function. A function for the LED Countdown.</p> <p>It wouldn’t hurt me, would it? It’s also a good reinforcement for my learning!</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Countdown LEDs</span>
+<span class="kt">int</span> <span class="n">redLED</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">yellowLED</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">greenLED</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+
+<span class="c1">// Put the LEDs pin inside a list</span>
+<span class="kt">int</span> <span class="n">countdownLEDs</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">redLED</span><span class="p">,</span> <span class="n">yellowLED</span><span class="p">,</span> <span class="n">greenLED</span><span class="p">}</span>
+
+<span class="c1">// Function: LED Countdown</span>
+<span class="kt">void</span> <span class="nf">winnerRingtone</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">LED</span> <span class="o">:</span> <span class="n">countdownLEDs</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+        <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+        <span class="n">digitalWrite</span><span class="p">(</span><span class="n">LED</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h2 id="result">Result</h2> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Countdown LEDs</span>
+<span class="kt">int</span> <span class="n">redLED</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">yellowLED</span> <span class="o">=</span> <span class="mi">9</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">greenLED</span> <span class="o">=</span> <span class="mi">8</span><span class="p">;</span>
+
+<span class="c1">// Buzzer</span>
+<span class="kt">int</span> <span class="n">buzzer</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+
+<span class="c1">// Player LEDs</span>
+<span class="kt">int</span> <span class="n">player1LED</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">player2LED</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+
+<span class="c1">// Player Button Input</span>
+<span class="kt">int</span> <span class="n">player1button</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">player2button</span> <span class="o">=</span> <span class="mi">13</span><span class="p">;</span>
+
+<span class="c1">// Negative Rail = Lane 44 -&gt; GND</span>
+
+<span class="c1">// Define default state for the game</span>
+<span class="kt">int</span> <span class="n">buttonPressed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="c1">// Ringtone for winner</span>
+<span class="kt">void</span> <span class="nf">winnerRingtone</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">buzzer</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">buzzer</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// List: Countdown LEDs</span>
+<span class="kt">int</span> <span class="n">countdownLEDs</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="n">redLED</span><span class="p">,</span> <span class="n">yellowLED</span><span class="p">,</span> <span class="n">greenLED</span><span class="p">};</span>
+
+<span class="c1">// Function: Countdown LEDs</span>
+<span class="kt">void</span> <span class="nf">countdownLED</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">currentPin</span> <span class="o">:</span> <span class="n">countdownLEDs</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">currentPin</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">currentPin</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// put your setup code here, to run once:</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">redLED</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">yellowLED</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">greenLED</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">buzzer</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">player1LED</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">player2LED</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">player1button</span><span class="p">,</span> <span class="n">INPUT_PULLUP</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">player2button</span><span class="p">,</span> <span class="n">INPUT_PULLUP</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Call Countdown LED function</span>
+  <span class="n">countdownLED</span><span class="p">();</span>
   
-        Your information will be used in accordance with Google's privacy policy. You may opt out at any time.
-</code></pre></div></div>]]></content><author><name></name></author><category term="external-posts"/><category term="google"/><summary type="html"><![CDATA[We’re sharing updates across our Gemini family of models and a glimpse of Project Astra, our vision for the future of AI assistants.]]></summary></entry><entry><title type="html">a post with tabs</title><link href="https://ze-fn.github.io/blog/2024/tabs/" rel="alternate" type="text/html" title="a post with tabs"/><published>2024-05-01T00:32:13+00:00</published><updated>2024-05-01T00:32:13+00:00</updated><id>https://ze-fn.github.io/blog/2024/tabs</id><content type="html" xml:base="https://ze-fn.github.io/blog/2024/tabs/"><![CDATA[<p>This is how a post with <a href="https://github.com/Ovski4/jekyll-tabs">tabs</a> looks like. Note that the tabs could be used for different purposes, not only for code.</p> <h2 id="first-tabs">First tabs</h2> <p>To add tabs, use the following syntax:</p> <div class="language-liquid highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">{%</span><span class="w"> </span><span class="nt">tabs</span><span class="w"> </span><span class="nv">group-name</span><span class="w"> </span><span class="cp">%}</span>
+  <span class="c1">// Game Begin</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">player1LED</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">player2LED</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="k">while</span> <span class="p">(</span><span class="n">buttonPressed</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">digitalRead</span><span class="p">(</span><span class="n">player1button</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">buttonPressed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="n">digitalWrite</span><span class="p">(</span><span class="n">player2LED</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+      <span class="n">winnerRingtone</span><span class="p">();</span> <span class="c1">// Call Winner Ringtone function</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Player 1 Wins!"</span><span class="p">);</span>
+      <span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">digitalRead</span><span class="p">(</span><span class="n">player2button</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">buttonPressed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="n">digitalWrite</span><span class="p">(</span><span class="n">player1LED</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+      <span class="n">winnerRingtone</span><span class="p">();</span> <span class="c1">// Call Winner Ringtone function</span>
+      <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Player 2 Wins!"</span><span class="p">);</span>
+      <span class="n">delay</span><span class="p">(</span><span class="mi">2000</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="c1">// Reset all to default state</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">player1LED</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">player2LED</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">buttonPressed</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></div>]]></content><author><name>Zelvy Fauzan</name></author><category term="Learning"/><category term="Arduino"/><category term="Electrical Engineering"/><category term="Project"/><category term="C++"/><summary type="html"><![CDATA[A project from Robonyx Academy]]></summary></entry><entry><title type="html">Microcontroller 2: Playing with Analog</title><link href="https://ze-fn.github.io/blog/2026/mc-2-light-control/" rel="alternate" type="text/html" title="Microcontroller 2: Playing with Analog"/><published>2026-07-16T00:00:00+00:00</published><updated>2026-07-16T00:00:00+00:00</updated><id>https://ze-fn.github.io/blog/2026/mc-2-light-control</id><content type="html" xml:base="https://ze-fn.github.io/blog/2026/mc-2-light-control/"><![CDATA[<h2 id="introduction">Introduction</h2> <p>This is just a recreational project from Robonyx’s lesson on Sonar Scanner Project.</p> <p>I made an analog controller to make an RGB light lit differently.</p> <h2 id="analog-rgb-light-controller">Analog RGB Light Controller</h2> <p>The idea is simple. It’s like a volume bar. If the volume bar reaches a certain range, the LED changes in color.</p> <p>So, as the name suggests, an analog that controls the color of an RGB light.</p> <p>To be specific …</p> <p>If the “volume” is in range of 0 to 85, then the LED will be red.</p> <p>If the “volume” is in range of 86 to 170, then the LED will be green.</p> <p>And if the “volume” is in range of 171 to 255, then the LED will be blue.</p> <p>Below is the code.</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// RGB LED</span>
+<span class="kt">int</span> <span class="n">redRGB</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">greenRGB</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">blueRGB</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 
-<span class="cp">{%</span><span class="w"> </span><span class="nt">tab</span><span class="w"> </span><span class="nv">group-name</span><span class="w"> </span><span class="nv">tab-name-1</span><span class="w"> </span><span class="cp">%}</span>
+<span class="c1">// Potentiometer 10K Ohm</span>
+<span class="kt">int</span> <span class="n">pot</span> <span class="o">=</span> <span class="n">A0</span><span class="p">;</span>
 
-Content 1
+<span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">scale</span><span class="p">;</span>
 
-<span class="cp">{%</span><span class="w"> </span><span class="nt">endtab</span><span class="w"> </span><span class="cp">%}</span>
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// put your setup code here, to run once:</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">redRGB</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">greenRGB</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">blueRGB</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">pot</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="cp">{%</span><span class="w"> </span><span class="nt">tab</span><span class="w"> </span><span class="nv">group-name</span><span class="w"> </span><span class="nv">tab-name-2</span><span class="w"> </span><span class="cp">%}</span>
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// put your main code here, to run repeatedly:</span>
+  <span class="n">value</span> <span class="o">=</span> <span class="n">analogRead</span><span class="p">(</span><span class="n">pot</span><span class="p">);</span>
+  <span class="n">scale</span> <span class="o">=</span> <span class="n">map</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1023</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">);</span>
+  <span class="k">if</span> <span class="p">(</span><span class="n">analogRead</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">85</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">redRGB</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">greenRGB</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">blueRGB</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">scale</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="nf">if</span> <span class="p">(</span><span class="n">analogRead</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">85</span> <span class="o">&amp;&amp;</span> <span class="n">analogRead</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">170</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">redRGB</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">greenRGB</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">blueRGB</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">scale</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">redRGB</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">greenRGB</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">blueRGB</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">scale</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div> <h2 id="reflection">Reflection</h2> <p>It worked but with some strange things happened.</p> <p>As you can see on the video, it seemed like the range is not proportional.</p> <p>It is as if the intervals are not equal. Green appears to be having the shortest of range, followed by red, and blue is the longest range.</p> <p>I think I made a mistake, or I missed something to which I’m unaware of.</p> <p>If you found the bug, let me know in the comment section.</p>]]></content><author><name>Zelvy Fauzan</name></author><category term="Learning"/><category term="Arduino"/><category term="Electrical Engineering"/><category term="Project"/><category term="C++"/><summary type="html"><![CDATA[Exploring the analog and RGB modules]]></summary></entry><entry><title type="html">EE: Electricity</title><link href="https://ze-fn.github.io/blog/2026/ee-p1-electricity/" rel="alternate" type="text/html" title="EE: Electricity"/><published>2026-07-13T00:00:00+00:00</published><updated>2026-07-13T00:00:00+00:00</updated><id>https://ze-fn.github.io/blog/2026/ee-p1-electricity</id><content type="html" xml:base="https://ze-fn.github.io/blog/2026/ee-p1-electricity/"><![CDATA[<h2 id="introduction">Introduction</h2> <p>Few days ago, I tried to light up some LEDs but sometimes it lit up and sometimes it didn’t. I got stuck. So, today, I tried some experiments. I wanted to understand how electricity flows.</p> <h2 id="before">Before</h2> <p>I thought that all LEDs will light up as long as every LEDs are channeled to GND.</p> <p>(insert image here)</p> <h2 id="experiment">Experiment</h2> <p>I installed additional LEDs on the breadboard. Three were previously installed and 5 new ones.</p> <p>Below is my circuit design for this experiments.</p> <p>(insert illustation)</p> <p>To understand how electricity flow, I tried to isolate different connections.</p> <h3 id="first-experiment">First Experiment</h3> <p>LEDs: 25, 27, 29, 50 Positive: 50 Negative: 60 <em>*Lit up: 50</em></p> <p>LEDs: 25, 27, 29, 50 Positive: 20 Negative: 60 <em>*Lit up: None</em></p> <p>LEDs: 25, 27, 29, 50 Positive: 50 Negative: 20 <em>*Lit up: None</em></p> <p>LEDs: 25, 27, 29, 50 Positive: 20 Negative: 20 <em>*Lit up: 25, 27, 29</em></p> <blockquote> <p>Temporary Conclusion: <em>Current flows from right to left?</em></p> </blockquote> <h3 id="second-experiments">Second Experiments</h3> <p>LEDs: 25, 27, 29, 50, 57 Positive: 50 Negative: 60 <em>*Lit up: 50, 57</em></p> <p>LEDs: 25, 27, 29, 50, 57 Positive: 20 Negative: 60 <em>*Lit up: None</em></p> <p>LEDs: 25, 27, 29, 50, 57 Positive: 50 Negative: 45 <em>*Lit up: 50, 57</em></p> <p>LEDs: 25, 27, 29, 50, 57 Positive: 20 Negative: 45 <em>*Lit up: None</em></p> <p>LEDs: 25, 27, 29, 50, 57 Positive: 57 Negative: 20 <em>*Lit up: None</em></p> <p>LEDs: 25, 27, 29, 50, 57 Positive: 50 Negative: 20 <em>*Lit up: None</em></p> <p>LEDs: 25, 27, 29, 50, 57 Positive: 45 Negative: 20 <em>*Lit up: None</em></p> <p>LEDs: 25, 27, 29, 50, 57 Positive: 20 Negative: 20 <em>*Lit up: 25, 27, 29</em></p> <h3 id="third-experiments">Third Experiments</h3> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 57 Negative: 60 <em>*Lit up: 37, 50, 57</em></p> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 50 Negative: 60 <em>*Lit up: 37, 50, 57</em></p> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 37 Negative: 60 <em>*Lit up: 37, 50, 57</em></p> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 20 Negative: 60 <em>*Lit up: None</em></p> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 50 Negative: 55 <em>*Lit up: 37, 50, 57</em></p> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 50 Negative: 45 <em>*Lit up: 37, 50, 57</em></p> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 50 Negative: 35 <em>*Lit up: 37, 50, 57</em></p> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 50 Negative: 26 <em>*Lit up: None</em></p> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 50 Negative: 20 <em>*Lit up: None</em></p> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 45 Negative: 60 <em>*Lit up: 37, 50, 57</em></p> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 45 Negative: 55 <em>*Lit up: 37, 50, 57</em></p> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 45 Negative: 45 <em>*Lit up: 37, 50, 57</em></p> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 45 Negative: 35 <em>*Lit up: 37, 50, 57</em></p> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 45 Negative: 26 <em>*Lit up: None</em></p> <blockquote> <p>Temporary Conclusion: Direction is not right to left, nor left to right.</p> </blockquote> <h3 id="fourth-experiments">Fourth Experiments</h3> <p>When I was about to place moreLEDs, I saw that there is a gap on the rails’ positive line.</p> <p>(insert photo)</p> <p>Just like that I realized that the gap is an indicator of separation. In other words, the breadboard is one but the current flow is divided into two parts. The two different current flows are separated by that gap.</p> <p>So I tried connecting between the two separate rails with a jumper to see if all six LEDs will lit up.</p> <p>LEDs: 25, 27, 29, 37, 50, 57 Positive: 60 Positive_Connection: 20, 35 Negative_Connection: 20, 35 Negative: 60 <em>*Lit up: 25, 27, 29, 37, 50, 57</em></p> <h2 id="conclusion">Conclusion</h2> <p>All LEDs will light up if every LEDs are connected to ground.</p> <p>(insert two illustrations side by side)</p>]]></content><author><name>Zelvy Fauzan</name></author><category term="Learning"/><category term="Electrical Engineering"/><category term="Electricity"/><category term="Fundamental"/><summary type="html"><![CDATA[Getting to Know Electricity]]></summary></entry><entry><title type="html">EE: Resistors</title><link href="https://ze-fn.github.io/blog/2026/ee-p2-resistors/" rel="alternate" type="text/html" title="EE: Resistors"/><published>2026-07-13T00:00:00+00:00</published><updated>2026-07-13T00:00:00+00:00</updated><id>https://ze-fn.github.io/blog/2026/ee-p2-resistors</id><content type="html" xml:base="https://ze-fn.github.io/blog/2026/ee-p2-resistors/"><![CDATA[<h2 id="introduction">Introduction</h2> <p>This is the second experiment test on this day. I had resistors with different values: 220 Ohm, 1K Ohm, and 10K Ohm. I wonder what’s the difference between the three.</p> <h2 id="hypothesis">Hypothesis</h2> <p>{\(H_0\)}: There is no difference in light intensity between LEDs with 200 Ohm, 1K Ohm, and 10K Ohm</p> <h2 id="experiment">Experiment</h2> <table> <thead> <tr> <th style="text-align: left">LED_loc</th> <th style="text-align: left">Resistor</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">4</td> <td style="text-align: left">10K</td> </tr> <tr> <td style="text-align: left">11</td> <td style="text-align: left">1K</td> </tr> <tr> <td style="text-align: left">15</td> <td style="text-align: left">200</td> </tr> </tbody> </table> <h2 id="result-and-discussion">Result and Discussion</h2> <p>(Insert photo evidence)</p> <p>It appears that LED on lane 4 (10K Ohm) is dim and LED on lane 15 (200 Ohm) is the brightest. LED on lane 11 (1K Ohm) lit with light intensity between the 10K Ohm and 200 Ohm.</p> <p>Delving on the linguistic side of the terminology, the word “resistor” comes from “resist” and suffix “-or”. This means that resistor is a module that supress the amount of current flow. If the source current is {\(X\)} Volt and is connected to a resistor with the amount of {\(Y\)} Ohm, then the current (V) that already passed the resistor will be less than the original {\(X\)} Volt.</p> <p>In other words, {\(X_1 &lt; X_0\)}.</p> <p>Cross-checking with Physics textbook, Current is expressed as {\(I\)} with a unit of Ampere, Voltage is expressed as {\(V\)} with a unit of Volt, and Resistance is expressed as {\(R\)} with a unit of {\(\Omega\)} Ohm. Together, to calculate the amount of current flowing is {\(I = \frac{V}{R}\)}.</p> <p>To prove this, I tried to do the math using python in Windows Command Prompt. I prefer terminal-style calculator instead of the Calculator App.</p> <div class="language-py highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&gt;&gt;&gt;</span> <span class="mf">5.5</span> <span class="o">/</span> <span class="mi">220</span>
+<span class="mf">0.025</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">5.5</span> <span class="o">/</span> <span class="mi">1000</span>
+<span class="mf">0.0055</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="mf">5.5</span> <span class="o">/</span> <span class="mi">10000</span>
+<span class="mf">0.00055</span>
+</code></pre></div></div> <h2 id="conclusion">Conclusion</h2> <p>In general terms,</p> <blockquote> <p>The higher the resistor value is, the brighter the light intensity will be.</p> </blockquote> <p>In scientific terms,</p> <blockquote> <p>The higher ther resistance is, the lower the current will be, which then resulted in lower output.</p> </blockquote>]]></content><author><name>Zelvy Fauzan</name></author><category term="Learning"/><category term="Electrical Engineering"/><category term="Electricity"/><category term="Fundamental"/><summary type="html"><![CDATA[Getting to Know Resistors]]></summary></entry><entry><title type="html">Traffic Lights in Arduino Uno R3</title><link href="https://ze-fn.github.io/blog/2026/arduino-r3-first-circuit/" rel="alternate" type="text/html" title="Traffic Lights in Arduino Uno R3"/><published>2026-07-06T00:00:00+00:00</published><updated>2026-07-06T00:00:00+00:00</updated><id>https://ze-fn.github.io/blog/2026/arduino-r3-first-circuit</id><content type="html" xml:base="https://ze-fn.github.io/blog/2026/arduino-r3-first-circuit/"><![CDATA[<h1 id="1-introduction">1. Introduction</h1> <p>The day before Monday, 6 July 2026, I saw <a href="https://www.youtube.com/watch?v=fiVFbw2czZc">Felix Siauw’s thumbnail video</a> that says “Selesai Lebih Baik Daripada Sempurna”. The text literally translates to “Done is better than perfect”. It strucked me! I always filling up my bucket list but I hardly emptied (done) it. One item in my bucket list is to become an Electrical Engineer in Radio Frequency and Microwave using Microcontroller. Long stroy short, I continued my study from Robonyx’s free course and below is what I learned and the project that I had done from the first chapter of <a href="https://www.skool.com/robonyx/about">Starter Course for Arduino</a> course.</p> <h1 id="2-what-i-learned">2. What I Learned</h1> <p>Electricity has been a tough one for me. Last year, I tried to make my own circuit design using breadboard but it didn’t go well. I managed to make a blinking LED. But when I stepped up to making a simple traffic light circuit design, the output wasn’t expected. Only one of the lights were lit. Below is my old design and the script.</p> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/arduino_projects/proj1-100-480.webp 480w,/assets/img/arduino_projects/proj1-100-800.webp 800w,/assets/img/arduino_projects/proj1-100-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/arduino_projects/proj1-100.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> </div> <details><summary>Script</summary> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">const</span> <span class="kt">int</span> <span class="n">greenLED</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>        <span class="c1">//the code will flash the LED connected to pin 12</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">yellowLED</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>       <span class="c1">//the yellow LED is connected to digital pin 11</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">redLED</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>          <span class="c1">//the red LED is connected to digital pin 10</span>
 
-Content 2
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">greenLED</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">yellowLED</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">redLED</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="cp">{%</span><span class="w"> </span><span class="nt">endtab</span><span class="w"> </span><span class="cp">%}</span>
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">redLED</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">yellowLED</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">greenLED</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">greenLED</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">redLED</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">yellowLED</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">greenLED</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">yellowLED</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="n">redLED</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">3000</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> </details> <h2 id="21-where-to-where-electric-current-flow">2.1. Where to Where: Electric Current Flow</h2> <ul> <li>Electricity moves from Positive to Negative.</li> <li>Positive is Anode; Negative is Cathode.</li> <li>Anode is (+); Cathode is (-).</li> <li>Long pin is Anode; Short pin is Cathode.</li> <li>(+) has more lines; (-) has only 1 line.</li> <li>Thus, Anode (+) is long pin, Cathode (-) is short pin.</li> </ul> <h2 id="22-resistor">2.2. Resistor</h2> <p>From “Resis” with suffix “-or”, which means <em>something that is resisting (something else)</em>. In this case, if an LED is supplied with unresisted current (e.g., 5 Volts), the LED will burn and then will no longer be used. Resistors keep the LED (or other stuffs) not burn by “resisting” some amount (indicated by Ohm) of the electricity current. Thus, we rescued the LED from burning to crisp! And the LED is happy. Just look at how bright it is.</p> <h2 id="23-ground">2.3. Ground</h2> <p>Ground is the place where we expel residual electricity. Let’s say we want to lit an LED but forgot to connect the cathode of the LED to Ground (GND). The LED won’t lit because the electricity is not flowing. To make electricity flow, we must connect the series to the Ground (GND). It has to make a perfect loop. From source (positive), to LED, then to ground (negative). Only by that the current can flow. Else, it won’t flow at all and LED won’t lit.</p> <h1 id="3-project-from-course">3. Project from Course</h1> <p>I copied what Hugh (Robonyx) did in the course but with different pin locations.</p> <p>This is my first attempt, which looked nice! Everything went well.</p> <p>(circuit design img goes here)</p> <p>{ % details Script %}</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">pinMode</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+<span class="p">}</span>
 
-<span class="cp">{%</span><span class="w"> </span><span class="nt">endtabs</span><span class="w"> </span><span class="cp">%}</span>
-</code></pre></div></div> <p>With this you can generate visualizations like:</p> <ul id="log" class="tab" data-tab="625c6846-629e-4774-bd51-bd4c33775bd3" data-name="log"> <li class="active" id="log-php"> <a href="#">php </a> </li> <li id="log-js"> <a href="#">js </a> </li> <li id="log-ruby"> <a href="#">ruby </a> </li> </ul> <ul class="tab-content" id="625c6846-629e-4774-bd51-bd4c33775bd3" data-name="log"> <li class="active"> <div class="language-php highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">var_dump</span><span class="p">(</span><span class="s1">'hello'</span><span class="p">);</span>
-</code></pre></div></div> </li> <li> <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">hello</span><span class="dl">"</span><span class="p">);</span>
-</code></pre></div></div> </li> <li> <div class="language-javascript highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">pputs</span> <span class="dl">'</span><span class="s1">hello</span><span class="dl">'</span>
-</code></pre></div></div> </li> </ul> <h2 id="another-example">Another example</h2> <ul id="data-struct" class="tab" data-tab="77e42a3a-0555-4cde-aba0-d142e8d5b9b9" data-name="data-struct"> <li class="active" id="data-struct-yaml"> <a href="#">yaml </a> </li> <li id="data-struct-json"> <a href="#">json </a> </li> </ul> <ul class="tab-content" id="77e42a3a-0555-4cde-aba0-d142e8d5b9b9" data-name="data-struct"> <li class="active"> <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">hello</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s2">"</span><span class="s">whatsup"</span>
-  <span class="pi">-</span> <span class="s2">"</span><span class="s">hi"</span>
-</code></pre></div></div> </li> <li> <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="nl">"hello"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">"whatsup"</span><span class="p">,</span><span class="w"> </span><span class="s2">"hi"</span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre></div></div> </li> </ul> <h2 id="tabs-for-something-else">Tabs for something else</h2> <ul id="something-else" class="tab" data-tab="46b967b2-be5e-45ae-809c-0e2fb5e18322" data-name="something-else"> <li class="active" id="something-else-text"> <a href="#">text </a> </li> <li id="something-else-quote"> <a href="#">quote </a> </li> <li id="something-else-list"> <a href="#">list </a> </li> </ul> <ul class="tab-content" id="46b967b2-be5e-45ae-809c-0e2fb5e18322" data-name="something-else"> <li class="active"> <p>Regular text</p> </li> <li> <blockquote> <p>A quote</p> </blockquote> </li> <li> <p>Hipster list</p> <ul> <li>brunch</li> <li>fixie</li> <li>raybans</li> <li>messenger bag</li> </ul> </li> </ul>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is what included tabs in a post could look like]]></summary></entry><entry><title type="html">a post with typograms</title><link href="https://ze-fn.github.io/blog/2024/typograms/" rel="alternate" type="text/html" title="a post with typograms"/><published>2024-04-29T23:36:10+00:00</published><updated>2024-04-29T23:36:10+00:00</updated><id>https://ze-fn.github.io/blog/2024/typograms</id><content type="html" xml:base="https://ze-fn.github.io/blog/2024/typograms/"><![CDATA[<p>This is an example post with some <a href="https://github.com/google/typograms/">typograms</a> code.</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">typograms
-</span><span class="sb">+----+
-|    |---&gt; My first diagram!
-+----+</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <pre><code class="language-typograms">+----+
-|    |---&gt; My first diagram!
-+----+
-</code></pre> <p>Another example:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">typograms
-</span><span class="sb">.------------------------.
-|.----------------------.|
-||"https://example.com" ||
-|'----------------------'|
-| ______________________ |
-||                      ||
-||   Welcome!           ||
-||                      ||
-||                      ||
-||  .----------------.  ||
-||  | username       |  ||
-||  '----------------'  ||
-||  .----------------.  ||
-||  |"*******"       |  ||
-||  '----------------'  ||
-||                      ||
-||  .----------------.  ||
-||  |   "Sign-up"    |  ||
-||  '----------------'  ||
-||                      ||
-|+----------------------+|
-.------------------------.</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>which generates:</p> <pre><code class="language-typograms">.------------------------.
-|.----------------------.|
-||"https://example.com" ||
-|'----------------------'|
-| ______________________ |
-||                      ||
-||   Welcome!           ||
-||                      ||
-||                      ||
-||  .----------------.  ||
-||  | username       |  ||
-||  '----------------'  ||
-||  .----------------.  ||
-||  |"*******"       |  ||
-||  '----------------'  ||
-||                      ||
-||  .----------------.  ||
-||  |   "Sign-up"    |  ||
-||  '----------------'  ||
-||                      ||
-|+----------------------+|
-.------------------------.
-</code></pre> <p>For more examples, check out the <a href="https://google.github.io/typograms/#examples">typograms documentation</a>.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="diagrams"/><summary type="html"><![CDATA[this is what included typograms code could look like]]></summary></entry><entry><title type="html">a post that can be cited</title><link href="https://ze-fn.github.io/blog/2024/post-citation/" rel="alternate" type="text/html" title="a post that can be cited"/><published>2024-04-28T15:06:00+00:00</published><updated>2024-04-28T15:06:00+00:00</updated><id>https://ze-fn.github.io/blog/2024/post-citation</id><content type="html" xml:base="https://ze-fn.github.io/blog/2024/post-citation/"><![CDATA[<p>This is an example post that can be cited. The content of the post ends here, while the citation information is automatically provided below. The only thing needed is for you to set the <code class="language-plaintext highlighter-rouge">citation</code> key in the front matter to <code class="language-plaintext highlighter-rouge">true</code>.</p>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="citation"/><summary type="html"><![CDATA[this is what a post that can be cited looks like]]></summary></entry><entry><title type="html">a post with pseudo code</title><link href="https://ze-fn.github.io/blog/2024/pseudocode/" rel="alternate" type="text/html" title="a post with pseudo code"/><published>2024-04-15T00:01:00+00:00</published><updated>2024-04-15T00:01:00+00:00</updated><id>https://ze-fn.github.io/blog/2024/pseudocode</id><content type="html" xml:base="https://ze-fn.github.io/blog/2024/pseudocode/"><![CDATA[<p>This is an example post with some pseudo code rendered by <a href="https://github.com/SaswatPadhi/pseudocode.js">pseudocode</a>. The example presented here is the same as the one in the <a href="https://saswat.padhi.me/pseudocode.js/">pseudocode.js</a> documentation, with only one simple but important change: everytime you would use <code class="language-plaintext highlighter-rouge">$</code>, you should use <code class="language-plaintext highlighter-rouge">$$</code> instead. Also, note that the <code class="language-plaintext highlighter-rouge">pseudocode</code> key in the front matter is set to <code class="language-plaintext highlighter-rouge">true</code> to enable the rendering of pseudo code. As an example, using this code:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">pseudocode
-</span><span class="sb">% This quicksort algorithm is extracted from Chapter 7, Introduction to Algorithms (3rd edition)
-\begin{algorithm}
-\caption{Quicksort}
-\begin{algorithmic}
-\PROCEDURE{Quicksort}{$$A, p, r$$}
-    \IF{$$p &lt; r$$}
-        \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
-        \STATE \CALL{Quicksort}{$$A, p, q - 1$$}
-        \STATE \CALL{Quicksort}{$$A, q + 1, r$$}
-    \ENDIF
-\ENDPROCEDURE
-\PROCEDURE{Partition}{$$A, p, r$$}
-    \STATE $$x = A[r]$$
-    \STATE $$i = p - 1$$
-    \FOR{$$j = p$$ \TO $$r - 1$$}
-        \IF{$$A[j] &lt; x$$}
-            \STATE $$i = i + 1$$
-            \STATE exchange
-            $$A[i]$$ with $$A[j]$$
-        \ENDIF
-        \STATE exchange $$A[i]$$ with $$A[r]$$
-    \ENDFOR
-\ENDPROCEDURE
-\end{algorithmic}
-\end{algorithm}</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Generates:</p> <pre><code class="language-pseudocode">% This quicksort algorithm is extracted from Chapter 7, Introduction to Algorithms (3rd edition)
-\begin{algorithm}
-\caption{Quicksort}
-\begin{algorithmic}
-\PROCEDURE{Quicksort}{$$A, p, r$$}
-    \IF{$$p &lt; r$$}
-        \STATE $$q = $$ \CALL{Partition}{$$A, p, r$$}
-        \STATE \CALL{Quicksort}{$$A, p, q - 1$$}
-        \STATE \CALL{Quicksort}{$$A, q + 1, r$$}
-    \ENDIF
-\ENDPROCEDURE
-\PROCEDURE{Partition}{$$A, p, r$$}
-    \STATE $$x = A[r]$$
-    \STATE $$i = p - 1$$
-    \FOR{$$j = p$$ \TO $$r - 1$$}
-        \IF{$$A[j] &lt; x$$}
-            \STATE $$i = i + 1$$
-            \STATE exchange
-            $$A[i]$$ with $$A[j]$$
-        \ENDIF
-        \STATE exchange $$A[i]$$ with $$A[r]$$
-    \ENDFOR
-\ENDPROCEDURE
-\end{algorithmic}
-\end{algorithm}
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is what included pseudo code could look like]]></summary></entry><entry><title type="html">a post with code diff</title><link href="https://ze-fn.github.io/blog/2024/code-diff/" rel="alternate" type="text/html" title="a post with code diff"/><published>2024-01-27T19:22:00+00:00</published><updated>2024-01-27T19:22:00+00:00</updated><id>https://ze-fn.github.io/blog/2024/code-diff</id><content type="html" xml:base="https://ze-fn.github.io/blog/2024/code-diff/"><![CDATA[<p>You can display diff code by using the regular markdown syntax:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">diff
-</span><span class="gh">diff --git a/sample.js b/sample.js
-index 0000001..0ddf2ba
-</span><span class="gd">--- a/sample.js
-</span><span class="gi">+++ b/sample.js
-</span><span class="p">@@ -1 +1 @@</span>
-<span class="gd">-console.log("Hello World!")
-</span><span class="gi">+console.log("Hello from Diff2Html!")</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>Which generates:</p> <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/sample.js b/sample.js
-index 0000001..0ddf2ba
-</span><span class="gd">--- a/sample.js
-</span><span class="gi">+++ b/sample.js
-</span><span class="p">@@ -1 +1 @@</span>
-<span class="gd">-console.log("Hello World!")
-</span><span class="gi">+console.log("Hello from Diff2Html!")
-</span></code></pre></div></div> <p>But this is difficult to read, specially if you have a large diff. You can use <a href="https://diff2html.xyz/">diff2html</a> to display a more readable version of the diff. For this, just use <code class="language-plaintext highlighter-rouge">diff2html</code> instead of <code class="language-plaintext highlighter-rouge">diff</code> for the code block language:</p> <div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">```</span><span class="nl">diff2html
-</span><span class="sb">diff --git a/sample.js b/sample.js
-index 0000001..0ddf2ba
---- a/sample.js
-+++ b/sample.js
-@@ -1 +1 @@
--console.log("Hello World!")
-+console.log("Hello from Diff2Html!")</span>
-<span class="p">```</span>
-</code></pre></div></div> <p>If we use a longer example, for example <a href="https://github.com/rtfpessoa/diff2html/commit/c2c253d3e3f8b8b267f551e659f72b44ca2ac927">this commit from diff2html</a>, it will generate the following output:</p> <pre><code class="language-diff2html">From 2aaae31cc2a37bfff83430c2c914b140bee59b6a Mon Sep 17 00:00:00 2001
-From: Rodrigo Fernandes &lt;rtfrodrigo@gmail.com&gt;
-Date: Sun, 9 Oct 2016 16:41:54 +0100
-Subject: [PATCH 1/2] Initial template override support
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>{ % enddetails % }</p> <h2 id="31-challenge">3.1. Challenge</h2> <p>So I decided to challenge myself and redo the traffic light circuit design using a new script (see below). Since there were three lights, which means that three sources need to go to the GND, I plugged them all into the negative side of the breadboard and connect a jumper wire from the negative side into the GND on the R3. It didn’t go well. Only the red LED went lit. So I tried to collect all of the cathode into one row and then connect the row into the GND on the R3. It went well!</p> <p>(img with caption: Awesome!)</p> <p>{ % details Script% }</p> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+<span class="p">}</span>
 
----
- scripts/hulk.js                    |  4 ++--
- src/diff2html.js                   |  3 +--
- src/file-list-printer.js           | 11 ++++++++---
- src/hoganjs-utils.js               | 29 +++++++++++++++++------------
- src/html-printer.js                |  6 ++++++
- src/line-by-line-printer.js        |  6 +++++-
- src/side-by-side-printer.js        |  6 +++++-
- test/file-list-printer-tests.js    |  2 +-
- test/hogan-cache-tests.js          | 18 +++++++++++++++---
- test/line-by-line-tests.js         |  3 +--
- test/side-by-side-printer-tests.js |  3 +--
- 11 files changed, 62 insertions(+), 29 deletions(-)
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+  <span class="n">delay</span><span class="p">(</span><span class="mi">5000</span><span class="p">);</span>
+  <span class="n">digitalWrite</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> <p>{ % enddetails % }</p> <p>Really happy with the results!</p> <h1 id="4-whats-next">4. What’s Next?</h1> <p>I’m continuing my study into Electrical Engineering using Microcontrollers. This is actually a part of my contingency plan for the unpredictable future. Next up is: <a href="#">Reaction Speed Game</a>.</p>]]></content><author><name>Zelvy Fauzan</name></author><category term="Learning"/><category term="Arduino"/><category term="Electrical Engineering"/><category term="Project"/><summary type="html"><![CDATA[Some of my first circuits]]></summary></entry><entry><title type="html">Traffic Lights in Arduino Uno R3</title><link href="https://ze-fn.github.io/blog/2026/arduino-r3-second-circuit/" rel="alternate" type="text/html" title="Traffic Lights in Arduino Uno R3"/><published>2026-07-06T00:00:00+00:00</published><updated>2026-07-06T00:00:00+00:00</updated><id>https://ze-fn.github.io/blog/2026/arduino-r3-second-circuit</id><content type="html" xml:base="https://ze-fn.github.io/blog/2026/arduino-r3-second-circuit/"><![CDATA[<h1 id="1-introduction">1. Introduction</h1> <p>This one is from the second chapter of Robonyx’s course to <a href="https://www.skool.com/robonyx/about">Starter Course for Arduino</a>, which is about “Reaction Speed Game”. The idea of the project is simple.</p> <blockquote> <p>Press the button as fast as possible and you win!</p> </blockquote> <p>But the programming part behind that simple game would be a challenge for my learning.</p> <h1 id="2-reverse-engineering-from-output">2. Reverse Engineering from Output</h1> <p>The course demonstrated the project first before going into the materials. So I had a glimpse of what I would build from this chapter.</p> <h2 id="21-what-i-saw">2.1. What I Saw</h2> <table> <thead> <tr> <th style="text-align: left">Parts</th> <th style="text-align: center">Count</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">Jumper Wire (Male)</td> <td style="text-align: center">13</td> </tr> <tr> <td style="text-align: left">LED</td> <td style="text-align: center">5</td> </tr> <tr> <td style="text-align: left">Resistor (220)</td> <td style="text-align: center">5</td> </tr> <tr> <td style="text-align: left">Button</td> <td style="text-align: center">2</td> </tr> <tr> <td style="text-align: left">Buzzer</td> <td style="text-align: center">1</td> </tr> </tbody> </table> <h2 id="22-my-guess">2.2. My Guess</h2> <p>I grouped what I saw into different sections: (1) signals, (2) input, (3) output, and (4) algorithm.</p> <h3 id="signals">Signals</h3> <ol> <li>Red, Yellow, Green LEDs are programmed to countdown for the game to start.</li> <li>The last LED signal lit duration is randomized to make it more “reaction-based” instead of fixed delay.</li> <li>When game starts, two LEDs are lit. They are waiting for input from users.</li> </ol> <h3 id="input">Input</h3> <ol> <li>Two buttons are waiting for input from users.</li> <li>User who pressed the button first will has the LED keep lit.</li> <li>User who pressed later will has the LED off. Or, ignore any input.</li> </ol> <h3 id="output">Output</h3> <ol> <li>The LED from the winner will lit.</li> <li>Buzzer will sound when the winner is decided.</li> </ol> <h2 id="3-project">3. Project</h2> <h3 id="31-what-i-learned">3.1. What I Learned</h3> <ul> <li>Negative rail can be used interchangeably to GND on the R3.</li> <li>Another design of traffic light circuit! (from instruction)</li> <li>CTRL + T for auto format.</li> </ul> <h3 id="32-traffic-lights-revisited">3.2. Traffic Lights Revisited</h3> <p>I followed what was instructed to build a traffic light circuit design. But then I found something strange. See my traffic light circuit design below.</p> <p>(compare img: left-left, right-right) caption: left lit, right off</p> <h3 id="33-buzzer">3.3. Buzzer</h3> <p>It has the same concept with lighting up an LED, but buzzer don’t need a resistor. This means we can directly channel the cathode end into the GND.</p> <details><summary>Script</summary> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">buzzer</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 
-diff --git a/scripts/hulk.js b/scripts/hulk.js
-index 5a793c18..a4b1a4d5 100755
---- a/scripts/hulk.js
-+++ b/scripts/hulk.js
-@@ -173,11 +173,11 @@ function namespace(name) {
- // write a template foreach file that matches template extension
- templates = extractFiles(options.argv.remain)
-   .map(function(file) {
--    var openedFile = fs.readFileSync(file, 'utf-8');
-+    var openedFile = fs.readFileSync(file, 'utf-8').trim();
-     var name;
-     if (!openedFile) return;
-     name = namespace(path.basename(file).replace(/\..*$/, ''));
--    openedFile = removeByteOrderMark(openedFile.trim());
-+    openedFile = removeByteOrderMark(openedFile);
-     openedFile = wrap(file, name, openedFile);
-     if (!options.outputdir) return openedFile;
-     fs.writeFileSync(path.join(options.outputdir, name + '.js')
-diff --git a/src/diff2html.js b/src/diff2html.js
-index 21b0119e..64e138f5 100644
---- a/src/diff2html.js
-+++ b/src/diff2html.js
-@@ -7,7 +7,6 @@
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">pinMode</span><span class="p">(</span><span class="n">buzzer</span><span class="p">,</span> <span class="n">OUTPUT</span><span class="p">);</span>
+<span class="p">}</span>
 
- (function() {
-   var diffParser = require('./diff-parser.js').DiffParser;
--  var fileLister = require('./file-list-printer.js').FileListPrinter;
-   var htmlPrinter = require('./html-printer.js').HtmlPrinter;
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">buzzer</span><span class="p">,</span> <span class="n">HIGH</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+    <span class="n">digitalWrite</span><span class="p">(</span><span class="n">buzzer</span><span class="p">,</span> <span class="n">LOW</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> </details> <h3 id="34-serial-monitor">3.4. Serial Monitor</h3> <p>This one has something to do with interacting between the Arduino and the computer. For example, we want the Arduino to send repeated message “Hello!” to our computer. We use <code class="language-plaintext highlighter-rouge">Serial.begin()</code> in the setup function and <code class="language-plaintext highlighter-rouge">Serial.println()</code> in the loop function.</p> <details><summary>Script</summary> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span> <span class="c1">// 9600 is considered common. Fast but also stable.</span>
+<span class="p">}</span>
 
-   function Diff2Html() {
-@@ -43,7 +42,7 @@
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="s">"Hello!"</span><span class="p">);</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">1000</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div> </details> <h3 id="35-digital-inputs-buttons-pull-updown-resistors">3.5. Digital Inputs, Buttons, Pull-up/down Resistors</h3> <p>This part is the part where we make the Arduino to take user input, along with other behaviours that follow.</p> <ol> <li>Take input from current</li> </ol> <div class="language-cpp highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kt">int</span> <span class="n">inputPin</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// Can be any value in the pin</span>
 
-     var fileList = '';
-     if (configOrEmpty.showFiles === true) {
--      fileList = fileLister.generateFileList(diffJson, configOrEmpty);
-+      fileList = htmlPrinter.generateFileListSummary(diffJson, configOrEmpty);
-     }
+<span class="kt">void</span> <span class="nf">setup</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">pinMode</span><span class="p">(</span><span class="n">inputPin</span><span class="p">,</span> <span class="n">INPUT</span><span class="p">);</span>
+  <span class="n">Serial</span><span class="p">.</span><span class="n">begin</span><span class="p">(</span><span class="mi">9600</span><span class="p">);</span>
+<span class="p">}</span>
 
-     var diffOutput = '';
-diff --git a/src/file-list-printer.js b/src/file-list-printer.js
-index e408d9b2..1e0a2c61 100644
---- a/src/file-list-printer.js
-+++ b/src/file-list-printer.js
-@@ -8,11 +8,16 @@
- (function() {
-   var printerUtils = require('./printer-utils.js').PrinterUtils;
-
--  var hoganUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+  var hoganUtils;
-+
-   var baseTemplatesPath = 'file-summary';
-   var iconsBaseTemplatesPath = 'icon';
-
--  function FileListPrinter() {
-+  function FileListPrinter(config) {
-+    this.config = config;
-+
-+    var HoganJsUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+    hoganUtils = new HoganJsUtils(config);
-   }
-
-   FileListPrinter.prototype.generateFileList = function(diffFiles) {
-@@ -38,5 +43,5 @@
-     });
-   };
-
--  module.exports.FileListPrinter = new FileListPrinter();
-+  module.exports.FileListPrinter = FileListPrinter;
- })();
-diff --git a/src/hoganjs-utils.js b/src/hoganjs-utils.js
-index 9949e5fa..0dda08d7 100644
---- a/src/hoganjs-utils.js
-+++ b/src/hoganjs-utils.js
-@@ -8,18 +8,19 @@
- (function() {
-   var fs = require('fs');
-   var path = require('path');
--
-   var hogan = require('hogan.js');
-
-   var hoganTemplates = require('./templates/diff2html-templates.js');
-
--  var templatesPath = path.resolve(__dirname, 'templates');
-+  var extraTemplates;
-
--  function HoganJsUtils() {
-+  function HoganJsUtils(configuration) {
-+    this.config = configuration || {};
-+    extraTemplates = this.config.templates || {};
-   }
-
--  HoganJsUtils.prototype.render = function(namespace, view, params, configuration) {
--    var template = this.template(namespace, view, configuration);
-+  HoganJsUtils.prototype.render = function(namespace, view, params) {
-+    var template = this.template(namespace, view);
-     if (template) {
-       return template.render(params);
-     }
-@@ -27,17 +28,16 @@
-     return null;
-   };
-
--  HoganJsUtils.prototype.template = function(namespace, view, configuration) {
--    var config = configuration || {};
-+  HoganJsUtils.prototype.template = function(namespace, view) {
-     var templateKey = this._templateKey(namespace, view);
-
--    return this._getTemplate(templateKey, config);
-+    return this._getTemplate(templateKey);
-   };
-
--  HoganJsUtils.prototype._getTemplate = function(templateKey, config) {
-+  HoganJsUtils.prototype._getTemplate = function(templateKey) {
-     var template;
-
--    if (!config.noCache) {
-+    if (!this.config.noCache) {
-       template = this._readFromCache(templateKey);
-     }
-
-@@ -53,6 +53,7 @@
-
-     try {
-       if (fs.readFileSync) {
-+        var templatesPath = path.resolve(__dirname, 'templates');
-         var templatePath = path.join(templatesPath, templateKey);
-         var templateContent = fs.readFileSync(templatePath + '.mustache', 'utf8');
-         template = hogan.compile(templateContent);
-@@ -66,12 +67,16 @@
-   };
-
-   HoganJsUtils.prototype._readFromCache = function(templateKey) {
--    return hoganTemplates[templateKey];
-+    return extraTemplates[templateKey] || hoganTemplates[templateKey];
-   };
-
-   HoganJsUtils.prototype._templateKey = function(namespace, view) {
-     return namespace + '-' + view;
-   };
-
--  module.exports.HoganJsUtils = new HoganJsUtils();
-+  HoganJsUtils.prototype.compile = function(templateStr) {
-+    return hogan.compile(templateStr);
-+  };
-+
-+  module.exports.HoganJsUtils = HoganJsUtils;
- })();
-diff --git a/src/html-printer.js b/src/html-printer.js
-index 585d5b66..13f83047 100644
---- a/src/html-printer.js
-+++ b/src/html-printer.js
-@@ -8,6 +8,7 @@
- (function() {
-   var LineByLinePrinter = require('./line-by-line-printer.js').LineByLinePrinter;
-   var SideBySidePrinter = require('./side-by-side-printer.js').SideBySidePrinter;
-+  var FileListPrinter = require('./file-list-printer.js').FileListPrinter;
-
-   function HtmlPrinter() {
-   }
-@@ -22,5 +23,10 @@
-     return sideBySidePrinter.generateSideBySideJsonHtml(diffFiles);
-   };
-
-+  HtmlPrinter.prototype.generateFileListSummary = function(diffJson, config) {
-+    var fileListPrinter = new FileListPrinter(config);
-+    return fileListPrinter.generateFileList(diffJson);
-+  };
-+
-   module.exports.HtmlPrinter = new HtmlPrinter();
- })();
-diff --git a/src/line-by-line-printer.js b/src/line-by-line-printer.js
-index b07eb53c..d230bedd 100644
---- a/src/line-by-line-printer.js
-+++ b/src/line-by-line-printer.js
-@@ -11,7 +11,8 @@
-   var utils = require('./utils.js').Utils;
-   var Rematch = require('./rematch.js').Rematch;
-
--  var hoganUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+  var hoganUtils;
-+
-   var genericTemplatesPath = 'generic';
-   var baseTemplatesPath = 'line-by-line';
-   var iconsBaseTemplatesPath = 'icon';
-@@ -19,6 +20,9 @@
-
-   function LineByLinePrinter(config) {
-     this.config = config;
-+
-+    var HoganJsUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+    hoganUtils = new HoganJsUtils(config);
-   }
-
-   LineByLinePrinter.prototype.makeFileDiffHtml = function(file, diffs) {
-diff --git a/src/side-by-side-printer.js b/src/side-by-side-printer.js
-index bbf1dc8d..5e3033b3 100644
---- a/src/side-by-side-printer.js
-+++ b/src/side-by-side-printer.js
-@@ -11,7 +11,8 @@
-   var utils = require('./utils.js').Utils;
-   var Rematch = require('./rematch.js').Rematch;
-
--  var hoganUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+  var hoganUtils;
-+
-   var genericTemplatesPath = 'generic';
-   var baseTemplatesPath = 'side-by-side';
-   var iconsBaseTemplatesPath = 'icon';
-@@ -26,6 +27,9 @@
-
-   function SideBySidePrinter(config) {
-     this.config = config;
-+
-+    var HoganJsUtils = require('./hoganjs-utils.js').HoganJsUtils;
-+    hoganUtils = new HoganJsUtils(config);
-   }
-
-   SideBySidePrinter.prototype.makeDiffHtml = function(file, diffs) {
-diff --git a/test/file-list-printer-tests.js b/test/file-list-printer-tests.js
-index a502a46f..60ea3208 100644
---- a/test/file-list-printer-tests.js
-+++ b/test/file-list-printer-tests.js
-@@ -1,6 +1,6 @@
- var assert = require('assert');
-
--var fileListPrinter = require('../src/file-list-printer.js').FileListPrinter;
-+var fileListPrinter = new (require('../src/file-list-printer.js').FileListPrinter)();
-
- describe('FileListPrinter', function() {
-   describe('generateFileList', function() {
-diff --git a/test/hogan-cache-tests.js b/test/hogan-cache-tests.js
-index 190bf6f8..3bb754ac 100644
---- a/test/hogan-cache-tests.js
-+++ b/test/hogan-cache-tests.js
-@@ -1,6 +1,6 @@
- var assert = require('assert');
-
--var HoganJsUtils = require('../src/hoganjs-utils.js').HoganJsUtils;
-+var HoganJsUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)();
- var diffParser = require('../src/diff-parser.js').DiffParser;
-
- describe('HoganJsUtils', function() {
-@@ -21,16 +21,28 @@ describe('HoganJsUtils', function() {
-       });
-       assert.equal(emptyDiffHtml, result);
-     });
-+
-     it('should render view without cache', function() {
-       var result = HoganJsUtils.render('generic', 'empty-diff', {
-         contentClass: 'd2h-code-line',
-         diffParser: diffParser
-       }, {noCache: true});
--      assert.equal(emptyDiffHtml + '\n', result);
-+      assert.equal(emptyDiffHtml, result);
-     });
-+
-     it('should return null if template is missing', function() {
--      var result = HoganJsUtils.render('generic', 'missing-template', {}, {noCache: true});
-+      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)({noCache: true});
-+      var result = hoganUtils.render('generic', 'missing-template', {});
-       assert.equal(null, result);
-     });
-+
-+    it('should allow templates to be overridden', function() {
-+      var emptyDiffTemplate = HoganJsUtils.compile('&lt;p&gt;&lt;/p&gt;');
-+
-+      var config = {templates: {'generic-empty-diff': emptyDiffTemplate}};
-+      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)(config);
-+      var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
-+      assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
-+    });
-   });
- });
-diff --git a/test/line-by-line-tests.js b/test/line-by-line-tests.js
-index 1cd92073..8869b3df 100644
---- a/test/line-by-line-tests.js
-+++ b/test/line-by-line-tests.js
-@@ -14,7 +14,7 @@ describe('LineByLinePrinter', function() {
-         '            File without changes\n' +
-         '        &lt;/div&gt;\n' +
-         '    &lt;/td&gt;\n' +
--        '&lt;/tr&gt;\n';
-+        '&lt;/tr&gt;';
-
-       assert.equal(expected, fileHtml);
-     });
-@@ -422,7 +422,6 @@ describe('LineByLinePrinter', function() {
-         '        &lt;/div&gt;\n' +
-         '    &lt;/td&gt;\n' +
-         '&lt;/tr&gt;\n' +
--        '\n' +
-         '                &lt;/tbody&gt;\n' +
-         '            &lt;/table&gt;\n' +
-         '        &lt;/div&gt;\n' +
-diff --git a/test/side-by-side-printer-tests.js b/test/side-by-side-printer-tests.js
-index 76625f8e..771daaa5 100644
---- a/test/side-by-side-printer-tests.js
-+++ b/test/side-by-side-printer-tests.js
-@@ -14,7 +14,7 @@ describe('SideBySidePrinter', function() {
-         '            File without changes\n' +
-         '        &lt;/div&gt;\n' +
-         '    &lt;/td&gt;\n' +
--        '&lt;/tr&gt;\n';
-+        '&lt;/tr&gt;';
-
-       assert.equal(expectedRight, fileHtml.right);
-       assert.equal(expectedLeft, fileHtml.left);
-@@ -324,7 +324,6 @@ describe('SideBySidePrinter', function() {
-         '        &lt;/div&gt;\n' +
-         '    &lt;/td&gt;\n' +
-         '&lt;/tr&gt;\n' +
--        '\n' +
-         '                    &lt;/tbody&gt;\n' +
-         '                &lt;/table&gt;\n' +
-         '            &lt;/div&gt;\n' +
-
-From f3cadb96677d0eb82fc2752dc3ffbf35ca9b5bdb Mon Sep 17 00:00:00 2001
-From: Rodrigo Fernandes &lt;rtfrodrigo@gmail.com&gt;
-Date: Sat, 15 Oct 2016 13:21:22 +0100
-Subject: [PATCH 2/2] Allow uncompiled templates
-
----
- README.md                 |  3 +++
- src/hoganjs-utils.js      |  7 +++++++
- test/hogan-cache-tests.js | 24 +++++++++++++++++++++++-
- 3 files changed, 33 insertions(+), 1 deletion(-)
-
-diff --git a/README.md b/README.md
-index 132c8a28..46909f25 100644
---- a/README.md
-+++ b/README.md
-@@ -98,6 +98,9 @@ The HTML output accepts a Javascript object with configuration. Possible options
-   - `synchronisedScroll`: scroll both panes in side-by-side mode: `true` or `false`, default is `false`
-   - `matchWordsThreshold`: similarity threshold for word matching, default is 0.25
-   - `matchingMaxComparisons`: perform at most this much comparisons for line matching a block of changes, default is `2500`
-+  - `templates`: object with previously compiled templates to replace parts of the html
-+  - `rawTemplates`: object with raw not compiled templates to replace parts of the html
-+  &gt; For more information regarding the possible templates look into [src/templates](https://github.com/rtfpessoa/diff2html/tree/master/src/templates)
-
- ## Diff2HtmlUI Helper
-
-diff --git a/src/hoganjs-utils.js b/src/hoganjs-utils.js
-index 0dda08d7..b2e9c275 100644
---- a/src/hoganjs-utils.js
-+++ b/src/hoganjs-utils.js
-@@ -17,6 +17,13 @@
-   function HoganJsUtils(configuration) {
-     this.config = configuration || {};
-     extraTemplates = this.config.templates || {};
-+
-+    var rawTemplates = this.config.rawTemplates || {};
-+    for (var templateName in rawTemplates) {
-+      if (rawTemplates.hasOwnProperty(templateName)) {
-+        if (!extraTemplates[templateName]) extraTemplates[templateName] = this.compile(rawTemplates[templateName]);
-+      }
-+    }
-   }
-
-   HoganJsUtils.prototype.render = function(namespace, view, params) {
-diff --git a/test/hogan-cache-tests.js b/test/hogan-cache-tests.js
-index 3bb754ac..a34839c0 100644
---- a/test/hogan-cache-tests.js
-+++ b/test/hogan-cache-tests.js
-@@ -36,7 +36,7 @@ describe('HoganJsUtils', function() {
-       assert.equal(null, result);
-     });
-
--    it('should allow templates to be overridden', function() {
-+    it('should allow templates to be overridden with compiled templates', function() {
-       var emptyDiffTemplate = HoganJsUtils.compile('&lt;p&gt;&lt;/p&gt;');
-
-       var config = {templates: {'generic-empty-diff': emptyDiffTemplate}};
-@@ -44,5 +44,27 @@ describe('HoganJsUtils', function() {
-       var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
-       assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
-     });
-+
-+    it('should allow templates to be overridden with uncompiled templates', function() {
-+      var emptyDiffTemplate = '&lt;p&gt;&lt;/p&gt;';
-+
-+      var config = {rawTemplates: {'generic-empty-diff': emptyDiffTemplate}};
-+      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)(config);
-+      var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
-+      assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
-+    });
-+
-+    it('should allow templates to be overridden giving priority to compiled templates', function() {
-+      var emptyDiffTemplate = HoganJsUtils.compile('&lt;p&gt;&lt;/p&gt;');
-+      var emptyDiffTemplateUncompiled = '&lt;p&gt;Not used!&lt;/p&gt;';
-+
-+      var config = {
-+        templates: {'generic-empty-diff': emptyDiffTemplate},
-+        rawTemplates: {'generic-empty-diff': emptyDiffTemplateUncompiled}
-+      };
-+      var hoganUtils = new (require('../src/hoganjs-utils.js').HoganJsUtils)(config);
-+      var result = hoganUtils.render('generic', 'empty-diff', {myName: 'Rodrigo Fernandes'});
-+      assert.equal('&lt;p&gt;Rodrigo Fernandes&lt;/p&gt;', result);
-+    });
-   });
- });
-</code></pre>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="code"/><summary type="html"><![CDATA[this is how you can display code diffs]]></summary></entry><entry><title type="html">a post with advanced image components</title><link href="https://ze-fn.github.io/blog/2024/advanced-images/" rel="alternate" type="text/html" title="a post with advanced image components"/><published>2024-01-27T11:46:00+00:00</published><updated>2024-01-27T11:46:00+00:00</updated><id>https://ze-fn.github.io/blog/2024/advanced-images</id><content type="html" xml:base="https://ze-fn.github.io/blog/2024/advanced-images/"><![CDATA[<p>This is an example post with advanced image components.</p> <h2 id="image-slider">Image Slider</h2> <p>This is a simple image slider. It uses the <a href="https://swiperjs.com/">Swiper</a> library. Check the <a href="https://swiperjs.com/demos">examples page</a> for more information of what you can achieve with it.</p> <swiper-container keyboard="true" navigation="true" pagination="true" pagination-clickable="true" pagination-dynamic-bullets="true" rewind="true"> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/9-480.webp 480w,/assets/img/9-800.webp 800w,/assets/img/9-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/9.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/7-480.webp 480w,/assets/img/7-800.webp 800w,/assets/img/7-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/7.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/8-480.webp 480w,/assets/img/8-800.webp 800w,/assets/img/8-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/8.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/10-480.webp 480w,/assets/img/10-800.webp 800w,/assets/img/10-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/10.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"/> </picture> </figure> </swiper-slide> <swiper-slide> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/12-480.webp 480w,/assets/img/12-800.webp 800w,/assets/img/12-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/12.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"/> </picture> </figure> </swiper-slide> </swiper-container> <h2 id="image-comparison-slider">Image Comparison Slider</h2> <p>This is a simple image comparison slider. It uses the <a href="https://img-comparison-slider.sneas.io/">img-comparison-slider</a> library. Check the <a href="https://img-comparison-slider.sneas.io/examples.html">examples page</a> for more information of what you can achieve with it.</p> <img-comparison-slider> <figure slot="first"> <picture> <source class="responsive-img-srcset" srcset="/assets/img/prof_pic-480.webp 480w,/assets/img/prof_pic-800.webp 800w,/assets/img/prof_pic-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/prof_pic.jpg" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"/> </picture> </figure> <figure slot="second"> <picture> <source class="responsive-img-srcset" srcset="/assets/img/prof_pic_color-480.webp 480w,/assets/img/prof_pic_color-800.webp 800w,/assets/img/prof_pic_color-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/prof_pic_color.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="lazy" onerror="this.onerror=null; document.querySelectorAll('.responsive-img-srcset').forEach(function (n) { n.remove(); });"/> </picture> </figure> </img-comparison-slider>]]></content><author><name></name></author><category term="sample-posts"/><category term="formatting"/><category term="images"/><summary type="html"><![CDATA[this is what advanced image components could look like]]></summary></entry></feed>
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">(){</span>
+    <span class="n">Serial</span><span class="p">.</span><span class="n">println</span><span class="p">(</span><span class="n">digitalRead</span><span class="p">(</span><span class="n">inputPin</span><span class="p">));</span>
+    <span class="n">delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>]]></content><author><name>Zelvy Fauzan</name></author><category term="Learning"/><category term="Arduino"/><category term="Electrical Engineering"/><category term="Project"/><summary type="html"><![CDATA[Some of my first circuits]]></summary></entry><entry><title type="html">Rekomendasi Jurusan Fisika Terapan</title><link href="https://ze-fn.github.io/blog/2026/univ-search/" rel="alternate" type="text/html" title="Rekomendasi Jurusan Fisika Terapan"/><published>2026-06-23T00:00:00+00:00</published><updated>2026-06-23T00:00:00+00:00</updated><id>https://ze-fn.github.io/blog/2026/univ-search</id><content type="html" xml:base="https://ze-fn.github.io/blog/2026/univ-search/"><![CDATA[<h1 id="pendahuluan">Pendahuluan</h1> <p>Berawal dari obrolan ringan melalui aplikasi pesan instan, teman saya bertanya tentang rekomendasi jurusan dan/atau universitas yang cocok untuknya. Teman saya berlatar belakang Fisika dan sekarang berniat untuk belajar kembali untuk nantinya menjadi peneliti di bidang yang ia minati. Sebagai catatan, teman saya ingin bergelut spesifik di bidang Fisika Terapan, sub bidang energi hibrida atau energi alternatif.</p> <p>Dari situ, saya mencoba untuk membantu teman saya mencarikan informasi dan memberikan rekomendasi jurusan dan universitas untuknya.</p> <h2 id="problem-statement">Problem Statement</h2> <blockquote> <p>Jurusan di universitas dalam negeri (Indonesia) mana yang paling bagus untuk jurusan Fisika Terapan dengan konsentrasi Energi Hibrida dan/atau Energi Alternatif?</p> </blockquote> <h1 id="metodologi">Metodologi</h1> <p>Untuk menyelesaikan permasalahan ini, saya pikir penting sifatnya mendefinisikan variabel tolak ukur. Namun begitu, mengingat permintaan ini terbatas waktu, saya memilih untuk mempercayai satu sumber data yang fokus dalam perangkingan universitas. Untuk evaluasi lanjutan, dalam hal ini menentukan kualitas jurusan, saya menggunakan teknik OSINT (Open Source Intelligence) untuk mendapat infomrasi publik mengenai dosen/promotor dengan minat penelitian yang serupa dengan minat teman saya.</p> <h2 id="desain-database">Desain Database</h2> <p>Mengingat target teman saya yang ingin menjadi seorang peneliti yang terjun ke lapangan, dengan fokus tema penelitian Fisika Terapan, saya melakukan investigasi dengan fokus ke informasi dosen yang ada di tiap universitas dengan kriteria yang sesuai.</p> <h3 id="universitas">Universitas</h3> <table> <thead> <tr> <th style="text-align: left">Variabel</th> <th style="text-align: left">Deskripsi</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">id</td> <td style="text-align: left">Nomor identifikasi unik universitas</td> </tr> <tr> <td style="text-align: left">nama_univ</td> <td style="text-align: left">Nama universitas</td> </tr> <tr> <td style="text-align: left">rank_2025</td> <td style="text-align: left">Peringkat universitas pada tahun 2025</td> </tr> <tr> <td style="text-align: left">rank_2026</td> <td style="text-align: left">Peringkat universitas pada tahun 2026</td> </tr> <tr> <td style="text-align: left">country</td> <td style="text-align: left">Negara dimana universitas berada</td> </tr> <tr> <td style="text-align: left">cpf_score</td> <td style="text-align: left">Sitasi per Fakultas</td> </tr> </tbody> </table> <h3 id="fakultas">Fakultas</h3> <table> <thead> <tr> <th style="text-align: left">Variabel</th> <th style="text-align: left">Deskripsi</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">univ_id</td> <td style="text-align: left">Nomor identifikasi unik universitas</td> </tr> <tr> <td style="text-align: left">fakult_id</td> <td style="text-align: left">Nomor identifikasi unik fakultas</td> </tr> <tr> <td style="text-align: left">nama_fa</td> <td style="text-align: left">Nama fakultas</td> </tr> </tbody> </table> <h3 id="dosen">Dosen</h3> <table> <thead> <tr> <th style="text-align: left">Variabel</th> <th style="text-align: left">Deskripsi</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">dosen_id</td> <td style="text-align: left">Nomor identifikasi unik dosen</td> </tr> <tr> <td style="text-align: left">nama_dosen</td> <td style="text-align: left">Nama dosen</td> </tr> <tr> <td style="text-align: left">fakult_id</td> <td style="text-align: left">Nomor identifikasi unik fakultas</td> </tr> <tr> <td style="text-align: left">minat_ris</td> <td style="text-align: left">Minat bidang penelitian dosen</td> </tr> <tr> <td style="text-align: left">n_artikel</td> <td style="text-align: left">Jumlah artikel terpublikasi oleh dosen</td> </tr> <tr> <td style="text-align: left">n_fauthor</td> <td style="text-align: left">Jumlah artikel dosen sebagai penulis pertama</td> </tr> <tr> <td style="text-align: left">n_sauthor</td> <td style="text-align: left">Jumlah artikel dosen sebagai penulis kedua</td> </tr> <tr> <td style="text-align: left">n_tauthor</td> <td style="text-align: left">Jumlah artikel dosen sebagai penulis ketiga</td> </tr> </tbody> </table> <h1 id="step-1-osint-gathering-peringkat-universitas">Step 1. OSINT Gathering Peringkat Universitas</h1> <p>Search query:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>world university rankings after:2026-01-01
+</code></pre></div></div> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/univ-search/osint-gathering-11-480.webp 480w,/assets/img/univ-search/osint-gathering-11-800.webp 800w,/assets/img/univ-search/osint-gathering-11-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/univ-search/osint-gathering-11.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> </div> <div class="caption"> Gambar 1. Hasil pencarian peringkat universitas tingkat dunia pada tahun 2026. </div> <p>Data peringkat universitas di tingkat dunia bisa diunduh.</p> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/univ-search/osint-gathering-12-480.webp 480w,/assets/img/univ-search/osint-gathering-12-800.webp 800w,/assets/img/univ-search/osint-gathering-12-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/univ-search/osint-gathering-12.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/univ-search/osint-gathering-13-480.webp 480w,/assets/img/univ-search/osint-gathering-13-800.webp 800w,/assets/img/univ-search/osint-gathering-13-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/univ-search/osint-gathering-13.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> </div> <div class="caption"> Universitas top 3 dunia dan tautan daftar lengkap peringkat (gambar kiri) dan dataset lengkap (gambar kanan). </div> <p>Saya menemukan ada banyak metrik di dalam dataset yang didapat namun hanya beberapa variabel yang akan saya gunakan dalam tahap analisis. Saya sajikan dalam format tabel berikut:</p> <table> <thead> <tr> <th style="text-align: left">Asal</th> <th style="text-align: left">Transformasi</th> </tr> </thead> <tbody> <tr> <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Rank</code></td> <td style="text-align: left"><code class="language-plaintext highlighter-rouge">rank_2026</code></td> </tr> <tr> <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Previous Rank</code></td> <td style="text-align: left"><code class="language-plaintext highlighter-rouge">rank_2025</code></td> </tr> <tr> <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Name</code></td> <td style="text-align: left"><code class="language-plaintext highlighter-rouge">nama_univ</code></td> </tr> <tr> <td style="text-align: left"><code class="language-plaintext highlighter-rouge">Country/Territory</code></td> <td style="text-align: left"><code class="language-plaintext highlighter-rouge">negara</code></td> </tr> <tr> <td style="text-align: left"><code class="language-plaintext highlighter-rouge">CPF Score</code></td> <td style="text-align: left"><code class="language-plaintext highlighter-rouge">cpf_score</code></td> </tr> </tbody> </table> <h1 id="step-2-osint-gathering-daftar-program-studi">Step 2. OSINT Gathering Daftar Program Studi</h1> <p>Search query:</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pddikti kemdiktisaintek universitas fakultas
+</code></pre></div></div> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/univ-search/osint-gathering-21-480.webp 480w,/assets/img/univ-search/osint-gathering-21-800.webp 800w,/assets/img/univ-search/osint-gathering-21-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/univ-search/osint-gathering-21.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> </div> <p>Pada laman PDDIKTI, saya melakukan pencarian nama universitas yang masuk dalam daftar peringkat dunia. Karena setiap pencarian di laman ini diproteksi oleh captcha, saya melakukan pencarian satu demi satu untuk setiap universitas.</p> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/univ-search/osint-gathering-22-480.webp 480w,/assets/img/univ-search/osint-gathering-22-800.webp 800w,/assets/img/univ-search/osint-gathering-22-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/univ-search/osint-gathering-22.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/univ-search/osint-gathering-23-480.webp 480w,/assets/img/univ-search/osint-gathering-23-800.webp 800w,/assets/img/univ-search/osint-gathering-23-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/univ-search/osint-gathering-23.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" data-zoomable="" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> </div> <p>Ketika query pencarian berdasarkan nama universitas di PDDIKTI muncul, saya scroll ke bawah hingga menemukan bagian daftar universitas lalu melihat rincian dari universitas yang sedang dicari. Di dalamnya, saya menemukan daftar lengkap program studi dalam format tabel. Tabel ini kemudian saya salin dan tempel di file Google Sheets.</p> <div class="row mt-3"> <div class="col-sm mt-3 mt-md-0"> <figure> <picture> <source class="responsive-img-srcset" srcset="/assets/img/univ-search/osint-gathering-24-480.webp 480w,/assets/img/univ-search/osint-gathering-24-800.webp 800w,/assets/img/univ-search/osint-gathering-24-1400.webp 1400w," type="image/webp" sizes="95vw"/> <img src="/assets/img/univ-search/osint-gathering-24.png" class="img-fluid rounded z-depth-1" width="100%" height="auto" loading="eager" onerror="this.onerror=null; $('.responsive-img-srcset').remove();"/> </picture> </figure> </div> </div> <blockquote> <p>Data yang saya ambil bisa diakses secara publik <a href="https://docs.google.com/spreadsheets/d/1qkrFVZ655DB2WeDLcIiM_aIh5lWyF801gOGDhDMWnd0/">di sini</a></p> </blockquote> <h1 id="step-3-osint-gathering-daftar-dosen">Step 3. OSINT Gathering Daftar Dosen</h1> <p>Mengingat minat teman saya yang ingin menjadi peneliti lapangan di bidang Teknik Fisika yang berkaitan dengan Energi Hibrida, Alternatif, dan/atau Terbarukan, saya melakukan filtering kembali di laman PDDIKTI.</p> <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ITB Fisika
+</code></pre></div></div> <p>Setalah itu, saya mengulik rincian dari Program Studi terkait dengan catatan nama program studi harus berkaitan dengan “Fisika”, jenjang S2 atau S3, dan nama lembaga sesuai dengan nama universitas yang ada pada search query. Di dalam tautan “Lihat Detail” pada kolom Aksi yang ada pada hasil pencarian PDDIKTI, ada daftar Tenaga Pendidik (Dosen). Data ini lah yang saya ambil untuk pencarian lebih lanjut di langkah selanjutnya (Step 4) tentang Kepakaran Dosen.</p> <p>Minat teman saya dan Kepakaran Dosen penting untuk dipertimbangkan karena akan sangat berpengaruh dengan pengalaman dan karir kedepannya.</p> <p>Data dosen yang memenuhi kriteria filterisasi bisa diakses secara publik di file Google Sheets yang sama dengan Step 2. <a href="https://docs.google.com/spreadsheets/d/1qkrFVZ655DB2WeDLcIiM_aIh5lWyF801gOGDhDMWnd0/">Cek disini</a>.</p> <h1 id="hasil-analisis">Hasil Analisis</h1> <p>Setelah semua data terkumpul, saya lanjut melakukan analisis. Analisis yang dipakai tidaklah sulit, bahkan bisa dibilang sangat mudah dan sederhana. Saya menggunakan inclusion dan exclusion dengan batas ambang untuk variabel-variabel tertentu.</p> <p>Pertama, saya melihat dari level universitas terlebih dahulu. Aturan yang saya terapkan pada level ini adalah peringkat universitas sedunia.</p> <ol> <li><code class="language-plaintext highlighter-rouge">rank_2026</code> &lt;= 500</li> <li><code class="language-plaintext highlighter-rouge">rank_2026</code> ORDER Z -&gt; A</li> <li><code class="language-plaintext highlighter-rouge">cpf_score</code> ORDER Z -&gt; A</li> <li>Ambil baris 1 sampai 3</li> </ol> <blockquote> <p>Hasil: <code class="language-plaintext highlighter-rouge">ITB</code>, <code class="language-plaintext highlighter-rouge">UI</code>, dan <code class="language-plaintext highlighter-rouge">UGM</code></p> </blockquote> <p>Kemudian, saya melakukan filter di level program studi.</p> <ol> <li><code class="language-plaintext highlighter-rouge">universitas</code> = {ITB, UI, UGM}</li> <li><code class="language-plaintext highlighter-rouge">jenjang</code> = {S2, S2 Terapan, S3}</li> <li><code class="language-plaintext highlighter-rouge">akreditasi</code> = {A, Unggul}</li> <li><code class="language-plaintext highlighter-rouge">status</code> = Aktif</li> <li><code class="language-plaintext highlighter-rouge">nama_prodi</code> != Pengajaran</li> <li><code class="language-plaintext highlighter-rouge">nama_prodi</code> = {Fisika, Energi, Teknik Fisika}</li> </ol> <p>Hasil:</p> <ol> <li>ITB: <ul> <li><code class="language-plaintext highlighter-rouge">S2 Teknik Fisika</code></li> <li><code class="language-plaintext highlighter-rouge">S3 Teknik Fisika</code></li> <li>S2 Fisika</li> <li>S3 Fisika</li> </ul> </li> <li>UI: <ul> <li><code class="language-plaintext highlighter-rouge">S2 Teknik Sistem Energi</code></li> <li>S2 Ilmu Fisika</li> <li>S2 Fisika</li> <li>S3 Fisika</li> </ul> </li> <li>UGM: <ul> <li>S2 Teknik Fisika</li> <li>S3 Fisika</li> <li>S2 Fisika</li> </ul> </li> </ol>]]></content><author><name>Zelvy Fauzan</name></author><category term="Portfolio"/><category term="OSINT"/><category term="Data Analysis"/><summary type="html"><![CDATA[Penerapan OSINT dan Data Analysis]]></summary></entry><entry><title type="html">Bahasa sebagai Alat Social Engineering</title><link href="https://ze-fn.github.io/blog/2026/pentingnya-komunikasi-interpersonal/" rel="alternate" type="text/html" title="Bahasa sebagai Alat Social Engineering"/><published>2026-06-21T00:00:00+00:00</published><updated>2026-06-21T00:00:00+00:00</updated><id>https://ze-fn.github.io/blog/2026/pentingnya-komunikasi-interpersonal</id><content type="html" xml:base="https://ze-fn.github.io/blog/2026/pentingnya-komunikasi-interpersonal/"><![CDATA[<h1 id="pendahuluan">Pendahuluan</h1> <p>Beberapa hari belakangan ini, saya seperti dihadapkan dengan beberapa peristiwa yang berkaitan dengan komunikasi interpersonal dan dampaknya pada kehidupan. Lebih tepatnya, saya seolah tersadar bahwa komunikasi interpersonal yang baik memiliki dampak yang sangat luar biasa dalam kehidupan. Mengingat naluriah manusia yang merupakan makhluk sosial, komunikasi interpersonal juga memegang peran yang bisa dibilang salah satu kompetensi paling krusial untuk menunjang kehidupan manusia.</p> <p>Saya bercengkrama dengan beberapa teman di dunia maya. Ada yang melalui pesan singkat ada juga yang melalui perantara gim daring. Semua pengalaman yang mereka berikan sangatlah berharga bagi saya karena dengan mendengarkan pengalaman mereka saya bisa memahami bagaimana manusia berinteraksi dan bertahan hidup, terutama di era modern ini.</p> <p>Saya membagi tulisan ini kedalam beberapa bagian. Setiap bagian mengandung pengalaman dari satu teman.</p> <h1 id="indirect-questioning-technique-sebagai-alternatif-untuk-topik-sensitif">Indirect Questioning Technique sebagai Alternatif untuk Topik Sensitif</h1> <p>Pengalaman pertama yang saya angkat berasaal dari teman saya yang terlibat dalam proyek sensus ekonomi penduduk pada 2026. Menurut saya, pengalaman ini sangat menarik baik dilihat dari sisi teori maupun praktiknya. Mari sebut teman saya ini dengan nama samaran “Vikta”.</p> <p>Vikta adalah seorang yang giat bekerja dan supel. Semua pekerjaan yang dia dapatkan pasti diselesaikan dengan tepat dan elegan. Vikta juga suka tantangan baru ketika bekerja, mencari peluang belajar disela-sela pekerjaan, bahkan belajar dari pekerjaan yang beliau sering kerjakan. Pada Juni 2026, Vikta terlibat dalam suatu proyek pemerintah untuk melakukan sensus ekonomi penduduk Indonesia.</p> <p>Dalam proyek sensus ekonomi penduduk Indonesia 2026, Vikta diberi tugas untuk melakukan sensus di kelurahan tempat ia tinggal. Beberapa saat sebelum proyek itu resmi dimulai, Vikta berdiskusi dengan saya tentang proyek tersebut serta bagaimana cara untuk melakukan pekerjaan sensus tersebut. Vikta terkadang khawatir soal proyek ini lantaran jumlah penduduk yang harus ia sensus tidaklah sedikit. Tidak luput juga kekhawatiran soal karirnya kedepan. Vikta memiliki cita-cita untuk menjadi Widyaiswara di lembaga pemerintahan melalui CPNS, dan Vikta belum dapat menghubungkan koneksi antara proyek sensus ini dengan cita-citanya. Di sini lah kami berdiskusi tentang proyek yang Vikta akan laksanakan.</p> <p>Kami mengawali diskusi dengan menelaah keuntungan yang didapat dari proyek sensus tersebut. Proyek sensus ini intinya ada pada pengambilan data penduduk. Sangat erat kaitannya dengan penelitian. Saya menggarisbawahi bahwa proses pengambilan data pada proyek ini mungkin akan berbeda dengan pengambilan data pada tugas akhir Sarjana atau Magister, yang mana kami sudah pernah mengalami dan menyelesaikan keduanya. Mengingat proyek ini memiliki tenggat waktu selama kurang lebih satu bulan dan 15 hari, saya menawarkan metoda pengambilan rute optimal kepada Vikta dengan mengutip sebuah video dari Veritasium tentang <a href="https://youtu.be/kS-CGkiPetQ">Bagaimana Navigasi Google Maps Bisa Sangat Cepat</a>. Saya pun belum selesai menonton video tersebut pada saat merekomendasikannya ke Vikta, namun saya pada saat itu percaya bahwa pengambilan rute yang optimal bisa membantu Vikta menyelesaikan tugasnya dengan lebih efektif dan efisien.</p> <p>Setelah itu, kami pun lanjut berdiskusi tentang bagaimana proyek sensus ini berkaitan dengan cita-citanya. Pada awalnya Vikta belum bisa menarik garis korelasi antara proyek ini dengan cita-citanya, lalu saya bersikeras bahwa keduanya memiliki kaitan yang erat namun memang agak tak kasat mata. Pada pasalnya, variabel yang akan diambil oleh Vikta sangatlah sensitif karena mengait finansial keluarga. Informasi yang sangat, sangat sensitif yang kalau sampai jatuh ke tangan orang yang tidak bertanggung jawab bisa menjatuhkan orang tersebut atau orang lain. Saya menjelaskan bahwa di situ lah kemampuan komunikasi interpersonal diasah.</p> <p>Argumen saya yaitu: sebagai petugas sensus ekonomi penduduk, keterampilan persuasi sangat dibutuhkan untuk membujuk lawan bicara memberikan informasi yang dibutuhkan. Saya spesifik menekankan pada aspek persuasi karena komunikasi dengan pendekatan tersebut mengharuskan rasa kepercayaan diantara petugas sensus dan penduduk untuk muncul terlebih dahulu sebelum penduduk bersedia untuk memberikan informasi sensitif. Tidak lupa juga saya sampaikan bahwa: beda orang, beda cara komunikasinya. Saya kemudian mengambil dua variabel ini (persuasi dan keunikan orang) dan menghubungkannya dengan pekerjaan Widyaiswara.</p> <p>Pekerjaan Widyaiswara biasanya memberikan pelatihan kepada ASN (Aparatur Sipil Negara) tentang berbagai hal tergantung dari ranah yang digeluti. Dua unsur penting yang tidak bisa dilepaskan dari “memberikan pelatihan” adalah <em>public speaking</em> dan <em>kepercayaan</em>. Menurut pengalaman saya, keduanya cenderung tidak memiliki hirarki tentang apa yang harus dibangung terlebih dahulu karena di beberapa kasus, kepercayaan harus dibangun terlebih dahulu tapi di kasus lain <em>public speaking</em> bisa memunculkan kepercayaan. Intinya, seorang Widyaiswara sepatutnya bisa merangkul, menarik perhatian, dan menyampaikan/melatih orang lain.</p> <p>Ada juga bahasan tentang teknik pengambilan data. Vikta bingung dan khawatir dengan potensi dimana penduduk tidak bersedia memberikan informasi yang akurat dan apa adanya. Hal ini memang wajar muncul karena pada pasalnya data sensitif memang sulit untuk didapatkan, dan kalau pun berhasil didapatkan tanggung jawab yang melekat pada data tersebut bisa menjadi beban siapapun yang memilikinya. Terlebih muncul wacana bahwa warga yang ada di kelurahannya menyerukan warga lain untuk menyembunyikan aset yang dimiliki. Hal ini lantas membuat Vikta semakin khawatir tentang kualitas data yang nanti ia ambil. Dari persoalan ini, saya menyarankan untuk menggunakan teknik spesifik yang menyerupai statistik inferensial.</p> <p>Saya menawarkan ide ke Vikta bahwa jika penduduk memberikan informasi yang <em>“tidak apa adanya”</em>, ia bisa menggunakan teknik inferensi. Intinya, daripada menanyakan pertanyaan secara gablang dan _to-the-point_kepada penduduk, tanyakan pertanyaan lain yang mengandung jawaban dari pertanyaan awal. Contohnya seperti ini:</p> <ul> <li>Variabel: Pajak Kendaraan</li> <li>Pertanyaan awal: Berapa banyak kendaraan yang dimiliki?</li> <li>Pertanyaan inferensial: Berapa nominal pajak kendaraan yang bapak/ibu bayarkan setiap tahun nya?</li> </ul> <p>Walau contoh pertanyaan di atas masih terlalu <em>direct</em>, tapi gagasan yang ingin saya sampaikan adalah jika tidak memungkinkan untuk mengambil 1 biji dari buah yang ada di suatu pohon, maka ambil saja pohon nya secara utuh niscara mendapat biji, buah, bunga, dan lain-lain. <em>“Sekali mendayung, dua pulau terlewati”</em> atau <em>“Two birds with one stone.”</em></p> <p>Beberapa waktu setelah itu, Vikta mulai melaksanakan proyek sensus. Ia berangkat dari satu rumah ke rumah lain di kelurahannya, mengambil data. Tak lama, saya menanyakan ke Vikta soal kesan melaksanakan proyek sensus itu. Ketika mendapat cerita pengalamannya, saya tercengang dengan apa yang dialami Vikta. Ia menjelaskan bahwa ada teknik komunikasi tertentu yang bisa membantu dia dalam mengambil data sensitif dari penduduk. Alih-alih melontarkan pertanyaan secara eksplisit, Vikta menanyakan pertanyaan yang “selangkah-dua langkah kedepan”. Salah satu contoh yang ia berikan adalah sebagai berikut:</p> <blockquote> <p>Vikta: “Pajak motor ayeuna mah awis nya, pak/bu?” Penduduk: “Puguhan neng, gaduh motor ge da kosong geuning”</p> </blockquote> <p>Yang intinya, Vikta mencoba untuk mengambil data tentang jumlah motor yang dimiliki seorang penduduk dengan cara melontarkan pertanyaan konfirmasi <em>“Biaya pajak motor saat ini naik dari yang sebelumnya”</em>, yang mana dibalas oleh penduduk tersebut <em>“Iya, ini juga saya punya motor tapi pajaknya kok kosong.”</em></p> <p>Potongan pengalaman Vikta ini tidak hanya mengonfirmasi teori linguistik tapi juga menambah wawasan saya tentang komunikasi interpersonal. Saya menyikapi pengalamn Vikta dari sisi linguistik dan juga sosial secara bersamaan, bahwa apa yang kita ingin dapatkan dari orang lain mungkin (atau bahkan pasti) perlu menerapkan teknik <em>social engineering</em>. <em>Social engineering</em> mungkin terdengar memiliki konotasi negatif di benak sebagian orang tapi teknik ini sering kita lakukan, baik yang disengaja maupun tidak. Intinya, <em>social engineering</em> bisa membawa kita untuk menggapai tujuan tertentu dengan menggunakan teknik/taktik bahasa tertentu.</p> <h1 id="ideological-square-framework-sebagai-taktik-untuk-menghadapi-wawancara-lamaran-kerja">Ideological Square Framework sebagai Taktik untuk Menghadapi Wawancara Lamaran Kerja</h1> <p>Pada saat tulisan ini ditulis, saya sudah tidak bekerja sebagai guru sekolah menengah pertama, dan sekarang saya sedang mencari perkerjaan di ranah Data Science. Kondisi ini mengharuskan saya untuk mempersiapkan diri sebagai calon karyawan. Salah satu tahapan dalam rekrutmen karyawan adalah wawancara dengan pihak perusahaan, termasuk wawancara HR dan/atau wawancara user. Saya menyadari bahwa kekurangan saya dalam bidang Data Science masih sangatlah banyak sehingga kecil kemungkinan saya bisa lolos tahap penyaringan CV awal. Namun begitu, saya tetap wajib mempersiapkan segala hal untuk setiap tahapan yang ada atau mungkin ada.</p> <p>Pada suatu malam ketika saya sedang bermain gim daring, saya bertukar pikiran dengan teman dalam gim. Kami bertukar pikiran tentang pengalaman bekerja. Teman saya bekerja di bidang teknologi dan informasi, lebih tepatnya di bagian perangkat keras jaringan komputer. Awalnya perbincangan kami tidaklah mengacu pada pekerjaan sama sekali, tapi seiring mengalirnya topik pembicaraan, kami pun sampai pada topik pekerjaan ini. Teman saya membagikan pengalamannya tentang kehidupan kerja di perusahaan sekarang. Karena satu dan lain hal, saya tidak akan menceritakan semua detail secara rinci tapi hanya garis besarnya saja.</p> <p>Singkat cerita, teman gim saya ini merasa perlu pengmebangan diri profesional yang lebih tinggi lagi. Ia memang memiliki semangat belajar yang tinggi. Saya mengaguminya. Di saat yang bersamaan, saya juga sedang mencari peluang untuk berkembang lebih jauh lagi. Kami memiliki tujuan dan arah yang sama. Oleh karena itu, kami mencoba untuk latihan rekrutmen kerja, spesifiknya di bagian wawancara dengan HR.</p> <p>Saya celetuk mencoba menjawab salah satu pertanyaan klasik yang biasa ditanyakan pada saat wawancara HR, <em>“Saya merasa tempat kerja saya sebelumnya sudah tidak bisa lagi memberikan peluang pengembangan diri baik secara personal maupun profesional. Atasan saya juga merekeomendasikan saya untuk mencari peluang yang lebih banyak lagi. Saya sudah melakukan riset terhadap profil perusahaan bapak/ibu dan saya merasa saya bisa ikut berkembang baik secara personal maupun profesional di perusahaan ini.”</em></p> <p>Ketika saya meminta pendapatnya, teman saya dengan nada yang kasual memberikan masukan, “Jangan”, yang mana pada saat itu juga langsung saya balas, “Oke”. Teman saya kemudian menjelaskan kenapa kalimat yang saya gunakan bisa menjadi pedang bermata dua yang akhirnya justru mengiris tangan saya sendiri. Singkatnya, penggunaan kata ganti orang pertama dengan frekuensi yang banyak bisa menimbulkan persepsi negatif dari sisi pewawancara. Hal ini disebabkan lantaran kata ganti orang pertama “Saya” dinilai memancarkan kesan egois. Logikanya, ketika kita terjun di dunia kerja, kita pasti bekerja tidak sendirian. Pasti ditemani orang lain atau bekerja sama dengan orang lain. Oleh karena itu, ketika kita menggunakan “Saya” berlebihan ketika menjawab pertanyaan (spesifiknya, pertanyaan tentang pengalaman kerja) memunculkan kesan negatif di mata staff HR. Implikasinya, staff HR akan mengira bahwa kita adalah orang egois yang tidak bisa bekerja sama dengan tim.</p> <p>Keesokan hari nya, saya mendiskusikan hal yang sama dengan ayah saya. Saya bercerita bahwa saya telah bertukar pikiran dengan teman di dalam sebuah gim tentang wawancara HR. Ayah saya mengonfirmasi bahwa penggunaan kata ganti orang pertama yang berlebihan bisa menimbulkan efek negatif yang tidak diinginkan. Kami pun berdiskusi tentang bagaimana taktik yang tepat untuk mengatasi masalah ini. Walau tidak berinteraksi secara langsung, teman saya dalam gim dan ayah saya sepakat bahwa masalah ini adalah masalah tentang “mendiskreditkan kontribusi kolega kerja”. Keduanya juga sepakat bahwa masalah ini bisa diselesaikan dengan menyertakan kontribusi kolega. Singkatnya, alih-alih hanya “Saya”, gunakan <em>“Saya dan tim …“</em>.</p> <p>Dari hal ini saya belajar lagi satu hal bahwa cara kita berkomunikasi dan cara kita merangkai kata-kata bisa menumbulkan efek dan implikasi yang sangat signifikan. Salah sedikit (walau kita tidak sadar) akan menimbulkan efek yang mungkin di luar dugaan. Bisa efek negatif ataupun positif.</p> <p>Dari hasil diskusi ini, saya jadi teringat sebuah kerangka teoretis dalam ranah Critical Discourse Analysis (CDA) yang pernah saya pelajari semasa studi sarjana. Kerangka ini kurang lebih berbunyi:</p> <blockquote> <ul> <li>Emphasize our good and de-emphasize other’s good.</li> <li>Emphasize other’s bad and de-emphasize our bad.</li> </ul> </blockquote> <p>Model teoretis ini dikembangkan oleh van Dijk (2011) dan akrab dikenal sebagai <em>Ideological Square Framework</em>.</p>]]></content><author><name>Zelvy Fauzan</name></author><category term="Diary"/><category term="Learning"/><category term="Psychology"/><category term="Self-Efficacy"/><category term="Interpersonal Communication"/><summary type="html"><![CDATA[Belajar dari Pengalaman Vikarius]]></summary></entry><entry><title type="html">Self-Join in DBMS</title><link href="https://ze-fn.github.io/blog/2026/self-join-in-postgresql/" rel="alternate" type="text/html" title="Self-Join in DBMS"/><published>2026-06-18T00:00:00+00:00</published><updated>2026-06-18T00:00:00+00:00</updated><id>https://ze-fn.github.io/blog/2026/self-join-in-postgresql</id><content type="html" xml:base="https://ze-fn.github.io/blog/2026/self-join-in-postgresql/"><![CDATA[<h1 id="introduction">Introduction</h1> <p>It had been one day since I resigned from teaching position at a local Junior High School. This presented me with a thought of next career.</p> <blockquote> <p>“What’s the next step?”</p> </blockquote> <p>In my mind, I already knew what I wanted to achieve and how to achieve it. I wanted to be a Data Scientist or Data Analyst. However, in the past few months, I learned primarily R programming in general and R programming for inferential statistics. This, of course, shifted my focus from one language to another. Previously, I was quite confident in MySQL and PostgreSQL skills. But when I tried to recall them, I found my memory to be hazy, to say the least. Therefore, I looked up some PostgreSQL exercises.</p> <p>I found this website called <a href="https://pgexercises.com/">PostgreSQL Exercises</a>. It has many exercises from basic to advanced querying skill, from basic query to string manipulation and recursive. I found the basic exercises refreshing for my skill. It was as if a plant getting watered. However, when it comes to “Joins and SUbqueries”, my brain stalled.</p> <h1 id="recalling-the-joins">Recalling The JOINS</h1> <p>I remembered that there are some techniques of table joins.</p> <ul> <li><code class="language-plaintext highlighter-rouge">INNER (LEFT/RIGHT) JOIN</code>: where one of the table is merged into another upon a row match.</li> <li><code class="language-plaintext highlighter-rouge">OUTER (LEFT/RIGHT) JOIN</code>: where the value in one table is matched with another table but when there is no match then the value in one of the table is left blank.</li> <li>FULL JOIN: where the tables are merged upon match in both tables.</li> <li>CROSS JOIN: where for every value in one table is paired with every value in the other table.</li> </ul> <p>One of the exercises in the exercise website was <a href="https://pgexercises.com/questions/joins/self2.html">“Produce a list of all members, along with their recommender”</a>. In essence, it was a “self-join” problem. The idea is to get a list of members along with the <em>recommender</em>.</p> <p>For example: I joined a gym membership. The gym gave me 10% discount for the subscription because I joined their membership. The gym also said that I can get another 10% discount if I invite people to joing the gym membership, on a condition that the people I invited have to use my unique code upon registering the gym membership. Long story short, I invited 8 people to the gym and all of them joined the gym membership.</p> <p>Now, let’s shift to the gym’s management point of view.</p> <p>The staff wanted to know who invited who. So they looked up the database and used self-join to see the answer.</p> <p>Naturally, each member has an identifier attached to their information in the database (usually in a column called <code class="language-plaintext highlighter-rouge">id</code>), along with a column (usually) called <code class="language-plaintext highlighter-rouge">referral</code>.</p> <table> <thead> <tr> <th style="text-align: left">id</th> <th style="text-align: left">fname</th> <th style="text-align: left">referral</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">1</td> <td style="text-align: left">Andy</td> <td style="text-align: left"> </td> </tr> <tr> <td style="text-align: left">2</td> <td style="text-align: left">Braun</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">3</td> <td style="text-align: left">Claire</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">4</td> <td style="text-align: left">Donny</td> <td style="text-align: left">2</td> </tr> <tr> <td style="text-align: left">5</td> <td style="text-align: left">Francis</td> <td style="text-align: left">2</td> </tr> <tr> <td style="text-align: left">6</td> <td style="text-align: left">Gwenda</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">7</td> <td style="text-align: left">Historia</td> <td style="text-align: left">3</td> </tr> <tr> <td style="text-align: left">8</td> <td style="text-align: left">Igna</td> <td style="text-align: left"> </td> </tr> <tr> <td style="text-align: left">9</td> <td style="text-align: left">Jill</td> <td style="text-align: left"> </td> </tr> <tr> <td style="text-align: left">10</td> <td style="text-align: left">Kamila</td> <td style="text-align: left">2</td> </tr> </tbody> </table> <p>The table above shows the database for gym membership. We can see that:</p> <ul> <li>Andy (id = 1) has invited Braun, Claire, and Gwenda.</li> <li>Braun (id = 2) has invited Donny, Francis, and Kamila.</li> <li>Claire (id = 3) has invited Historia.</li> </ul> <p>Usually, this kind of information is presented in the following table format:</p> <table> <thead> <tr> <th style="text-align: left">id</th> <th style="text-align: left">referal_name</th> <th style="text-align: left">referee</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">1</td> <td style="text-align: left">Andy</td> <td style="text-align: left">Braun</td> </tr> <tr> <td style="text-align: left">1</td> <td style="text-align: left">Andy</td> <td style="text-align: left">Claire</td> </tr> <tr> <td style="text-align: left">1</td> <td style="text-align: left">Andy</td> <td style="text-align: left">Gwenda</td> </tr> <tr> <td style="text-align: left">2</td> <td style="text-align: left">Braun</td> <td style="text-align: left">Donny</td> </tr> <tr> <td style="text-align: left">2</td> <td style="text-align: left">Braun</td> <td style="text-align: left">Francis</td> </tr> <tr> <td style="text-align: left">2</td> <td style="text-align: left">Braun</td> <td style="text-align: left">Kamila</td> </tr> <tr> <td style="text-align: left">3</td> <td style="text-align: left">Claire</td> <td style="text-align: left">Historia</td> </tr> </tbody> </table> <p>Seeing the original table as is (or maybe even the joined table) may prove difficult to understand, so let’s illustrate this referral process bit-by-bit. I will walk you through.</p> <h1 id="joins-in-details">JOINS in Details</h1> <ol> <li>First, let’s imagine we make a copy of the original table.</li> </ol> <table> <thead> <tr> <th style="text-align: left">id</th> <th style="text-align: left">fname</th> <th style="text-align: left">referral</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">1</td> <td style="text-align: left">Andy</td> <td style="text-align: left"> </td> </tr> <tr> <td style="text-align: left">2</td> <td style="text-align: left">Braun</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">3</td> <td style="text-align: left">Claire</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">4</td> <td style="text-align: left">Donny</td> <td style="text-align: left">2</td> </tr> <tr> <td style="text-align: left">5</td> <td style="text-align: left">Francis</td> <td style="text-align: left">2</td> </tr> <tr> <td style="text-align: left">6</td> <td style="text-align: left">Gwenda</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">7</td> <td style="text-align: left">Historia</td> <td style="text-align: left">3</td> </tr> <tr> <td style="text-align: left">8</td> <td style="text-align: left">Igna</td> <td style="text-align: left"> </td> </tr> <tr> <td style="text-align: left">9</td> <td style="text-align: left">Jill</td> <td style="text-align: left"> </td> </tr> <tr> <td style="text-align: left">10</td> <td style="text-align: left">Kamila</td> <td style="text-align: left">2</td> </tr> </tbody> </table> <hr/> <table> <thead> <tr> <th style="text-align: left">id</th> <th style="text-align: left">fname</th> <th style="text-align: left">referral</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">1</td> <td style="text-align: left">Andy</td> <td style="text-align: left"> </td> </tr> <tr> <td style="text-align: left">2</td> <td style="text-align: left">Braun</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">3</td> <td style="text-align: left">Claire</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">4</td> <td style="text-align: left">Donny</td> <td style="text-align: left">2</td> </tr> <tr> <td style="text-align: left">5</td> <td style="text-align: left">Francis</td> <td style="text-align: left">2</td> </tr> <tr> <td style="text-align: left">6</td> <td style="text-align: left">Gwenda</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">7</td> <td style="text-align: left">Historia</td> <td style="text-align: left">3</td> </tr> <tr> <td style="text-align: left">8</td> <td style="text-align: left">Igna</td> <td style="text-align: left"> </td> </tr> <tr> <td style="text-align: left">9</td> <td style="text-align: left">Jill</td> <td style="text-align: left"> </td> </tr> <tr> <td style="text-align: left">10</td> <td style="text-align: left">Kamila</td> <td style="text-align: left">2</td> </tr> </tbody> </table> <ol> <li>Let’s put the tables side-by-side.</li> </ol> <p>(image 1.1)</p> <p>Since the two table are identical, I will call the table in the left one as “lt” (shorthand of <em>left table</em>) and the table on the right side as “rt” (abbreviated from <em>right table</em>).</p> <ol> <li>Notice that the column <code class="language-plaintext highlighter-rouge">referral</code> in both tables are actually <em>“referring”</em> to the <code class="language-plaintext highlighter-rouge">id</code>column.</li> </ol> <p>(image 1.2)</p> <p>If we draw a line between <code class="language-plaintext highlighter-rouge">id</code> and <code class="language-plaintext highlighter-rouge">referral</code>, we will get lines of connections. Let’s call it “relationship”.</p> <ol> <li>Now comes the rather tricky part: joining the tables.</li> </ol> <p>The idea is to match the value in the <code class="language-plaintext highlighter-rouge">referral</code> column with the <code class="language-plaintext highlighter-rouge">id</code> column. In this case, we only care to see who has successfully invited people. Therefore, want to see only the matching values between the two columns from the two tables. Take a look at the table below.</p> <table> <thead> <tr> <th style="text-align: left">lt.id</th> <th style="text-align: left">lt.fname</th> <th style="text-align: left">lt.referral</th> <th style="text-align: left">rt.id</th> <th style="text-align: left">rt.fname</th> <th style="text-align: left">rt.referral</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">1</td> <td style="text-align: left">Andy</td> <td style="text-align: left"> </td> <td style="text-align: left">2</td> <td style="text-align: left">Braun</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">1</td> <td style="text-align: left">Andy</td> <td style="text-align: left"> </td> <td style="text-align: left">3</td> <td style="text-align: left">Claire</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">1</td> <td style="text-align: left">Andy</td> <td style="text-align: left"> </td> <td style="text-align: left">6</td> <td style="text-align: left">Gwenda</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">2</td> <td style="text-align: left">Braun</td> <td style="text-align: left">1</td> <td style="text-align: left">4</td> <td style="text-align: left">Donny</td> <td style="text-align: left">2</td> </tr> <tr> <td style="text-align: left">2</td> <td style="text-align: left">Braun</td> <td style="text-align: left">1</td> <td style="text-align: left">5</td> <td style="text-align: left">Francis</td> <td style="text-align: left">2</td> </tr> <tr> <td style="text-align: left">2</td> <td style="text-align: left">Braun</td> <td style="text-align: left">1</td> <td style="text-align: left">10</td> <td style="text-align: left">Kamila</td> <td style="text-align: left">2</td> </tr> <tr> <td style="text-align: left">3</td> <td style="text-align: left">Claire</td> <td style="text-align: left">1</td> <td style="text-align: left">7</td> <td style="text-align: left">Historia</td> <td style="text-align: left">3</td> </tr> </tbody> </table> <p>Did you notice that the value in <code class="language-plaintext highlighter-rouge">lt.id</code> has identical value as in the <code class="language-plaintext highlighter-rouge">rt.referral</code>? This is because we just performed a table join. In PostgreSQL term, this is called <code class="language-plaintext highlighter-rouge">INNER JOIN</code>.</p> <p>Some of you may feel uneasy or intimidated by the <code class="language-plaintext highlighter-rouge">lt.referral</code> and <code class="language-plaintext highlighter-rouge">rt.id</code> columns. Fear not for they are usually not shown or are intentionally not included. I intentionally showed this so that you can see the <em>“behind the scenes”</em>. And we can always exclude the unnecessary columns, like the following:</p> <table> <thead> <tr> <th style="text-align: left">lt.id</th> <th style="text-align: left">lt.fname</th> <th style="text-align: left">rt.fname</th> <th style="text-align: left">rt.referral</th> </tr> </thead> <tbody> <tr> <td style="text-align: left">1</td> <td style="text-align: left">Andy</td> <td style="text-align: left">Braun</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">1</td> <td style="text-align: left">Andy</td> <td style="text-align: left">Claire</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">1</td> <td style="text-align: left">Andy</td> <td style="text-align: left">Gwenda</td> <td style="text-align: left">1</td> </tr> <tr> <td style="text-align: left">2</td> <td style="text-align: left">Braun</td> <td style="text-align: left">Donny</td> <td style="text-align: left">2</td> </tr> <tr> <td style="text-align: left">2</td> <td style="text-align: left">Braun</td> <td style="text-align: left">Francis</td> <td style="text-align: left">2</td> </tr> <tr> <td style="text-align: left">2</td> <td style="text-align: left">Braun</td> <td style="text-align: left">Kamila</td> <td style="text-align: left">2</td> </tr> <tr> <td style="text-align: left">3</td> <td style="text-align: left">Claire</td> <td style="text-align: left">Historia</td> <td style="text-align: left">3</td> </tr> </tbody> </table> <p>Or even more, you can also exclude the <code class="language-plaintext highlighter-rouge">rt.referral</code> if you are confident in your querying skill. Me personally prefer printing out the <code class="language-plaintext highlighter-rouge">rt.referral</code> so that I can validate whether my query answers the right question, or whether the resulting table query is aligned with whatever was requested.</p> <h1 id="recapau">Recapau</h1> <p>All in all, the self-join takes a “parent” and a “child” from the same table, creates duplicate of the same table, and combines the two based on value match between the parent and the child.</p> <p>To put it practically,</p> <div class="language-sql highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">SELECT</span>
+  <span class="n">lt</span><span class="p">.</span><span class="n">fname</span><span class="p">,</span>   <span class="c1">-- First name of the parent</span>
+  <span class="n">lt</span><span class="p">.</span><span class="n">lname</span><span class="p">,</span>   <span class="c1">-- Last name of the parent</span>
+  <span class="n">rt</span><span class="p">.</span><span class="n">fname</span><span class="p">,</span>   <span class="c1">-- First name of the child</span>
+  <span class="n">rt</span><span class="p">.</span><span class="n">lname</span>    <span class="c1">-- Last name of the child</span>
+<span class="k">FROM</span> <span class="k">database</span> <span class="k">AS</span> <span class="n">lt</span>       <span class="c1">-- Original table</span>
+<span class="k">LEFT</span> <span class="k">JOIN</span> <span class="k">database</span> <span class="n">rt</span>     <span class="c1">-- Duplicated table</span>
+  <span class="k">ON</span> <span class="n">rt</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">lt</span><span class="p">.</span><span class="n">id</span>        <span class="c1">-- Mutual identifier</span>
+<span class="cm">/* ... 
+Any kinds of conditionals can be inserted past this line 
+*/</span>
+</code></pre></div></div>]]></content><author><name>Zelvy Fauzan</name></author><category term="Diary"/><category term="Journal"/><category term="DBMS"/><category term="SQL"/><category term="English"/><summary type="html"><![CDATA[Revisiting the SQL Syntax and the Logic Behind It]]></summary></entry></feed>
