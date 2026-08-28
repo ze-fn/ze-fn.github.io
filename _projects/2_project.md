@@ -1,81 +1,49 @@
 ---
 layout: page
-title: project 2
-description: a project with a background image and giscus comments
-img: assets/img/3.jpg
-importance: 2
-category: work
+title: Electrical Engineering and Computer Science (Undergraduate)
+description: My learning progress on MIT OCW
+# img: assets/img/3.jpg
+importance: 1
+category: learning
 giscus_comments: true
 ---
 
-Every project has a beautiful feature showcase page.
-It's easy to include images in a flexible 3-column grid format.
-Make your photos 1/3, 2/3, or full width.
+## Introduction
 
-To give your project a background in the portfolio page, just add the img tag to the front matter like so:
+This is a personal project to pursue _life-long learning_. I love computer sciences and also recently gained a tremendous interest in engineering. I found that MIT offers an open courseware for everyone to learn to. I have no formal education background in computer science or engineering, but I once taught Informatics (or information system) for junior high school students. Teaching informatics have led me to take a deep interest into science, technology, engineering, and mathematics (STEM).
 
-    ---
-    layout: page
-    title: project
-    description: a project with a background image
-    img: /assets/img/12.jpg
-    ---
+This project will contain all of my learning journey from each course offered in MIT OCW. To be specific, I filtered the courses with:
 
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/1.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/3.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    Caption photos easily. On the left, a road goes through a tunnel. Middle, leaves artistically fall in a hipster photoshoot. Right, in another hipster photoshoot, a lumberjack grasps a handful of pine needles.
-</div>
-<div class="row">
-    <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/5.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    This image can also have a caption. It's like magic.
-</div>
-
-You can also put regular text between your rows of images.
-Say you wanted to write a little bit about your project before you posted the rest of the images.
-You describe how you toiled, sweated, _bled_ for your project, and then... you reveal its glory in the next row of images.
-
-<div class="row justify-content-sm-center">
-    <div class="col-sm-8 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-    <div class="col-sm-4 mt-3 mt-md-0">
-        {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-    </div>
-</div>
-<div class="caption">
-    You can also have artistically styled 2/3 + 1/3 images, like these.
-</div>
-
-The code is simple.
-Just wrap your images with `<div class="col-sm">` and place them inside `<div class="row">` (read more about the <a href="https://getbootstrap.com/docs/4.4/layout/grid/">Bootstrap Grid</a> system).
-To make images responsive, add `img-fluid` class to each; for rounded corners and shadows use `rounded` and `z-depth-1` classes.
-Here's the code for the last row of images above:
-
-{% raw %}
-
-```html
-<div class="row justify-content-sm-center">
-  <div class="col-sm-8 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/6.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-  <div class="col-sm-4 mt-3 mt-md-0">
-    {% include figure.liquid path="assets/img/11.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
-  </div>
-</div>
+```txt
+Departments: Electrical Engineering and Computer Science
+Level: Undergraduate
 ```
 
-{% endraw %}
+and then sorted it by `MIT Course #` in an ascending manner. This way, I hope to achieve a logical and chronological understanding of the study field.
+
+## Course Structure
+
+I scraped the course names from the Explore section of the OCW. The procedure for scraping the data was quite primitive, to say the least.
+
+1. Copy the table from the courses section.
+2. Paste into Google Spreadsheet.
+3. All data is in one column, transform data.
+    * `=WRAPROWS(A2:A, 3)`
+4. Add `index` column for row numbering.
+5. Populate the `index` using autofill.
+
+**[Click to view cleaned course structure](https://docs.google.com/spreadsheets/d/1U6Mb4Nc0DF_3zLFf8eATUHJmP-uBTmMEvp4CAnwmAHk/edit?usp=sharing)**
+
+## Course Progress
+
+In this section, I listed the progress of my learning. I will periodically update it as I complete the courses. In each course, I used a tree view to structure my progress. Inside each course is:
+
+1. Learning note (LN)
+2. Practice sets (PS)
+3. Exam (E)
+4. Project (P)
+
+---
+
+1. Introduction to Computer Science And Programming In Python
+    * What is Computation?
