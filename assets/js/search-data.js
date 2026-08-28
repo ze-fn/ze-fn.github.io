@@ -37,7 +37,29 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-python-basic-conditional-statements",
+        },{id: "post-what-is-computation",
+        
+          title: "What is Computation?",
+        
+        description: "Theories and aspects of computational thinking.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/what-is-computation/";
+          
+        },
+      },{id: "post-experience-from-south-lampung",
+        
+          title: "Experience from South Lampung",
+        
+        description: "A life event that made me rethink life",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/experience-from-lampung/";
+          
+        },
+      },{id: "post-python-basic-conditional-statements",
         
           title: "Python: Basic Conditional Statements",
         
@@ -439,14 +461,17 @@ ninja.data = [{
           section: "News",},{id: "news-started-my-learning-journey-on-freecodecamp-to-be-a-full-stack-web-developer",
           title: 'Started my learning journey on freeCodeCamp to be a Full-Stack Web Developer!',
           description: "",
+          section: "News",},{id: "news-started-learning-on-mit-ocw-with-filters-electrical-engineering-and-computer-science-undergraduate",
+          title: 'Started learning on MIT OCW with filters: Electrical Engineering and Computer Science +...',
+          description: "",
           section: "News",},{id: "projects-cpns-kemendik",
           title: 'CPNS-Kemendik',
           description: "Longitudinal analysis of the Civil Service Examination (CPNS) results within the Indonesian Ministry of Education",
           section: "Projects",handler: () => {
               window.location.href = "/projects/1_project/";
-            },},{id: "projects-project-2",
-          title: 'project 2',
-          description: "a project with a background image and giscus comments",
+            },},{id: "projects-electrical-engineering-and-computer-science-undergraduate",
+          title: 'Electrical Engineering and Computer Science (Undergraduate)',
+          description: "My learning progress on MIT OCW",
           section: "Projects",handler: () => {
               window.location.href = "/projects/2_project/";
             },},{id: "projects-project-3-with-very-long-name",
