@@ -37,7 +37,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-what-is-computation",
+        },{id: "post-project-ellie-pseudocode-for-retrieving-volume-issue-and-issue-url",
+        
+          title: "Project ELLIE: Pseudocode for Retrieving Volume, Issue, and Issue URL",
+        
+        description: "One of the parts of project ELLIE",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/pseudocode-to-retrieve-vol-and-issue/";
+          
+        },
+      },{id: "post-what-is-computation",
         
           title: "What is Computation?",
         
