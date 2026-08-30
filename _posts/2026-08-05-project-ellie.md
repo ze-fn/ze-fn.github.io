@@ -11,29 +11,29 @@ authors:
     affiliations:
       name: Independent
 toc:
-  - name: "Abstract"
+  - name: Abstract
   - name: "Chapter 1: Introduction"
     subsections:
-    - name: "1.1. Background of the Study"
-    - name: "1.2. Rationale of the Study"
-    - name: "1.3. Problems of the Study"
-    - name: "1.4. Aims of the Study"
-    - name: "1.5. Contributions of the Study"
+    - name: Background of the Study
+    - name: Rationale of the Study
+    - name: Problems of the Study
+    - name: Aims of the Study
+    - name: Contributions of the Study
   - name: "Chapter 2: Methodology"
     subsections: 
-    - name: "2.1. Study Design"
-    - name: "2.2. Search Strategy"
-    - name: "2.3. Study Selection and Eligibility"
-    - name: "2.4. Data Extraction and Synthesis"
+    - name: Study Design
+    - name: Search Strategy
+    - name: Study Selection and Eligibility
+    - name: Data Extraction and Synthesis
   - name: "Chapter 3: Results and Findings"
     subsections:
-    - name: "TBA"
+    - name: TBA
   - name: "Chapter 4: Conclusions"
     subsections:
-    - name: "4.1. Conclusion"
-    - name: "4.2. Limitations and Suggestions"
-    - name: "4.3. Declaration of Competing Interest"
-  - name: "Appendix"
+    - name: Conclusion
+    - name: Limitations and Suggestions
+    - name: Declaration of Competing Interest
+  - name: Appendix
 
 featured: true
 mermaid:
@@ -70,31 +70,31 @@ _To be added_
 
 This chapter elaborates on the foundations, the motivations, the direction, and the contributions of the study.
 
-### 1.1. Background of the Study
+### Background of the Study
 
 This is a personal project aimed to provide insights for researchers and English Language educators in seeing the bigger picture of how English is taught in Indonesia. In nature, one may consider this project as a meta-synthesis research. It collects, analyzes, and interprets articles from all around the internet. 
 
-### 1.2. Rationale of the Study
+### Rationale of the Study
 
 Learning and teaching practices is a personalized matter. Each individual has their own preferences. As such, while generalization is a good way to see the characteristics of the majority of the population, individual differences are not to be disregarded. 
 
 Many factors have been believed to be the predictors of students learning outcome. This includes (but not limited only to) economic status, psychological condition, social relationship, age, sex, geography, and so on. With this in mind, this project is set out to capture those variables and plot them into a map. 
 
-### 1.3. Problems of the Study
+### Problems of the Study
 
 To guide the project, I formulated some problems to be solved in this project. That way, I will not stray outside of the scope that I had set.
 
 1. What is the most common teaching methodology to teach English as a Foreign Language in Indonesia over the years?
 2. Which English teaching method has the most optimal effect size based on geographical location, age, and sex in each province of Indonesia?
 
-### 1.4. Aims of the Study
+### Aims of the Study
 
 The current project was dedicated to answer the problems stated in the aforementioned section. As such, this project is aimed to:
 
 1. provide a time-series graph that shows the most common teaching methodology to teach English as a Foreign Language in Indonesia, and
 2. present a tabular data showing the teaching methods of English as a Foreign Language with the most optimal effect size based on geographical location, age, and sex in each province of Indonesia.
 
-### 1.5. Contributions of the Study
+### Contributions of the Study
 
 With the problems and aims at hand, I offered contribution in three dimensions:
 
@@ -106,18 +106,18 @@ With the problems and aims at hand, I offered contribution in three dimensions:
 
 In this chapter, I mapped out the strategy to achieve the current project's aims.
 
-### 2.1. Study Design
+### Study Design
 
 > **TBA**
 >
 > Meta-synthesis
 {: .block-warning}
 
-### 2.2. Search Strategy
+### Search Strategy
 
 Manual record: Journal's Archive URL on SINTA 1-5, Scopus Q1-Q4
 
-### 2.3. Study Selection and Eligibility
+### Study Selection and Eligibility
 
 #### Inclusion Criteria
 
@@ -132,7 +132,7 @@ Manual record: Journal's Archive URL on SINTA 1-5, Scopus Q1-Q4
 * Research subject/participant: NOT Indonesian
 * Research methodology: NOT Quantitative
 
-### 2.4. Data Extraction and Synthesis
+### Data Extraction and Synthesis
 
 This study applied concepts and practices from computer science field, specifically data engineering, data analysis, and data science. 
 
@@ -147,7 +147,211 @@ The following is the relational database diagram that shows the relationship amo
 > **TBA**
 {: .block-warning}
 
-#### Script
+#### Data Wrangling
+
+This section covers both data scrapping and cleaning because the process is rather cyclical rather than a linear one.
+
+##### Stage 0: Environment Preparation
+
+The script I used was mainly in R language, and I used the libraries/packages in the `tidyverse` collection.
+
+```r
+req_packs <- c(
+  "tidyverse", 
+  "googlesheets4")
+
+for (pack in req_packs) {
+  if (!requireNamespace(pack, quietly = FALSE)) {
+    install.packages(pack, dependencies = TRUE)
+  }
+  library(pack, character.only = TRUE)
+}
+```
+
+Once the packages are installed, I imported the data of eligible journals. The link is open for public review.
+
+```r
+gsheet_url <- "https://docs.google.com/spreadsheets/d/1ReHFwLLCVOFLmOSEyyxD60DCepdVPC5jvuBJCbryDLM/edit?usp=sharing"
+```
+
+##### Stage 1: Getting The URLs for Eligible Journals
+
+```r
+# data_import Rev.1
+# Import specific sheet from given link
+journal_list <- read_sheet(
+  gsheet_url, 
+  sheet = "journals", 
+  col_names = TRUE, 
+  col_types = "icccccccccl", 
+  na = "")
+```
+
+##### Stage 2: Testing Connection to Each Journal Archive URL
+
+From my experience in learning cybersecurity, some websites my refuse to connect if the visitor is not human. In other words, since I was using automation tool using R language, websites will know that I was using a tool instead of visiting it myself as a human. Thus, I tested the connection to each URL.
+
+```r
+# test_conn Rev.1
+j <- 0
+for (i in journal_list$archive){
+  j <- j + 1
+  print(glue::glue("Iteration: {j}"))
+  print(glue::glue("Testing connection to URL: {i}"))
+  print(httr2::request(i) |> 
+          #httr2::req_headers(`Host` = "google.com") |> 
+          #httr2::req_headers(`Referrer` = "google.com") |> 
+          #httr2::req_headers(`X-Forwarded-For` = "google.com") |> 
+          #httr2::req_headers(`X-Forwarded` = "google.com") |> 
+          #httr2::req_headers(`X-Original-URL` = "google.com") |> 
+          #httr2::req_headers(`X-Forwarded-For` = "google.com", `X-Forwarded` = "google.com") |> 
+          #httr2::req_headers(`X-Forwarded-For` = "google.com", `X-Forwarded` = "google.com", `Referrer` = "google.com") |> 
+          #httr2::req_headers(`X-Forwarded-For` = "google.com", `Referrer` = i) |>
+          httr2::req_headers(`User-Agent` = c("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:154.0) Gecko/20100101 Firefox/154.0", "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_7_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36","Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36","Mozilla/5.0 (Macintosh; Intel Mac OS X 14.7; rv:134.0) Gecko/20100101 Firefox/134.0")) |> 
+          httr2::req_perform() |> 
+          httr2::resp_status())
+}
+```
+
+As expected, two URLs refused to connect. Since I lack deep level of proficiency in computer networking and website infrastructure, I decided to exclude the ones refused to connect by creating a new column in the Google Sheet. If connection to website is NOT 200 OK, then bot_ok is populated with boolean values represented with `1` for `TRUE` and `0` for `FALSE`.
+
+| bot_ok |
+| :----: |
+| TRUE   |
+| TRUE   |
+| FALSE  |
+| ...    |
+
+This presents a change in the initial database and revision as well as re-execution of the whole code is necessary.
+
+##### Stage 3: Update Database Excluding URLs with 403 Code
+
+```r
+# data_import Rev.2
+# Import specific sheet from given link
+journal_list <- read_sheet(
+  gsheet_url, 
+  sheet = "journals", 
+  col_names = TRUE, 
+  col_types = "icccccccccll",   # Added `l` at the end representing the new col
+  na = "")
+
+# test_conn Rev.2
+j <- 0
+for (i in journal_list$archive[journal_list$bot_ok != FALSE]){
+  j <- j + 1
+  print(glue::glue("Iteration: {j}"))
+  print(glue::glue("Testing connection to URL: {i}"))
+  print(httr2::request(i) |> 
+          #httr2::req_headers(`Host` = "google.com") |> 
+          #httr2::req_headers(`Referrer` = "google.com") |> 
+          #httr2::req_headers(`X-Forwarded-For` = "google.com") |> 
+          #httr2::req_headers(`X-Forwarded` = "google.com") |> 
+          #httr2::req_headers(`X-Original-URL` = "google.com") |> 
+          #httr2::req_headers(`X-Forwarded-For` = "google.com", `X-Forwarded` = "google.com") |> 
+          #httr2::req_headers(`X-Forwarded-For` = "google.com", `X-Forwarded` = "google.com", `Referrer` = "google.com") |> 
+          #httr2::req_headers(`X-Forwarded-For` = "google.com", `Referrer` = i) |>
+          httr2::req_headers(`User-Agent` = c("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:154.0) Gecko/20100101 Firefox/154.0", "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_7_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36","Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36","Mozilla/5.0 (Macintosh; Intel Mac OS X 14.7; rv:134.0) Gecko/20100101 Firefox/134.0")) |> 
+          httr2::req_perform() |> 
+          httr2::resp_status())
+}
+```
+
+##### Stage 4: Retrieving Issue URLs for Each Journal
+
+Each journal has volume and issue. They are usually paired to each other. 
+
+I used a global coverage parsing of the fields that I needed. This was done because each journal structured their webpage differently despite using the same website template. As an illustration, journal X defines the issue links under the `<a>` HTML tag but journal Y and Z define the issue links under the `<div>` element of the month separator. This heterogeneity posed problem in the automation process. Therefore, I decided to cover the whole page instead, and cleaning them at a later stage.
+
+```r
+# Researcher's Note: Test SUCCESS. Production SUCCESS
+ok_status_journals <- journal_list |> 
+  filter(bot_ok != FALSE) |> 
+  pull(archive)
+
+# Binds the text and URL
+prev_df <- tibble()
+next_df <- tibble()
+staging1_df <- tibble()
+
+for (i in 1:length(ok_status_journals)){
+  print(glue::glue("Retrieving from: ", ok_status_journals[i]))
+  next_df <- bind_cols(
+    issues = (
+      # Take the text having "Vol"
+      ok_status_journals[i] |> 
+        rvest::read_html() |> 
+        rvest::html_elements("*") |>
+        rvest::html_text()
+      ),
+    # Take the URL having "Vol" in text
+    issue_url = (
+      ok_status_journals[i] |> 
+        rvest::read_html() |> 
+        rvest::html_elements("*") |> 
+        rvest::html_attr('href'))
+    )
+  staging1_df <- bind_rows(staging1_df, next_df)
+  prev_df <- next_df
+}
+print(glue::glue("All issue URL from journals saved.
+                 Number of total HTML elements from all journal: {nrow(staging1_df)}"))
+```
+
+##### Stage 5: Cleaning The Issue URLs
+
+The data from the retrieval process was unstructured. This calls for further cleaning.
+
+```r
+# Only retrieve rows with valid and appropriate text-URL pair
+staging2_df <-
+  staging1_df %>%
+    filter(!is.na(issue_url),
+           str_detect(issue_url, "ac.id"),
+           str_detect(issue_url, "issue/view")
+    ) %>%
+    mutate(issues = str_remove_all(issues, "\\n")) %>%
+    mutate(issues = str_remove_all(issues, "\\t")) %>%
+    filter(issues != "")
+```
+
+##### Stage 6: Testing Connection to Each Issue URL
+
+Since each issue is organized in a different directory (of the journal website), it is safe to assume that for each issue URL retrieved from the previous stage already represents each journal, and that no URL is duplicated both inside the journal and inter-journals.
+
+However, it is considered good practice to investigate on the availability of each URL so that scrapping operation would not halted.
+
+```r
+issue_statuscode <- vector("integer", length(staging2_df$issue_url))
+
+for (i in 1:length(staging2_df$issue_url)){
+  statuscode <- tryCatch({
+    staging2_df$issue_url[i] %>%
+    httr2::request() %>%
+    httr2::req_error(is_error = \(resp) FALSE) %>%
+    httr2::req_perform() %>%
+    httr2::resp_status()
+  }, 
+  error = function(e){
+    print(glue::glue("Network error on {staging2_df$issue_url[i]}: {conditionMessage(e)}"))
+    return(NA_integer_)
+  })
+  # Logging progress
+  print(glue::glue("Testing URL [ ", staging2_df$issue_url[i], " ] Status Code: ", statuscode))
+  # Append statuscode to vector
+  issue_statuscode[i] <- statuscode
+}
+# Add the issue_statuscode vector into staging data frame for next stage
+staging2_df$issue_statuscode <- issue_statuscode
+```
+
+##### Stage 7: Retrieving Article URLs from Each Issue URL
+
+This stage has the same logic with the previous retrieval stage, the difference being the source URL. Looking at the resulting status code for each issue URL, there are some unreachable URLs. I have tried to access it manually, using Virtual Private Network (VPN), and the combination between the two, but to no avail. Therefore, I excluded the URLs with `NA` status code.
+
+```r
+
+```
 
 > **TBA**
 {: .block-warning}
@@ -159,26 +363,26 @@ Since the scrapping process was divided into several processes, each process pro
 > **TBA**
 {: .block-warning}
 
-### 3. Chapter 3: Results and Findings
+### Chapter 3: Results and Findings
 
 This chapter encloses the aggregation of the data frame. Each subsection is elaborated with data analysis and interpretation from the author.
 
 > **TBA**
 {: .block-warning}
 
-### 4. Chapter 4: Conclusions
+### Chapter 4: Conclusions
 
-#### 4.1. Conclusion
-
-> **TBA**
-{: .block-warning}
-
-#### 4.2. Limitations and Suggestions
+#### Conclusion
 
 > **TBA**
 {: .block-warning}
 
-### 4.3. Declaration of Competing Interest
+#### Limitations and Suggestions
+
+> **TBA**
+{: .block-warning}
+
+### Declaration of Competing Interest
 
 None.
 
