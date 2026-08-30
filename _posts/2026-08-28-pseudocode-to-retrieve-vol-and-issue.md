@@ -49,7 +49,7 @@ The underlying principles are:
 * HTTP Requests (GET request), and
 * Database Normalization (N1)
 
-## Algorithm
+## High-Level Algorithm
 
 Below is the procedure (or IT practitioners usually address it as: algorithm) for scrapping the data, served in pseudocode. Pseudocode is a human-friendly and -redable format to explain computing processes.
 
@@ -71,7 +71,12 @@ Below is the procedure (or IT practitioners usually address it as: algorithm) fo
 14. For each link in `article_link`, take the CSS element having class name resembles "keywords" and store the text content as `article_keywords`.
 15. For each link in `article_link`, take the CSS element having class name resembles "reference" and store the text content as `article_references`.
 
-## 
+## Detailed Algorithm
+
+1. Import from sheet then save to object as data.frame
+2. For i in object$col:
+  1. rvest::read_html(i) |>
+  2. 
 
 ## Script Prototyping
 

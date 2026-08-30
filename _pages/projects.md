@@ -2,10 +2,10 @@
 layout: page
 title: projects
 permalink: /projects/
-description: A growing collection of your cool projects.
+description: Some of my projects. Aimed to contribute.
 nav: true
 nav_order: 3
-display_categories: [Data, Computer Networking]
+display_categories: [Research, Data]
 horizontal: false
 ---
 
