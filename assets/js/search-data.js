@@ -25,7 +25,7 @@ ninja.data = [{
           },
         },{id: "nav-projects",
           title: "projects",
-          description: "A growing collection of your cool projects.",
+          description: "Some of my projects. Aimed to contribute.",
           section: "Navigation",
           handler: () => {
             window.location.href = "/projects/";
@@ -68,6 +68,17 @@ ninja.data = [{
         handler: () => {
           
             window.location.href = "/blog/2026/experience-from-lampung/";
+          
+        },
+      },{id: "post-project-ellie",
+        
+          title: "Project: ELLIE",
+        
+        description: "A Meta-Synthesis of papers about English Language Education in Indonesia",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/project-ellie/";
           
         },
       },{id: "post-python-basic-conditional-statements",
@@ -475,12 +486,7 @@ ninja.data = [{
           section: "News",},{id: "news-started-learning-on-mit-ocw-with-filters-electrical-engineering-and-computer-science-undergraduate",
           title: 'Started learning on MIT OCW with filters: Electrical Engineering and Computer Science +...',
           description: "",
-          section: "News",},{id: "projects-cpns-kemendik",
-          title: 'CPNS-Kemendik',
-          description: "Longitudinal analysis of the Civil Service Examination (CPNS) results within the Indonesian Ministry of Education",
-          section: "Projects",handler: () => {
-              window.location.href = "/projects/1_project/";
-            },},{id: "projects-electrical-engineering-and-computer-science-undergraduate",
+          section: "News",},{id: "projects-electrical-engineering-and-computer-science-undergraduate",
           title: 'Electrical Engineering and Computer Science (Undergraduate)',
           description: "My learning progress on MIT OCW",
           section: "Projects",handler: () => {
@@ -520,6 +526,11 @@ ninja.data = [{
           description: "another project with an image 🎉",
           section: "Projects",handler: () => {
               window.location.href = "/projects/9_project/";
+            },},{id: "projects-project-ellie",
+          title: 'Project: ELLIE',
+          description: "A Meta-Synthesis of papers about English Language Education in Indonesia",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/ellie/";
             },},{
         id: 'social-email',
         title: 'email',
