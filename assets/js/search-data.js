@@ -528,7 +528,7 @@ ninja.data = [{
               window.location.href = "/projects/9_project/";
             },},{id: "projects-project-ellie",
           title: 'Project: ELLIE',
-          description: "A Meta-Synthesis of papers about English Language Education in Indonesia",
+          description: "Contains Researcher&#39;s Log",
           section: "Projects",handler: () => {
               window.location.href = "/projects/ellie/";
             },},{
