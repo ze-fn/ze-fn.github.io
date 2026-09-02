@@ -192,130 +192,98 @@ journal_list <- read_sheet(
 From my experience in learning cybersecurity, some websites my refuse to connect if the visitor is not human. In other words, since I was using automation tool using R language, websites will know that I was using a tool instead of visiting it myself as a human. Thus, I tested the connection to each URL.
 
 ```r
-# test_conn Rev.1
-j <- 0
-for (i in journal_list$archive){
-  j <- j + 1
-  print(glue::glue("Iteration: {j}"))
-  print(glue::glue("Testing connection to URL: {i}"))
-  print(httr2::request(i) |> 
-          #httr2::req_headers(`Host` = "google.com") |> 
-          #httr2::req_headers(`Referrer` = "google.com") |> 
-          #httr2::req_headers(`X-Forwarded-For` = "google.com") |> 
-          #httr2::req_headers(`X-Forwarded` = "google.com") |> 
-          #httr2::req_headers(`X-Original-URL` = "google.com") |> 
-          #httr2::req_headers(`X-Forwarded-For` = "google.com", `X-Forwarded` = "google.com") |> 
-          #httr2::req_headers(`X-Forwarded-For` = "google.com", `X-Forwarded` = "google.com", `Referrer` = "google.com") |> 
-          #httr2::req_headers(`X-Forwarded-For` = "google.com", `Referrer` = i) |>
-          httr2::req_headers(`User-Agent` = c("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:154.0) Gecko/20100101 Firefox/154.0", "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_7_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36","Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36","Mozilla/5.0 (Macintosh; Intel Mac OS X 14.7; rv:134.0) Gecko/20100101 Firefox/134.0")) |> 
-          httr2::req_perform() |> 
-          httr2::resp_status())
-}
-```
-
-As expected, two URLs refused to connect. Since I lack deep level of proficiency in computer networking and website infrastructure, I decided to exclude the ones refused to connect by creating a new column in the Google Sheet. If connection to website is NOT 200 OK, then bot_ok is populated with boolean values represented with `1` for `TRUE` and `0` for `FALSE`.
-
-| bot_ok |
-| :----: |
-| TRUE   |
-| TRUE   |
-| FALSE  |
-| ...    |
-
-This presents a change in the initial database and revision as well as re-execution of the whole code is necessary.
-
-##### Stage 3: Update Database Excluding URLs with 403 Code
-
-```r
-# data_import Rev.2
-# Import specific sheet from given link
-journal_list <- read_sheet(
-  gsheet_url, 
-  sheet = "journals", 
-  col_names = TRUE, 
-  col_types = "icccccccccll",   # Added `l` at the end representing the new col
-  na = "")
-
 # test_conn Rev.2
-j <- 0
-for (i in journal_list$archive[journal_list$bot_ok != FALSE]){
-  j <- j + 1
-  print(glue::glue("Iteration: {j}"))
-  print(glue::glue("Testing connection to URL: {i}"))
-  print(httr2::request(i) |> 
-          #httr2::req_headers(`Host` = "google.com") |> 
-          #httr2::req_headers(`Referrer` = "google.com") |> 
-          #httr2::req_headers(`X-Forwarded-For` = "google.com") |> 
-          #httr2::req_headers(`X-Forwarded` = "google.com") |> 
-          #httr2::req_headers(`X-Original-URL` = "google.com") |> 
-          #httr2::req_headers(`X-Forwarded-For` = "google.com", `X-Forwarded` = "google.com") |> 
-          #httr2::req_headers(`X-Forwarded-For` = "google.com", `X-Forwarded` = "google.com", `Referrer` = "google.com") |> 
-          #httr2::req_headers(`X-Forwarded-For` = "google.com", `Referrer` = i) |>
-          httr2::req_headers(`User-Agent` = c("Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:154.0) Gecko/20100101 Firefox/154.0", "Mozilla/5.0 (Macintosh; Intel Mac OS X 14_7_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36","Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36","Mozilla/5.0 (Macintosh; Intel Mac OS X 14.7; rv:134.0) Gecko/20100101 Firefox/134.0")) |> 
-          httr2::req_perform() |> 
-          httr2::resp_status())
+archive_statuscode <- vector("integer")
+archive_url <- vector("character")
+
+user_agent <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:154.0) Gecko/20100101 Firefox/154.0"
+
+for (i in journal_list$archive){
+  statuscode1 <- tryCatch({
+    i |> 
+      httr2::request() |> 
+      httr2::req_error(is_error = \(resp) FALSE) |>
+      httr2::req_headers(`User-Agent` = user_agent) |> 
+      httr2::req_timeout(5) |> 
+      httr2::req_perform() |> 
+      httr2::resp_status()},
+    error = function(e){
+      print(glue::glue("Failed to fetch [ {i} ] due to {conditionMessage(e)}"))
+      return(NA_integer_)
+    })
+  print(glue::glue("Testing connection to [ {i} ]: Status code {statuscode1}"))
+  archive_statuscode[i] <- statuscode1
+  archive_url[i] <- i
 }
+
+staging1_df <- tibble(archive_url, archive_statuscode)
 ```
 
-##### Stage 4: Retrieving Issue URLs for Each Journal
+The code above creates a new table `staging1_df` which contains:
+
+* `archive_url`: The URL to journal's archive webpage
+* `archive_statuscode`: Connection test result (uses [HTTP Status Code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status) convention)
+
+##### Stage 3: Retrieving Issue URLs for Each Journal
 
 Each journal has volume and issue. They are usually paired to each other. 
 
 I used a global coverage parsing of the fields that I needed. This was done because each journal structured their webpage differently despite using the same website template. As an illustration, journal X defines the issue links under the `<a>` HTML tag but journal Y and Z define the issue links under the `<div>` element of the month separator. This heterogeneity posed problem in the automation process. Therefore, I decided to cover the whole page instead, and cleaning them at a later stage.
 
 ```r
-# Researcher's Note: Test SUCCESS. Production SUCCESS
-ok_status_journals <- journal_list |> 
-  filter(bot_ok != FALSE) |> 
-  pull(archive)
+# retrieve_issues Rev.2
 
-# Binds the text and URL
-prev_df <- tibble()
-next_df <- tibble()
-staging1_df <- tibble()
+# URLs as vector
+archive_200_ok <- staging1_df %>%
+  filter(archive_statuscode == 200) %>%
+  select(archive_url) %>%
+  pull()
 
-for (i in 1:length(ok_status_journals)){
-  print(glue::glue("Retrieving from: ", ok_status_journals[i]))
-  next_df <- bind_cols(
-    issues = (
-      # Take the text having "Vol"
-      ok_status_journals[i] |> 
-        rvest::read_html() |> 
-        rvest::html_elements("*") |>
-        rvest::html_text()
-      ),
-    # Take the URL having "Vol" in text
-    issue_url = (
-      ok_status_journals[i] |> 
-        rvest::read_html() |> 
-        rvest::html_elements("*") |> 
-        rvest::html_attr('href'))
-    )
-  staging1_df <- bind_rows(staging1_df, next_df)
-  prev_df <- next_df
+# Set User-Agent to bypass bot protection measure
+user_agent_str <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+
+# To store each page from journal archive URLs
+staging2_list <- vector("list", length(archive_200_ok))
+
+for (i in seq_along(archive_200_ok)) {
+  print(glue::glue("Retrieving from: [ {archive_200_ok[i]} ]"))
+  target_url <- archive_200_ok[i]
+  
+  # Parses the URL HTML page
+  page <- 
+    httr2::request(target_url) %>% 
+    httr2::req_user_agent(user_agent_str) %>% 
+    httr2::req_perform() %>% 
+    httr2::resp_body_html() 
+  
+  elements <- page %>% rvest::html_elements("*")
+  
+  staging2_list[[i]] <- tibble(
+    issues = elements %>% rvest::html_text(),
+    issue_url = elements %>% rvest::html_attr("href")
+  )
 }
-print(glue::glue("All issue URL from journals saved.
-                 Number of total HTML elements from all journal: {nrow(staging1_df)}"))
+print(glue::glue("Raw HTML from each Issue URL for all journals has been saved."))
+staging2_df_ver2 <- bind_rows(staging2_list)
 ```
 
-##### Stage 5: Cleaning The Issue URLs
+##### Stage 4: Cleaning The Issue URLs
 
 The data from the retrieval process was unstructured. This calls for further cleaning.
 
 ```r
 # Only retrieve rows with valid and appropriate text-URL pair
-staging2_df <-
-  staging1_df %>%
+(staging3_df <- staging2_df_ver2 %>%
     filter(!is.na(issue_url),
            str_detect(issue_url, "ac.id"),
-           str_detect(issue_url, "issue/view")
-    ) %>%
+           str_detect(issue_url, "issue/view")) %>%
     mutate(issues = str_remove_all(issues, "\\n")) %>%
     mutate(issues = str_remove_all(issues, "\\t")) %>%
     filter(issues != "")
+)
 ```
 
-##### Stage 6: Testing Connection to Each Issue URL
+##### Stage 5: Testing Connection to Each Issue URL
 
 Since each issue is organized in a different directory (of the journal website), it is safe to assume that for each issue URL retrieved from the previous stage already represents each journal, and that no URL is duplicated both inside the journal and inter-journals.
 
