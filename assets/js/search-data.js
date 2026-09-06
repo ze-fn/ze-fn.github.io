@@ -37,7 +37,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-project-ellie-pseudocode-for-retrieving-volume-issue-and-issue-url",
+        },{id: "post-1-intro-to-programming-language",
+        
+          title: "1. Intro to Programming Language",
+        
+        description: "Lesson Journey from Microsoft&#39;s Web Dev for Beginners",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/introduction-to-programming-language/";
+          
+        },
+      },{id: "post-project-ellie-pseudocode-for-retrieving-volume-issue-and-issue-url",
         
           title: "Project ELLIE: Pseudocode for Retrieving Volume, Issue, and Issue URL",
         
