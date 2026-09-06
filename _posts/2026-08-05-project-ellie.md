@@ -177,7 +177,7 @@ gsheet_url <- "https://docs.google.com/spreadsheets/d/1ReHFwLLCVOFLmOSEyyxD60DCe
 ##### Stage 1: Getting The URLs for Eligible Journals
 
 ```r
-# data_import Rev.1
+# data_import Rev.2
 # Import specific sheet from given link
 journal_list <- read_sheet(
   gsheet_url, 
@@ -189,12 +189,13 @@ journal_list <- read_sheet(
 
 ##### Stage 2: Testing Connection to Each Journal Archive URL
 
-From my experience in learning cybersecurity, some websites my refuse to connect if the visitor is not human. In other words, since I was using automation tool using R language, websites will know that I was using a tool instead of visiting it myself as a human. Thus, I tested the connection to each URL.
+From my experience in learning cybersecurity, some websites may refuse to connect if the visitor is not human. In other words, since I was using automation tool using R language, websites will know that I was using a tool instead of visiting them myself as a human. Thus, I tested the connection to each URL using a custom configuration of the HTTP Headers. Most of the websites accepted browser user agent while a small portion of them did not. Those inaccessible from custom HTTP Header User-Agent were left for further testing and investigation.
 
 ```r
 # test_conn Rev.2
 archive_statuscode <- vector("integer")
 archive_url <- vector("character")
+
 
 user_agent <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:154.0) Gecko/20100101 Firefox/154.0"
 
@@ -219,16 +220,16 @@ for (i in journal_list$archive){
 staging1_df <- tibble(archive_url, archive_statuscode)
 ```
 
-The code above creates a new table `staging1_df` which contains:
+The code above creates a new table namely `staging1_df`, which contains:
 
 * `archive_url`: The URL to journal's archive webpage
 * `archive_statuscode`: Connection test result (uses [HTTP Status Code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Status) convention)
 
 ##### Stage 3: Retrieving Issue URLs for Each Journal
 
-Each journal has volume and issue. They are usually paired to each other. 
+Each journal has volumes and issues. They are usually paired to each other in a hierarchical way. One volume contains at least one issue. The relationship between the two are vertical hierarchy.
 
-I used a global coverage parsing of the fields that I needed. This was done because each journal structured their webpage differently despite using the same website template. As an illustration, journal X defines the issue links under the `<a>` HTML tag but journal Y and Z define the issue links under the `<div>` element of the month separator. This heterogeneity posed problem in the automation process. Therefore, I decided to cover the whole page instead, and cleaning them at a later stage.
+To retrieve the list of issue URLs, I fetched the whole webpage instead of targeting the URLs with CSS selector or XPATH. I chose this because the structure of each journals were different from one another, meaning that the structures were heterogeneous. As such, targeting the specific object while the object itself are contained in boxes of different names would impact render the engineering process inefficient. 
 
 ```r
 # retrieve_issues Rev.2
@@ -239,20 +240,17 @@ archive_200_ok <- staging1_df %>%
   select(archive_url) %>%
   pull()
 
-# Set User-Agent to bypass bot protection measure
-user_agent_str <- "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-
 # To store each page from journal archive URLs
-staging2_list <- vector("list", length(archive_200_ok))
+staging2_list <- vector("list")
 
-for (i in seq_along(archive_200_ok)) {
+for (i in 1:length(archive_200_ok)) {
   print(glue::glue("Retrieving from: [ {archive_200_ok[i]} ]"))
   target_url <- archive_200_ok[i]
   
   # Parses the URL HTML page
   page <- 
     httr2::request(target_url) %>% 
-    httr2::req_user_agent(user_agent_str) %>% 
+    httr2::req_user_agent(user_agent) %>% 
     httr2::req_perform() %>% 
     httr2::resp_body_html() 
   
@@ -264,7 +262,7 @@ for (i in seq_along(archive_200_ok)) {
   )
 }
 print(glue::glue("Raw HTML from each Issue URL for all journals has been saved."))
-staging2_df_ver2 <- bind_rows(staging2_list)
+staging2_df <- bind_rows(staging2_list)
 ```
 
 ##### Stage 4: Cleaning The Issue URLs
@@ -273,7 +271,7 @@ The data from the retrieval process was unstructured. This calls for further cle
 
 ```r
 # Only retrieve rows with valid and appropriate text-URL pair
-(staging3_df <- staging2_df_ver2 %>%
+(staging3_df <- staging2_df %>%
     filter(!is.na(issue_url),
            str_detect(issue_url, "ac.id"),
            str_detect(issue_url, "issue/view")) %>%
@@ -290,27 +288,29 @@ Since each issue is organized in a different directory (of the journal website),
 However, it is considered good practice to investigate on the availability of each URL so that scrapping operation would not halted.
 
 ```r
-issue_statuscode <- vector("integer", length(staging2_df$issue_url))
+issue_statuscode <- vector("integer")
 
-for (i in 1:length(staging2_df$issue_url)){
+for (i in 1:length(staging3_df$issue_url)){
   statuscode <- tryCatch({
-    staging2_df$issue_url[i] %>%
+    staging3_df$issue_url[i] %>%
     httr2::request() %>%
+    httr2::req_headers(`User-Agent` = user_agent) %>%
     httr2::req_error(is_error = \(resp) FALSE) %>%
+    httr2::req_timeout(5) %>%
     httr2::req_perform() %>%
     httr2::resp_status()
   }, 
   error = function(e){
-    print(glue::glue("Network error on {staging2_df$issue_url[i]}: {conditionMessage(e)}"))
+    print(glue::glue("Network error on {staging3_df$issue_url[i]}: {conditionMessage(e)}"))
     return(NA_integer_)
   })
   # Logging progress
-  print(glue::glue("Testing URL [ ", staging2_df$issue_url[i], " ] Status Code: ", statuscode))
+  print(glue::glue("Testing connection to URL [ {staging3_df$issue_url[i]} ] Status Code: {statuscode}"))
   # Append statuscode to vector
   issue_statuscode[i] <- statuscode
 }
 # Add the issue_statuscode vector into staging data frame for next stage
-staging2_df$issue_statuscode <- issue_statuscode
+staging3_df$issue_statuscode <- issue_statuscode
 ```
 
 ##### Stage 7: Retrieving Article URLs from Each Issue URL
@@ -318,18 +318,309 @@ staging2_df$issue_statuscode <- issue_statuscode
 This stage has the same logic with the previous retrieval stage, the difference being the source URL. Looking at the resulting status code for each issue URL, there are some unreachable URLs. I have tried to access it manually, using Virtual Private Network (VPN), and the combination between the two, but to no avail. Therefore, I excluded the URLs with `NA` status code.
 
 ```r
+# retrieve_article
 
+# URLs as vector
+issue_200_ok <- staging3_df %>%
+  filter(issue_statuscode == 200) %>%
+  select(issue_url) %>%
+  pull()
+
+# To store each page from journal issue URLs
+staging4_list <- vector("list")
+
+for (i in 1:length(issue_200_ok)) {
+  print(glue::glue("Retrieving from: [ {issue_200_ok[i]} ]"))
+  target_url <- issue_200_ok[i]
+  
+  # Parses the URL HTML page
+  page <- 
+    httr2::request(target_url) %>% 
+    httr2::req_user_agent(user_agent) %>% 
+    httr2::req_perform() %>% 
+    httr2::resp_body_html() 
+  
+  elements <- page %>% rvest::html_elements("*")
+  
+  staging4_list[[i]] <- tibble(
+    article_title = elements %>% rvest::html_text(),
+    article_url = elements %>% rvest::html_attr("href")
+  )
+}
+print(glue::glue("Raw HTML containing all articles from each issue URL for all journals has been saved."))
+staging4_df <- bind_rows(staging4_list)
 ```
 
-> **TBA**
-{: .block-warning}
+##### Stage 8: Cleaning the List of Article URLs
 
-#### Data Cleaning
+```r
+staging5_df <- staging4_df %>%
+  # Cleaning Regex and Whitespaces
+  mutate(
+    article_title = str_replace(article_title, "[\n\t]", ""),
+    article_url = str_replace(article_url, "[\n\t]", "")) %>%
+  mutate(
+    article_title = str_squish(article_title),
+    article_url = str_squish(article_url)) %>%
+  
+  # Adding a new column to count the n of char in article_title
+  group_by(article_title) %>%
+  mutate(article_title_strlen = str_length(article_title)) %>%
+  ungroup() %>%
+  
+  # Exclude NULL from article_url and `0` from article_title_strlen
+  filter(!is.na(article_url),
+         article_title_strlen != 0)
+```
 
-Since the scrapping process was divided into several processes, each process produces separate related tables. As such, the tables are joined using one-to-many table join procedure.
+```r
+staging6_df <- staging5_df %>%
+  #filter(!article_title %in% exc_not_article_explicit) %>%
+  filter(str_detect(article_url, "article")) %>%
+  filter(!str_detect(article_title, "^\\d")) %>%
+  filter(!str_detect(article_title, regex("pdf|epub|html|front matter|back matter", ignore_case = TRUE)))
+```
 
-> **TBA**
-{: .block-warning}
+```r
+# Preview
+(staging6_df %>%
+  group_by(article_url) %>%
+  mutate(count_url = n()) %>%
+  ungroup() %>%
+  group_by(article_title) %>%
+  mutate(count_title = n()) %>%
+  ungroup() %>%
+  arrange(desc(count_url)) %>%
+  filter(count_url == 1) -> staging7_df)
+View(staging7_df)
+```
+
+##### Stage X: Testing Connection to Each Article URLs
+
+```r
+article_statuscode <- vector("integer")
+
+for (i in 1:length(staging7_df$article_url)){
+  statuscode <- tryCatch({
+    staging7_df$article_url[i] %>%
+    httr2::request() %>%
+    httr2::req_headers(`User-Agent` = user_agent) %>%
+    httr2::req_error(is_error = \(resp) FALSE) %>%
+    httr2::req_timeout(5) %>%
+    httr2::req_perform() %>%
+    httr2::resp_status()
+  }, 
+  error = function(e){
+    print(glue::glue("Network error on {staging7_df$article_url[i]}: {conditionMessage(e)}"))
+    return(NA_integer_)
+  })
+  # Logging progress
+  print(glue::glue("Testing connection to URL [ {staging7_df$article_url[i]} ] Status Code: {statuscode}"))
+  # Append statuscode to vector
+  article_statuscode[i] <- statuscode
+}
+# Add the issue_statuscode vector into staging data frame for next stage
+staging7_df$article_statuscode <- article_statuscode
+```
+
+##### Stage X1: Scrapping the Article Surface Metadata
+
+```r
+# Find nodes whose class contains `pattern` (case-insensitive).
+# Drops nodes nested inside another matching node to avoid duplicate text.
+class_nodes_outermost <- function(html, pattern) {
+  cls <- "translate(@class, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"
+  xpath <- paste0(
+    "//*[contains(", cls, ", '", pattern, "') and ",
+    "not(ancestor::*[contains(", cls, ", '", pattern, "')])]"
+  )
+  rvest::html_nodes(html, xpath = xpath)
+}
+
+# Combine texts and child HTML from a node set into single strings.
+combine_nodes <- function(nodes) {
+  if (length(nodes) == 0) {
+    return(list(text = NA_character_, html = NA_character_))
+  }
+  texts <- stringr::str_squish(iconv(
+    rvest::html_text(nodes, trim = TRUE),
+    from = "UTF-8", to = "UTF-8", sub = ""
+  ))
+  texts <- unique(texts[!is.na(texts) & nchar(texts) > 0])
+  text <- if (length(texts) > 0) paste(texts, collapse = "\n") else NA_character_
+
+  html_bits <- unlist(lapply(nodes, function(n) as.character(rvest::html_children(n))))
+  html_combined <- if (length(html_bits) > 0) paste(html_bits, collapse = "\n") else NA_character_
+
+  list(text = text, html = html_combined)
+}
+
+
+scrape_article_segmented <- function(url) {
+  response <- tryCatch({
+    httr::GET(
+      url,
+      httr::add_headers(`User-Agent` = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"),
+      httr::timeout(10)
+    )
+  }, error = function(e) return(NULL))
+
+  empty_payload <- list(
+    title = tibble::tibble(url = as.character(url), title = NA_character_),
+    authors = tibble::tibble(url = as.character(url), author = NA_character_),
+    abstract = tibble::tibble(url = as.character(url), abstract_text = NA_character_, nested_html = NA_character_),
+    keywords = tibble::tibble(url = as.character(url), keyword_text = NA_character_, nested_html = NA_character_),
+    references = tibble::tibble(url = as.character(url), reference_list = NA_character_)
+  )
+
+  if (is.null(response) || httr::status_code(response) != 200) {
+    return(empty_payload)
+  }
+
+  content_type <- httr::headers(response)[["content-type"]]
+  if (!is.null(content_type) && grepl("application/pdf", content_type, ignore.case = TRUE)) {
+    return(empty_payload)
+  }
+
+  html <- tryCatch(rvest::read_html(response), error = function(e) return(NULL))
+  if (is.null(html)) return(empty_payload)
+
+  # --- helpers -------------------------------------------------------------
+
+  class_nodes_outermost <- function(doc, pattern) {
+    cls <- "translate(@class, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"
+    xpath <- paste0(
+      "//*[contains(", cls, ", '", pattern, "') and ",
+      "not(ancestor::*[contains(", cls, ", '", pattern, "')])]"
+    )
+    rvest::html_nodes(doc, xpath = xpath)
+  }
+
+  safe_text <- function(nodes) {
+    if (length(nodes) == 0 || inherits(nodes, "xml_missing")) return(NA_character_)
+    txt <- tryCatch(rvest::html_text(nodes, trim = TRUE), error = function(e) NA_character_)
+    txt <- iconv(txt, from = "UTF-8", to = "UTF-8", sub = "")
+    txt <- stringr::str_squish(txt)
+    txt <- unique(txt[!is.na(txt) & nchar(txt) > 0])
+    if (length(txt) == 0) NA_character_ else paste(txt, collapse = "\n")
+  }
+
+  safe_html <- function(nodes) {
+    if (length(nodes) == 0 || inherits(nodes, "xml_missing")) return(NA_character_)
+    bits <- unlist(lapply(nodes, function(n) {
+      if (inherits(n, "xml_missing")) return(character(0))
+      kids <- tryCatch(rvest::html_children(n), error = function(e) NULL)
+      if (is.null(kids) || length(kids) == 0) return(character(0))
+      tryCatch(as.character(kids), error = function(e) character(0))
+    }))
+    if (length(bits) == 0) NA_character_ else paste(bits, collapse = "\n")
+  }
+
+  # --- 1. TITLE -----------------------------------------------------------
+  title_node <- rvest::html_node(html, "head title")
+  raw_title <- if (!inherits(title_node, "xml_missing") && length(title_node) > 0) {
+    rvest::html_text(title_node, trim = TRUE)
+  } else {
+    NA_character_
+  }
+  clean_title <- if (!is.na(raw_title)) stringr::str_squish(iconv(raw_title, from = "UTF-8", to = "UTF-8", sub = "")) else NA_character_
+  df_title <- tibble::tibble(
+    url = as.character(url),
+    title = if (!is.na(clean_title) && nchar(clean_title) > 0) clean_title else NA_character_
+  )
+
+  # --- 2. AUTHORS ---------------------------------------------------------
+  author_nodes <- rvest::html_nodes(html, xpath = "//*[contains(translate(@class, 'AUTHOR', 'author'), 'author')]")
+  raw_authors <- tryCatch(rvest::html_text(author_nodes, trim = TRUE), error = function(e) character(0))
+  clean_authors <- iconv(raw_authors, from = "UTF-8", to = "UTF-8", sub = "")
+  clean_authors <- stringr::str_squish(clean_authors)
+  keep <- !is.na(clean_authors) & nchar(clean_authors) > 0
+  clean_authors <- clean_authors[keep]
+
+  df_authors <- if (length(clean_authors) > 0) {
+    tibble::tibble(url = as.character(url), author = clean_authors)
+  } else {
+    tibble::tibble(url = as.character(url), author = NA_character_)
+  }
+
+  # --- 3. ABSTRACT (class contains "abstract") ----------------------------
+  abstract_nodes <- class_nodes_outermost(html, "abstract")
+  df_abstract <- tibble::tibble(
+    url = as.character(url),
+    abstract_text = safe_text(abstract_nodes),
+    nested_html = safe_html(abstract_nodes)
+  )
+
+  # --- 4. KEYWORDS (class contains "keyword") -----------------------------
+  keyword_nodes <- class_nodes_outermost(html, "keyword")
+  df_keywords <- tibble::tibble(
+    url = as.character(url),
+    keyword_text = safe_text(keyword_nodes),
+    nested_html = safe_html(keyword_nodes)
+  )
+
+  # --- 5. REFERENCES (class contains "reference" OR ul/ol with "reference") -
+  ref_nodes <- class_nodes_outermost(html, "reference")
+
+  lowtxt <- "translate(., 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"
+  cls    <- "translate(@class, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz')"
+
+  ref_ul <- tryCatch(
+    rvest::html_nodes(html, xpath = paste0("//ul[contains(", lowtxt, ", 'reference') and not(ancestor::*[contains(", cls, ", 'reference')])]")),
+    error = function(e) rvest::html_nodes(html, xpath = "//none")
+  )
+  ref_ol <- tryCatch(
+    rvest::html_nodes(html, xpath = paste0("//ol[contains(", lowtxt, ", 'reference') and not(ancestor::*[contains(", cls, ", 'reference')])]")),
+    error = function(e) rvest::html_nodes(html, xpath = "//none")
+  )
+
+  ref_texts <- c(safe_text(ref_nodes), safe_text(ref_ul), safe_text(ref_ol))
+  ref_texts <- ref_texts[!is.na(ref_texts)]
+  ref_combined <- if (length(ref_texts) > 0) paste(ref_texts, collapse = "\n") else NA_character_
+
+  df_references <- tibble::tibble(
+    url = as.character(url),
+    reference_list = ref_combined
+  )
+
+  return(list(
+    title = df_title,
+    authors = df_authors,
+    abstract = df_abstract,
+    keywords = df_keywords,
+    references = df_references
+  ))
+}
+
+urls <- staging7_df %>%
+  select(article_url) %>%
+  pull()
+
+article_list <- scrape_urls_to_list(urls)
+```
+
+##### Stage X2: Scrapping Result
+
+```r
+article_list$titles %>%
+  left_join(article_list$authors, by = "url") %>%
+  left_join(article_list$abstracts, by = "url") %>%
+  left_join(article_list$keywords, by = "url") %>%
+  left_join(article_list$reference_lists, by = "url") %>%
+  group_by(url) %>%
+  mutate(count_url = n()) %>%
+  ungroup() %>%
+  arrange(desc(count_url)) -> dirty_articles
+
+(missing_keywords <- sum(is.na(dirty_articles$keyword_text)))
+(n_keywords <- length(dirty_articles$keyword_text))
+
+dirty_articles %>%
+  visdat::vis_miss() +
+  ggthemes::theme_fivethirtyeight() +
+  labs(title = "Missing data", subtitle = glue::glue("{missing_keywords} of {n_keywords} articles need further investigation")) +
+  theme(axis.text.x = element_text(angle = 15, vjust = 1))
+```
 
 ### Chapter 3: Results and Findings
 
