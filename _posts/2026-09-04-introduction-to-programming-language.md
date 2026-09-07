@@ -64,3 +64,167 @@ There are a lot of daily task that I would like to automate.
 
 Well, why are there so many programming languages? Why not use one, single programming language for all?
 
+## Concept Check: Building Blocks Mastery
+
+> Can you explain the difference between a variable and a statement in your own words?
+
+Variables and statements are often come in pair, but the two are different.
+
+Variables are container. Just like that. Its function is to contain a value.
+
+Statements are a way of telling the computer to do a single, specific task. In this case, one may understand statements as a "declaration". 
+
+
+{% tabs varstats %}
+
+{% tab varstats js %}
+
+```js
+let variable; # This is variable
+variable = "I'm the content of variable" # This one is a statement
+console.log(variable) # This one is also considered a statement
+```
+
+{% endtab %}
+
+{% tab varstats r %}
+
+```r
+dummy_object <- vector("numeric") # Variable declaration
+dummy_object <- c(1, 2, 3, 4, 5, 6) # Statement
+dummy_object # Also a statement
+```
+
+{% endtab %}
+
+{% endtabs %}
+
+
+> Think of a real-world scenario where you'd use an if-then decision (like our voting example)
+
+There are so many, in fact. To list some:
+
+* IF day is Saturday or Sunday, THEN don't work
+* IF distance to ground is 5, THEN initiate safe landing
+* IF score is less than 75, THEN declare "Not Pass"
+* The list goes on ...
+
+> What's one thing about programming logic that surprised you?
+
+The IF-THEN for multiple cases in `js`. I didn't know that you can make conditional statement with such easy-to-understand way. I'm pointing at the `switch`. It's just so clever and intuitive.
+
+## Tool Mastery Check: WHat Resonates With You?
+
+> Which tool are you most excited to try first?
+
+There are so many tools that excite me right now. But if I had to pick only one, I would chose Text Editor. I mean, this is basically the backbone of every programming languages. As long as we have a media to write and a tool to write, we can build practically anything.
+
+> Does the command line still feel intimidating, or are you curious about it?
+
+Well, to be honest, the terminal is also one of the thing that excite me the most. They do intimidate me, even until now, but as long as I can tame it down, they are basically the most obedient assistant. There were times when I play around with command line and messed up many things. In fact, this day (Sunday, 6 September 2026), I used a terminal in my laptop (Ubuntu) to connect to a VPN. My home internet was quite the "picky" one when it comes to connection. It won't allow me to access many websites. So, to tackle this, I tried to connect to cloudflare VPN (1.1.1.1). Since linux is heavily "terminal", I looked up the internet on how to connect to the internet through a VPN, and I accidentally deleted the content of `/etc/resolv.conf`. When I thought nothing happened, all of a sudden I can't connect to the internet. It was because I entered:
+
+```bash
+$ sudo su cat /etc/resolv.conf
+$ sudo su tee /etc/resolv.conf
+$ sudo su cat /etc/resolv.conf
+$ sudo su nano /etc/resolv.conf
+```
+
+Yeah, it was quite the experience! But I won't step back from trying to tame the command line. I know that if I tame this beast, I would be unstoppable.
+
+> Can you imagine using browser DevTools to peek behind the curtain of your favorite websites?
+
+Well, my latest project (Project: ELLIE) is about web scrapping and many of my times spent on looking on the inspect element panel! It has become a second nature for me to open the DevTools of the browser. Sometimes I even do some tricks to show/hide HTML tags with specific CSS elements to get something that I needed (not my fault. They started designing the web unbearable that it made me the user difficult to navigate or get what I wanted).
+
+## Challenge
+
+### Language Explorer
+
+**Mission:** Pick three programming languages of different "universe" and look up a simple code using that three programming languages.
+
+**My Answers:**
+
+{% tabs langexplorers %}
+
+{% tab langexplorers js %}
+
+```js
+let a;
+let r;
+
+console.log("Circle Area Calculator");
+r = parseFloat(prompt("Enter radius value of your choice: "));
+a = Math.PI * (r ** 2);
+console.log(`Your circle is : ${a}`);
+```
+
+{% endtab %}
+
+{% tab langexplorers r %}
+
+```r
+r <- as.numeric(readline(prompt = "Enter radius value of your choice: "))
+a <- pi * (r ^ 2)
+print(paste("Your circle is: ", a))
+```
+
+{% endtab %}
+
+{% tab langexplorers python %}
+
+```py
+import math
+r = float(input("Enter radius value of your choice: "))
+a = math.pi() * (r ^ 2)
+```
+
+{% endtab %}
+
+{% endtabs %}
+
+## Uncover their Origin Stories
+
+Since I picked JS, R, and Python in the previous section, I will stick to it for this one as well.
+
+### Javascript
+
+It all started ...
+
+### R
+
+It was a sunny day...
+
+### Python
+
+Snakes? I don't think so...
+
+## Meet the Communities
+
+I need to find communities for each programming languages.
+
+## Follow Your Gut Feeling
+
+I have been practising programming for quite some time. The first programming language that clicks with me was R. But then as I gain more experiences from my practices and other people's experience, I think I want to try Python, JS, Bash, C++ and many more. 
+
+After trying learning SQL, PostgreSQL, Python, Javascript, and many others, R language is still what clicks with me the most. I think I will stay with R for the time being.
+
+## Final Reflection Check-In
+
+> What's one thing about programming that excited you today?
+
+All developers out there still look up the basic stuff. I thought senior developers remember the basic stuff as if it's second nature to them. Now I feel more confident.
+
+> Which tool or concept do you want to explore first?
+
+Among all the exciting topics, I think it'd would be better for me to explore mora about control flow. I do get excited about parallel computing using CUDA, computer networking, etc. but fundamentals are called "fundamentals" not without a reason.
+
+Control Flow it is!
+
+> How do you feel about starting this programming journey?
+
+At first, I thought it would be another classic programming course. But after I read it, it's actually more engaging.
+
+> What's one question you'd like to ask a developer right now?
+
+How do you cope with client's *request* when developing their design?
+

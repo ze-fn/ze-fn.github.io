@@ -29,6 +29,9 @@ _styles: >
 
 ## **Researcher's Log**
 
+
+0. 2026-09-06: Scrapping the journals felt slow, trying multithreading technique.
+0. 2026-09-05: Journal websites in Indonesia have similar structure, but identifiers for each elements are different. Challenge for precise scrapping.
 0. 2026-08-30: Links with 403 code are stashed. Proceeding with scrape procedure.
 0. 2026-08-29: Some links returned 403 Forbidden. Trying HTTP Header request forgery.
 0. 2026-08-28: [Pseudocode for web scrapping](https://ze-fn.github.io/blog/2026/pseudocode-to-retrieve-vol-and-issue/)
