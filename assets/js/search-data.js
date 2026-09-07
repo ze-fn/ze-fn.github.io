@@ -37,7 +37,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-1-intro-to-programming-language",
+        },{id: "post-revisiting-pedagogical-practices",
+        
+          title: "Revisiting Pedagogical Practices",
+        
+        description: "A Reflection on Learning Outcomes, Communication, Experience",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/pedagogical-reflection-when-learning-webdev/";
+          
+        },
+      },{id: "post-1-intro-to-programming-language",
         
           title: "1. Intro to Programming Language",
         
