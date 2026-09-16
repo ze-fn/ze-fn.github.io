@@ -37,7 +37,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-revisiting-pedagogical-practices",
+        },{id: "post-2-intro-to-github",
+        
+          title: "2. Intro to GitHub",
+        
+        description: "Lesson Journey from Microsoft&#39;s Web Dev for Beginners",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/intro-to-github/";
+          
+        },
+      },{id: "post-revisiting-pedagogical-practices",
         
           title: "Revisiting Pedagogical Practices",
         
