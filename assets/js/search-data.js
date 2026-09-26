@@ -37,7 +37,29 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-2-intro-to-github",
+        },{id: "post-1-defning-data-science",
+        
+          title: "1. Defning Data Science",
+        
+        description: "Assignment: Data Science Scenarios",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/data-science-scenarios/";
+          
+        },
+      },{id: "post-classifying-dataset",
+        
+          title: "Classifying Dataset",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/classifying-dataset/";
+          
+        },
+      },{id: "post-2-intro-to-github",
         
           title: "2. Intro to GitHub",
         
