@@ -1,6 +1,6 @@
 ---
 layout: distill
-title: "1. Defning Data Science"
+title: "1.1 Defning Data Science"
 description: "Assignment: Data Science Scenarios"
 tags: [Data Science, Microsoft, Assignment]
 category: [Learning]
