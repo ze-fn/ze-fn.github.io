@@ -37,9 +37,20 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-1-defning-data-science",
+        },{id: "post-5-relational-databases",
         
-          title: "1. Defning Data Science",
+          title: "5. Relational Databases",
+        
+        description: "Assignment: Displaying Airport Data",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/relational-databases/";
+          
+        },
+      },{id: "post-1-1-defning-data-science",
+        
+          title: "1.1 Defning Data Science",
         
         description: "Assignment: Data Science Scenarios",
         section: "Posts",
@@ -48,11 +59,11 @@ ninja.data = [{
             window.location.href = "/blog/2026/data-science-scenarios/";
           
         },
-      },{id: "post-classifying-dataset",
+      },{id: "post-1-3-defning-data",
         
-          title: "Classifying Dataset",
+          title: "1.3 Defning Data",
         
-        description: "",
+        description: "Assignment: Classifying Datasets",
         section: "Posts",
         handler: () => {
           
