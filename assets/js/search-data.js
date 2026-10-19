@@ -37,7 +37,29 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-5-relational-databases",
+        },{id: "post-understanding-by-design-an-approach-to-lesson-planning",
+        
+          title: "Understanding by Design: An Approach to Lesson Planning",
+        
+        description: "A Part of Teacher Professional Certification Program",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/understanding-by-design/";
+          
+        },
+      },{id: "post-6-nonrelational-databases",
+        
+          title: "6. Nonrelational Databases",
+        
+        description: "Assignment: Soda Profits",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/nonrelational-databases/";
+          
+        },
+      },{id: "post-5-relational-databases",
         
           title: "5. Relational Databases",
         
