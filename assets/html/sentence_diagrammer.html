@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Sentence Diagrammer</title>
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f6f5f1;--ink:#1d2623;--mute:#65716c;--line:#d8d6cc;--chip:#fff;--acc:#245a4b;--accfg:#fff;--board:#23403a;--chalk:#f1ede0}
+html{scroll-padding-top:env(safe-area-inset-top,0px);height:100%}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){color-scheme:dark;--bg:#151a18;--ink:#e9e6da;--mute:#97a39e;--line:#303b37;--chip:#1e2522;--acc:#6bbba3;--accfg:#10201b;--board:#1b322d}}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#151a18;--ink:#e9e6da;--mute:#97a39e;--line:#303b37;--chip:#1e2522;--acc:#6bbba3;--accfg:#10201b;--board:#1b322d}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;min-height:100%;background:var(--bg);color:var(--ink);font:16px/1.55 Georgia,"Times New Roman",serif}
+main{max-width:860px;margin:0 auto;padding:28px 16px 48px}
+h1{font-size:2rem;line-height:1.15;margin:0 0 6px;font-weight:700}
+h2{font-size:1.05rem;margin:28px 0 6px}
+p{margin:0 0 10px;max-width:68ch}
+.sub,.hint{color:var(--mute)}
+.row{display:flex;gap:8px;margin:18px 0 10px}
+input{flex:1;min-width:0;font:inherit;padding:10px 12px;border:1px solid var(--line);border-radius:6px;background:var(--chip);color:var(--ink)}
+button{font:inherit;cursor:pointer}
+#go{padding:10px 18px;border:0;border-radius:6px;background:var(--acc);color:var(--accfg);font-weight:700}
+:is(button,input):focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+.ex{display:flex;flex-wrap:wrap;gap:6px}
+.ex button{padding:4px 10px;border:1px solid var(--line);border-radius:99px;background:none;color:var(--mute);font-size:.88rem}
+.ex button:hover{color:var(--ink);border-color:var(--mute)}
+#chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{padding:4px 10px 3px;border:1px solid var(--line);border-radius:6px;background:var(--chip);color:var(--ink);text-align:center;min-width:52px}
+.chip small{display:block;color:var(--mute);font-size:.75rem;line-height:1.2}
+.chip:hover{border-color:var(--acc)}
+#msg{color:var(--acc);min-height:1.5em;font-style:italic}
+.board{background:var(--board);border-radius:8px;padding:12px 8px;overflow-x:auto;min-height:150px}
+.board svg{display:block;max-width:none}
+.board line{stroke:var(--chalk);stroke-width:2.2;stroke-linecap:round}
+.board text{fill:var(--chalk);font:18px Georgia,serif}
+details{margin-top:24px;color:var(--mute)}
+summary{cursor:pointer;color:var(--ink)}
+li{margin:4px 0}
+</style>
+</head>
+<body>
+<main>
+<h1>Sentence diagrammer</h1>
+<p class="sub">Type a simple English sentence and see it drawn as a Reed–Kellogg diagram.</p>
+<div class="row"><input id="inp" aria-label="Sentence" value="Children in the preschool classroom nap after lunch."><button id="go">Diagram</button></div>
+<div class="ex" id="ex"></div>
+
+<h2>Word types</h2>
+<p class="hint">These are rule-based guesses. Click any word to change its type, and the diagram updates.</p>
+<div id="chips"></div>
+
+<h2>Diagram</h2>
+<div id="msg" role="status"></div>
+<div class="board" id="board"></div>
+
+<details>
+<summary>How to read it, and what this prototype can’t do</summary>
+<ul>
+<li>The main line holds the subject, verb, and object. A vertical line through the baseline separates subject and verb.</li>
+<li>A short vertical line resting on the baseline marks a direct object. A backslash marks a complement after a linking verb (<i>is, seems, became</i>).</li>
+<li>Slanted lines carry modifiers: articles, adjectives, and adverbs. A preposition sits on a slanted line that leads to its object.</li>
+<li>Limits: one clause only. No questions, <i>and/but/or</i>, infinitives, or indirect objects. A prepositional phrase after the verb attaches to the verb, which is not always right. The vocabulary is a small built-in list plus spelling hints, so fix tags by clicking.</li>
+</ul>
+</details>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+const SET=s=>new Set(s.split(' '));
+const S={
+det:SET('the a an this that these those my your his her its our their some many every each any another'),
+prep:SET('in on at under over above below behind beside between among near by with without from to into onto toward through across along around about after before during until since of for against despite past off up down inside outside within'),
+pron:SET('i you he she it we they me him us them'),
+aux:SET('am is are was were be been being has have had do does did will would can could shall should may might must'),
+conj:SET('and but or'),
+adv:SET('not never always often sometimes usually very too quite really soon now then here there today yesterday tomorrow well fast late early again almost just also still already quickly slowly together away'),
+adj:SET('big small little large tiny huge tall short long old young new good bad great happy sad angry hungry tired hot cold warm cool red blue green yellow black white brown orange pink purple gray grey quick slow lazy kind nice beautiful ugly pretty clean dirty fresh sweet sour soft hard loud quiet bright dark heavy light busy empty full rich poor strong weak smart clever funny scary interesting boring delicious favorite first last next other same different important easy difficult cute sleepy'),
+verb:SET('go come run walk talk eat drink sleep nap play read write see look watch hear listen speak say tell ask answer give take make get put bring buy sell find lose keep leave stay live work study teach learn think know want need like love hate help call use try start stop open close build jump swim sing dance cook wash drive ride fly fall sit stand wait meet visit travel laugh cry smile shout kick throw catch carry push pull cut draw paint climb grow cross hold show turn move pay send win feed seem become feel taste smell sound appear remain bark chase hug kiss clap')
+};
+const IRR=SET('went came ran ate drank slept saw wrote said told gave took made got brought bought sold found lost kept left sat stood met flew fell drove rode swam sang threw caught drew grew held paid sent won thought knew taught built spoke heard felt became');
+const ADJSUF=/(ful|ous|ive|less|able|ible|ish)$/, NOTADV=/^(family|belly|jelly|bully|reply|supply|friendly|lovely|lonely|silly|lively)$/;
+const BE=/^(am|is|are|was|were|be|been|being|seem\w*|became|become\w*|remain\w*|appear\w*)$/, SENS=/^(look|feel|felt|taste|smell|sound|stay)\w*$/;
+const TAGS=['noun','verb','adj','adv','det','prep','pron','aux'];
+
+function isVerbForm(w){
+  if(S.verb.has(w)||IRR.has(w))return true;
+  const c=[w.replace(/ies$/,'y'),w.replace(/ied$/,'y'),w.replace(/es$/,''),w.replace(/s$/,''),w.replace(/ed$/,''),w.replace(/d$/,''),w.replace(/ing$/,''),w.replace(/ing$/,'e'),w.replace(/(.)\1ing$/,'$1'),w.replace(/(.)\1ed$/,'$1')];
+  return c.some(x=>x!==w&&S.verb.has(x));
+}
+const isVerbLike=w=>isVerbForm(w)||/(ed|ing)$/.test(w);
+const isAdvWord=w=>S.adv.has(w)||(/ly$/.test(w)&&w.length>4&&!NOTADV.test(w));
+
+function autoTag(ws){
+  const tg=[];let sv=false;
+  ws.forEach((w,i)=>{
+    const p=tg[i-1];let t;
+    if(S.aux.has(w)){
+      let j=i+1;while(j<ws.length&&isAdvWord(ws[j]))j++;
+      const nx=ws[j];
+      t=(!sv&&nx&&(S.aux.has(nx)||isVerbLike(nx)))?'aux':'verb';
+    }
+    else if(S.det.has(w))t='det';
+    else if(S.prep.has(w))t='prep';
+    else if(S.pron.has(w))t='pron';
+    else if(S.conj.has(w))t='conj';
+    else if(!sv&&isVerbForm(w)&&(i===0||['noun','pron','adv','aux'].includes(p)))t='verb';
+    else if(S.adj.has(w)||ADJSUF.test(w)||(S.adv.has(w)&&['det','adj'].includes(p)))t='adj';
+    else if(isAdvWord(w))t='adv';
+    else if(!sv&&/ed$/.test(w)&&['noun','pron','adv','aux'].includes(p))t='verb';
+    else t='noun';
+    if(t==='verb')sv=true;
+    tg.push(t);
+  });
+  return tg;
+}
+
+function build(ws,tg,low){
+  const n=ws.length;let i=0;const T=k=>tg[k];
+  const nd=(text,mods=[],pps=[])=>({text,mods,pps});
+  const chain=a=>a.length?[nd(a[a.length-1],chain(a.slice(0,-1)))]:[];
+  const advAhead=k=>{while(T(k)==='adv')k++;return T(k)==='adj'};
+  function pp(h){while(T(i)==='prep'){const p=ws[i++],o=np(true);if(!o){i--;break}h.pps.push({prep:p,np:o})}}
+  function np(allow){
+    if(T(i)==='pron'){const h=nd(ws[i]);h.tag='pron';i++;if(allow)pp(h);return h}
+    const run=[];
+    while(i<n){const t=T(i);if(t==='det'||t==='adj'||t==='noun'||(t==='adv'&&advAhead(i)))run.push(i++);else break}
+    if(!run.length)return null;
+    let hi=run.length-1;for(let k=hi;k>=0;k--)if(T(run[k])==='noun'){hi=k;break}
+    const mods=[];let pend=[];
+    run.forEach((ix,k)=>{
+      if(k===hi)return;
+      if(T(ix)==='adv')pend.push(ws[ix]);
+      else{const m=nd(ws[ix]);if(pend.length){m.mods=chain(pend);pend=[]}mods.push(m)}
+    });
+    const h=nd(ws[run[hi]],mods);h.tag=T(run[hi]);
+    if(pend.length)h.mods.push(...chain(pend));
+    if(allow)pp(h);
+    return h;
+  }
+  let subj;
+  if(T(0)==='verb'||T(0)==='aux')subj=nd('(you)');else subj=np(true);
+  if(!subj)return{err:'I couldn’t find a subject at the start. Check the word types above.'};
+  const auxs=[],pre=[];
+  while(i<n&&(T(i)==='aux'||T(i)==='adv'))(T(i)==='aux'?auxs:pre).push(ws[i++]);
+  if(T(i)!=='verb')return{err:'I couldn’t find the main verb. Click the verb above and set it to “verb”.'};
+  const vi=i++;
+  const verb=nd([...auxs,ws[vi]].join(' '),pre.map(a=>nd(a)));
+  let obj=null,kind='';
+  const o=np(false);
+  if(o){obj=o;kind=(BE.test(low[vi])||(SENS.test(low[vi])&&o.tag==='adj'))?'comp':'obj'}
+  while(i<n){
+    const t=T(i);
+    if(t==='adv'){const c=[];while(i<n&&T(i)==='adv')c.push(ws[i++]);verb.mods.push(...chain(c))}
+    else if(t==='prep'){const p=ws[i++],o2=np(true);if(!o2){i--;break}verb.pps.push({prep:p,np:o2})}
+    else break;
+  }
+  return{subj,verb,obj,kind,left:ws.slice(i).join(' ')};
+}
+
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const ctx=document.createElement('canvas').getContext('2d');ctx.font='18px Georgia, serif';
+const TW=s=>ctx.measureText(s).width||s.length*9;
+const PAD=32;
+
+function render(m){
+  let out='',mx=0,my=0;
+  const bump=(x,y)=>{mx=Math.max(mx,x);my=Math.max(my,y)};
+  const line=(a,b,c,d)=>{out+=`<line x1="${a}" y1="${b}" x2="${c}" y2="${d}"/>`;bump(a,b);bump(c,d)};
+  const txt=(s,x,y,rot)=>{out+=`<text transform="translate(${x} ${y})${rot?' rotate(60)':''}" dy="-6" text-anchor="middle">${esc(s)}</text>`};
+  const slant=(x,y,dx,dy,s)=>{line(x,y,x+dx,y+dy);txt(s,x+dx/2,y+dy/2,1)};
+  function mod(k,ax,ay){
+    const L=TW(k.text)+14,dx=L/2,dy=L*.866;
+    slant(ax,ay,dx,dy,k.text);
+    let s=dx+22;
+    k.mods.forEach(c=>{s=Math.max(s,dx/2+mod(c,ax+dx/2,ay+dy/2))});
+    return s;
+  }
+  function node(k,x,y){
+    const tw=TW(k.text);let c=10;
+    k.mods.forEach(q=>{c+=mod(q,x+c,y)});
+    k.pps.forEach(p=>{
+      const L=TW(p.prep)+14,dx=L/2,dy=L*.866;
+      slant(x+c,y,dx,dy,p.prep);
+      c+=dx+node(p.np,x+c+dx,y+dy);
+    });
+    const w=Math.max(tw+PAD,c+6);
+    line(x,y,x+w,y);txt(k.text,x+(tw+PAD)/2,y,0);
+    return w;
+  }
+  const Y=50;let x=24;
+  x+=node(m.subj,x,Y);line(x,Y-26,x,Y+26);
+  x+=node(m.verb,x,Y);
+  if(m.obj){
+    if(m.kind==='comp')line(x-12,Y-26,x,Y);else line(x,Y-26,x,Y);
+    x+=node(m.obj,x,Y);
+  }
+  bump(x,0);
+  const W=Math.ceil(mx+30),H=Math.ceil(my+30);
+  return `<svg viewBox="0 0 ${W} ${H}" width="${W}" height="${H}" role="img" aria-label="Sentence diagram">${out}</svg>`;
+}
+
+let ws=[],low=[],tg=[],isQ=false;
+function chips(){
+  $('#chips').innerHTML=ws.map((w,i)=>`<button class="chip" data-i="${i}" title="Click to change type"><b>${esc(w)}</b><small>${tg[i]}</small></button>`).join('');
+}
+function draw(){
+  const msg=$('#msg'),b=$('#board');msg.textContent='';b.innerHTML='';
+  if(!ws.length){msg.textContent='Type a sentence to begin.';return}
+  if(isQ){msg.textContent='This looks like a question. Questions rearrange the word order, so try the statement form (for example, “You have a moment.”).';return}
+  if(tg.includes('conj')){msg.textContent='This prototype handles one clause. Words like “and”, “but”, and “or” aren’t supported yet.';return}
+  const r=build(ws,tg,low);
+  if(r.err){msg.textContent=r.err;return}
+  b.innerHTML=render(r);
+  if(r.left)msg.textContent=`I couldn’t place “${r.left}”. Try changing a word type, or simplify the sentence.`;
+}
+function run(){
+  let s=$('#inp').value.trim();
+  isQ=/\?\s*$/.test(s);
+  s=s.replace(/won['’]t/gi,'will not').replace(/can['’]t/gi,'can not').replace(/n['’]t\b/gi,' not').replace(/['’]m\b/gi,' am').replace(/['’]re\b/gi,' are').replace(/['’]ll\b/gi,' will');
+  ws=s.match(/[A-Za-z]+(?:[-'’][A-Za-z]+)*/g)||[];
+  low=ws.map(w=>w.toLowerCase().replace(/’/g,"'"));
+  tg=autoTag(low);chips();draw();
+}
+$('#go').onclick=run;
+$('#inp').onkeydown=e=>{if(e.key==='Enter')run()};
+$('#chips').onclick=e=>{
+  const b=e.target.closest('.chip');if(!b)return;
+  const i=+b.dataset.i;
+  tg[i]=TAGS[(TAGS.indexOf(tg[i])+1)%TAGS.length];
+  chips();draw();
+};
+['Children in the preschool classroom nap after lunch.','The quick brown fox jumps over the lazy dog.','She is very happy.','Birds sing.','The dog chased a small cat.','Go home.'].forEach(t=>{
+  const b=document.createElement('button');b.textContent=t;
+  b.onclick=()=>{$('#inp').value=t;run()};$('#ex').appendChild(b);
+});
+run();
+</script>
+</body>
+</html>

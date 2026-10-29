@@ -37,7 +37,40 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-understanding-by-design-an-approach-to-lesson-planning",
+        },{id: "post-implicit-vs-explicit-learning-as-teachers",
+        
+          title: "Implicit vs Explicit Learning as Teachers",
+        
+        description: "Do Means of Knowledge Acquisition affects Teaching Skills?",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/implicit-vs-explicit-learning-as-teachers/";
+          
+        },
+      },{id: "post-which-data-types-best-conserve-storage-in-r-programming",
+        
+          title: "Which Data Types Best Conserve Storage in R Programming",
+        
+        description: "A Shower Thought",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/optimizing-storage-from-data-type/";
+          
+        },
+      },{id: "post-found-bug-in-indonesia-39-s-ministry-of-education-39-s-software-installer",
+        
+          title: "Found bug in Indonesia&#39;s Ministry of Education&#39;s Software Installer",
+        
+        description: "Surface level Reverse Engineering with Network Flow using Wireshark",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/exambrowser-for-bppp-ministry-of-edu-indonesia/";
+          
+        },
+      },{id: "post-understanding-by-design-an-approach-to-lesson-planning",
         
           title: "Understanding by Design: An Approach to Lesson Planning",
         
@@ -101,6 +134,17 @@ ninja.data = [{
         handler: () => {
           
             window.location.href = "/blog/2026/intro-to-github/";
+          
+        },
+      },{id: "post-maintenance-rumah-dan-fisika",
+        
+          title: "Maintenance Rumah dan Fisika",
+        
+        description: "Prinsip Siphon (Xyphon) untuk Menguras Toren",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/xyphon-to-drain-water-tank/";
           
         },
       },{id: "post-revisiting-pedagogical-practices",
