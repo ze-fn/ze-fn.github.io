@@ -30,26 +30,8 @@ mermaid:
 
 Hello there! Welcome to my personal space :D
 
-I do projects in various subjects but I'm mainly interested in Data Science. My formal background may not supplement me with basic knowledge in the projects but I'm truly passionate about them. Below is the list of projects I'm currently working on. Feel free to contact me through [email](mailto:zelvy.fauzan2000@gmail.com) for collaboration or just some casual chats.
+I'm Zelvy Fauzan. I do various kinds of projects. Data science, analytics, simple civil engineering, home maintenance, network engineering, etc. 
 
-```mermaid
-kanban
-  Ideation
-    id1[Multimodal Song Circumplex Analysis]
-    id2[Aerodynamic Simulation]
-    id3[Thermal Imaging for Interior Design Optimization]
-  Data Collection
-    id4[Comparative Anemometric Analysis]
-  Active
-    id5[Japan Weather Analysis]
-  Review
-    id6[Digital Poster Trends Analysis]
-  Done
-    id7[Home Network Expansion]
-```
+I currently work as an English teacher at a public Junior High School. In the meantime, I'm doing a professional certification program for teachers. Besides that, I'm also a [certified Data Analyst (DataCamp)](https://www.datacamp.com/certificate/DA0026233709119). If you are interested in getting in touch with me (be it personally or professionally), [send me an email](mailto:zelvy.fauzan2000@gmail.com). I won't bite, but please keep the conversation civil if you do so.
 
-During my bachelor in [Universitas Siliwangi](https://unsil.ac.id/), I focused my studies on the impact of digital technology on academic wriring skills. I then continued my master in English Language Education in [Universitas Sebelas Maret](https://uns.ac.id/). I shifted my research interest to positive psychology of teachers, specifically on profiling how EFL teachers cope with job burnout.
-
-Now I'm working as a teacher at a public junior high school in Jalaksana. I teach `Computer Science` and `Character Building` subjects, as well as the school's [computer technician](https://ze-fn.github.io/blog/2026/checkup-komputer-tka/). In my free times, I work on various projects (see more [here](https://ze-fn.github.io/blog/category/portfolio/)), listening to music, playing some games, and sometimes writing a [journal](https://www.instagram.com/zelvy.fauzan/) using fountain pen.
-
-My favourite fountain pen is the [Pilot Metropolitan with Extra Fine nib](https://www.instagram.com/p/DDqrVMcpjCC/)!
+During my bachelor in [Universitas Siliwangi](https://unsil.ac.id/), I focused my studies on the impact of digital technology on academic wriring skills. I then continued my master in English Language Education in [Universitas Sebelas Maret](https://uns.ac.id/). I shifted my research interest to positive psychology of teachers, specifically on profiling how EFL teachers cope with job burnout. My next degree project will be about data science in educational research. I think I'm going to implement an AI/ML DevOps project for curriculum development and school daily operations.
